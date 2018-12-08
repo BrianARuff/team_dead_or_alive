@@ -1,0 +1,24 @@
+{
+  "name": "dead_or_alive",
+  "version": "1.0.0",
+  "description": "backend for a celebrity quiz app",
+  "main": "index.js",
+  "scripts": {
+    "test": "test --verbose"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ceejaay/team_dead_or_alive.git"
+  },
+  "author": "Chad Jemmett",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ceejaay/team_dead_or_alive/issues"
+  },
+  "homepage": "https://github.com/ceejaay/team_dead_or_alive#readme",
+  "dependencies": {
+    "express": "^4.16.4",
+    "knex": "^0.15.2",
+    "sqlite3": "^4.0.4"
+  }
+}
