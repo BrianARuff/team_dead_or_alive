@@ -22,8 +22,7 @@ export default function reducer(state = initialState, action) {
       return {...state, fetching: true}
 
     case QUIZ_SUCCESS:
-      console.log(action.payload);
-      return {...state, quizzes: action.payload, fetching: false}
+      return {...state, quizzes: [action.payload], fetching: false}
 
     case QUIZ_FAIL:
       return {...state, error: action.payload}

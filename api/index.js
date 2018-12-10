@@ -8,7 +8,7 @@ const server = express();
 server.use(cors())
 server.use(express.json())
 
-  //test data 
+  //test data
   const data = [
     {name: "Betty White", dob: "January 17, 1922", dod: null, image: "https://en.wikipedia.org/wiki/Betty_White#/media/File:Betty_White_2010.jpg"},
     {name: "Heath Ledger", dob: "April 4, 1979", dod: "January 22, 2008" , image: "https://en.wikipedia.org/wiki/Heath_Ledger#/media/File:Heath_Ledger_(Berlin_Film_Festival_2006)_revised.jpg"},
@@ -27,8 +27,8 @@ server.get('/api/dead_or_alive', (req, res) => {
 
 
 module.exports = server;
-// const port = process.env.PORT || 5000;
+const port = process.env.PORT || 5000;
 
-// server.listen(port, function() {
-//   console.log(`\n=== Web API Listening on http://localhost:${port} ===\n`);
-// });
+server.listen(port, function() {
+  console.log(`\n=== Web API Listening on http://localhost:${port} ===\n`);
+});

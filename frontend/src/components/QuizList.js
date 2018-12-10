@@ -7,7 +7,7 @@ class QuizList extends React.Component {
 
   componentDidMount() {
 
-    //this.props.fetchQuizzes();
+    this.props.fetchQuizzes();
 
   }
 
@@ -25,7 +25,7 @@ class QuizList extends React.Component {
 
       <div className='quiz-list'>
 
-        {this.props.quizzes.map(quiz => <h1>First Quiz</h1>)}
+        {this.props.quizzes.map(quiz => <h3>First Quiz</h3>)}
 
       </div>
 
