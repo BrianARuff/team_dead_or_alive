@@ -74,6 +74,9 @@ class Login extends React.Component {
     if (e.target.name === 'username' && this.state.showSignupSuccess)
       this.setState({showSignupSuccess: false});
 
+    if (this.state.showLoginFail)
+      this.setState({showLoginFail: false});
+
     if (e.target.name === 'password') {
 
       let newPassword = '';
