@@ -1,4 +1,3 @@
-
 const express = require('express');
 const cors = require('cors')
 const knex = require('knex')
@@ -71,7 +70,7 @@ server.post('/api/login', (req, res) => {
       const token = generateToken(user)
       res.status(200).json({message: 'welcome user', token})
     } else {
-      res.status(401).json({message: "you are not logged in"})
+      res.status(422).json({message: "you are not logged in"})
     }
   }).catch(err => res.status(500).json({message: "Something went wrong"}))
 })
@@ -80,6 +79,6 @@ server.post('/api/login', (req, res) => {
 module.exports = server;
 const port = process.env.PORT || 5000;
 
-server.listen(port, function() {
-  console.log(`\n=== Web API Listening on http://localhost:${port} ===\n`);
-});
+// server.listen(port, function() {
+//   console.log(`\n=== Web API Listening on http://localhost:${port} ===\n`);
+// });
