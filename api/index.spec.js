@@ -36,4 +36,18 @@ describe('server', () => {
        expect(response.body).toBe('string')
     })
   })
+
+  describe('/api/ login route', ()=> {
+    it('should return status code 200', async () => {
+      let response = await request(server).post('/api/login')
+        .send({username: 'user', password: 'password'})
+       expect(response.status).toBe(200)
+    }) 
+
+    it('should return the status 422 if there is a missing username or password', async () => {
+      let response = await request(server).post('/api/login')
+        .send({username: '', password: ''})
+       expect(response.status).toBe(422)
+    })
+  })
 })
