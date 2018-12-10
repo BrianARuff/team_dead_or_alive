@@ -131,6 +131,13 @@ table {
   margin: 0 auto;
   display: flex;
   flex-direction: column;
+  position: relative;
+  font-family: 'Roboto', sans-serif;
+}
+.container .login {
+  position: absolute;
+  top: 5px;
+  right: 5px;
 }
 .container header {
   display: flex;
@@ -182,7 +189,6 @@ table {
   align-items: none;
   flex-direction: row;
   color: #fff;
-  background-color: #333;
   font-size: 40px;
   border-radius: 50%;
   position: absolute;
@@ -193,8 +199,6 @@ table {
 .carousel .left-button:hover,
 .carousel .right-button:hover {
   color: #333;
-  background-color: #fff;
-  border: 2px solid #333;
 }
 .carousel .left-button {
   top: 50%;
