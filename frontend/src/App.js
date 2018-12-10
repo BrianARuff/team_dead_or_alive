@@ -1,34 +1,34 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { connect } from 'react-redux';
+
+import Login from './components/Login';
 
 class App extends Component {
 
-  constructor() {
-
-    super();
-    this.state = {
+  componentDidUpdate() {
 
 
-
-    }
-
-  }
-
-  componentDidMount() {
-
-    // axios.get('http://localhost:5000')
-    //   .then(res => this.setState({serverResp: res.data}))
-    //   .catch(err => console.log(err));
 
   }
 
   render() {
     return (
-      <div className="App">
-        <p>Testing</p>
+      <div className="app">
+        {!this.props.username ? <Login /> : <h1>Logged in as {this.props.username}!</h1>}
       </div>
     );
   }
 }
 
-export default App;
+function stateToProps(state) {
+
+  return {
+
+    username: state.username
+
+  }
+
+}
+
+export default connect(stateToProps, {})(App);
