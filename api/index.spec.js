@@ -12,16 +12,17 @@ describe('server', () => {
 
 
   describe('/api/register route', () => {
-    it('should return status code 201', async () => {
-      let response = await request(server).post('/api/register')
-        .send({username: 'user', password: 'password'})
-       expect(response.status).toBe(201)
-    })
-
-    it('should return the ID number of the new resource', async () => {
+     it('should return the ID number of the new resource', async () => {
       let response = await request(server).post('/api/register')
         .send({username: 'user', password: 'password'})
        expect(typeof response.body).toBe('number')
+        console.log('the response body', response.body)
+    })
+
+   it('should return status code 201', async () => {
+      let response = await request(server).post('/api/register')
+        .send({username: 'user', password: 'password'})
+       expect(response.status).toBe(201)
     })
 
     it('should return the status 422 if there is a missing username or password', async () => {
@@ -30,7 +31,7 @@ describe('server', () => {
        expect(response.status).toBe(422)
     })
 
-    it.skip('should return a jwt so that the user is logged in after ame or password', async () => {
+    it('should return a jwt so that the user is logged in after ame or password', async () => {
       let response = await request(server).post('/api/register')
         .send({username: 'user', password: 'password'})
        expect(response.body).toBe('string')
