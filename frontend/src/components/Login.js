@@ -13,7 +13,8 @@ class Login extends React.Component {
       passwordTxt: '',
       username: '',
       password: '',
-      showSignupFail: false
+      showSignupFail: false,
+      showSignupSuccess: false
 
     }
 
@@ -29,7 +30,8 @@ class Login extends React.Component {
 
           passwordTxt: '',
           username: '',
-          password: ''
+          password: '',
+          showSignupSuccess: true
 
         });
 
@@ -56,6 +58,9 @@ class Login extends React.Component {
 
     if (e.target.name === 'username' && this.state.showSignupFail)
       this.setState({showSignupFail: false});
+
+    if (e.target.name === 'username' && this.state.showSignupSuccess)
+      this.setState({showSignupSuccess: false});
 
     if (e.target.name === 'password') {
 
@@ -119,6 +124,7 @@ class Login extends React.Component {
         onSubmit={this.handleSubmit}>
 
         {this.state.showSignupFail && <p>Username already exists. Pick new username.</p>}
+        {this.state.showSignupSuccess && <p>Registered!</p>}
         {this.createFormInput('username')}
         {this.createFormInput('password')}
 
