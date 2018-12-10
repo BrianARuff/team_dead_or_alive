@@ -34,7 +34,6 @@ let credits = document.querySelector('footer span');
 let creditContent = document.querySelector('.footerContent')
 $(credits).click( () => $(creditContent).slideToggle( "slow"));
 
-
 //login modal
 let login = document.querySelector('.login')
 
@@ -48,3 +47,4 @@ window.addEventListener('click', event => {
     if (event.target == modal) {
         modal.style.display = "none";
     }})
+
