@@ -213,6 +213,7 @@ body .container {
   justify-content: center;
   align-items: center;
   flex-direction: row;
+  max-height: 400px;
   position: relative;
   overflow: hidden;
   margin: 16px auto;
@@ -233,7 +234,7 @@ body .container {
 }
 .carousel .left-button:hover,
 .carousel .right-button:hover {
-  color: #333;
+  color: #a7a7a7;
 }
 .carousel .left-button {
   top: 50%;
@@ -246,5 +247,25 @@ body .container {
   transform: translate(0, -50%);
 }
 .carousel img {
+  display: none;
+}
+footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+footer h3 {
+  font-size: 1rem;
+}
+footer img {
+  height: 15px;
+}
+footer span {
+  cursor: pointer;
+}
+footer .footerContent {
+  margin-top: 10px;
+}
+footer .display {
   display: none;
 }

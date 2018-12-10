@@ -30,3 +30,8 @@ class Carousel {
 }
 
 let carousel = document.querySelectorAll('.carousel').forEach(item => new Carousel(item)); // Creates carousel object
+
+
+let credits = document.querySelector('footer span');
+let creditContent = document.querySelector('.footerContent')
+credits.addEventListener('click', () => creditContent.classList.toggle('display'))
