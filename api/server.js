@@ -10,12 +10,25 @@ const server = express();
 server.use(cors())
 server.use(express.json())
 
-  //test data
+  duplicateUser = (req, res, next) => {
+    const {username, password} = req.body
+    db('users').where({username: creds.username}).first()
+    .then(user => {
+      if(user.username === username) {
+        res.status(500).json({message: "There is already a user registered by that name"})
+      } else {
+        next()
+      }
+    })
+
+  }
+
+  //test data 
   const data = [
     {name: "Betty White", dob: "January 17, 1922", dod: null, image: "https://en.wikipedia.org/wiki/Betty_White#/media/File:Betty_White_2010.jpg"},
     {name: "Heath Ledger", dob: "April 4, 1979", dod: "January 22, 2008" , image: "https://en.wikipedia.org/wiki/Heath_Ledger#/media/File:Heath_Ledger_(Berlin_Film_Festival_2006)_revised.jpg"},
     {name: "Wilford Brimley", dob: "September 27, 1934", dod: null, image: "https://en.wikipedia.org/wiki/Wilford_Brimley#/media/File:Wilford_Brimley.jpg"},
-  ]
+    {name: "Stan Lee", dob: "December 28, 1922", dod: "November 12, 2018", image: "https://en.wikipedia.org/wiki/Stan_Lee#/media/File:Stan_Lee_by_Gage_Skidmore_3.jpg"}, ]
 
 
 // Json token generator
@@ -71,15 +84,10 @@ server.post('/api/login', (req, res) => {
       const token = generateToken(user)
       res.status(200).json({message: 'welcome user', token})
     } else {
-      res.status(401).json({message: "you are not logged in"})
+      res.status(422).json({message: "you are not logged in"})
     }
   }).catch(err => res.status(500).json({message: "Something went wrong"}))
 })
 
 
 module.exports = server;
-const port = process.env.PORT || 5000;
-
-server.listen(port, function() {
-  console.log(`\n=== Web API Listening on http://localhost:${port} ===\n`);
-});
