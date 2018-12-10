@@ -8,7 +8,7 @@ class App extends Component {
     super();
     this.state = {
 
-      serverResp: 'waiting for response...'
+
 
     }
 
@@ -25,7 +25,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <p>{this.state.serverResp}</p>
+        <p>Testing</p>
       </div>
     );
   }
