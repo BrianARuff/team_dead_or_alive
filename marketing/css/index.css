@@ -135,6 +135,18 @@ table {
   color: #343434;
   text-decoration: none;
 }
+.or {
+  margin: -48px auto;
+  position: relative;
+  left: 0%;
+  top: 135px;
+  color: #343434;
+  font-family: 'Economica', sans-serif;
+  font-size: 6rem;
+}
+.or span {
+  color: #fff;
+}
 header {
   display: flex;
   width: 100%;
@@ -144,44 +156,39 @@ header {
   border-bottom: 1px solid #343434;
 }
 header .headerLeft {
+  justify-content: center;
+  align-items: center;
   background-color: #343434;
   color: #fff;
   width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
-  padding: 75px 100px;
 }
 header .headerLeft img {
   width: 128px;
 }
 header .headerRight {
+  justify-content: center;
+  align-items: center;
   background-color: #fff;
   color: #343434;
   width: 100%;
   display: flex;
   flex-direction: column;
-  padding: 75px 100px;
 }
 header .headerRight img {
   width: 128px;
 }
-header .or {
-  position: absolute;
-  left: 47.3%;
-  top: 77px;
-  color: #343434;
-}
-header .or span {
-  color: #fff;
-}
 body {
   font-family: 'Roboto', sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: inherit;
 }
 body a.signUp {
-  position: absolute;
-  left: 47.3%;
-  top: 330px;
+  margin: -80px auto 50px;
+  font-size: 2rem;
   padding: 10px 15px;
   border: 1px solid #343434;
   border-radius: 4px;
@@ -201,15 +208,14 @@ body .container {
   position: relative;
 }
 .carousel {
-  width: auto;
+  max-width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: row;
-  height: 500px;
   position: relative;
   overflow: hidden;
-  margin: 16px auto 0;
+  margin: 16px auto;
 }
 .carousel .left-button,
 .carousel .right-button {
