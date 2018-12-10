@@ -1,21 +1,17 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
 
 import Login from './components/Login';
+import Router from './components/Router';
 
 class App extends Component {
-
-  componentDidUpdate() {
-
-
-
-  }
 
   render() {
     return (
       <div className="app">
-        {!this.props.username ? <Login /> : <h1>Logged in as {this.props.username}!</h1>}
+        {!this.props.username ? <Login /> : <BrowserRouter><Router /></BrowserRouter>}
       </div>
     );
   }
