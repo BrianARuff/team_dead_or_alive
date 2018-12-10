@@ -4,6 +4,7 @@ const cors = require('cors')
 const knex = require('knex')
 const knexConfig = require('./knexfile.js')
 const db = knex(knexConfig.development)
+const bcrypt = require('bcryptjs');
 const server = express();
 server.use(cors())
 server.use(express.json())
@@ -25,26 +26,26 @@ server.get('/api/dead_or_alive', (req, res) => {
 })
 
 
-server.post('/api/register', () => {
-  const {name, password} = req.body
-    if(name.length >= 1 && password.length >= 1) {
-      //make a database insert
-      // if db insert is a success then send a response
-
+server.post('/api/register', (req, res) => {
+  console.log(req.body)
+  const {username, password} = req.body
+    if(username.length >= 1 && password.length >= 1) {
+    const creds = req.body
+      //the 2 is just of dev purposes
+    const hash = bcrypt.hashSync(creds.password, 2)
+    creds.password = hash
+    db('users').insert(creds).then(id => {
+      res.status(201).json(id)
+    }).catch(err => res.status(500).json({message: "Status 500"}))
     } else {
-
+      res.status(422).json({message: "username or password are invalid."})
     }
-
-
-
-
-
 } )
 
 
 module.exports = server;
-// const port = process.env.PORT || 5000;
+const port = process.env.PORT || 5000;
 
-// server.listen(port, function() {
-//   console.log(`\n=== Web API Listening on http://localhost:${port} ===\n`);
-// });
+server.listen(port, function() {
+  console.log(`\n=== Web API Listening on http://localhost:${port} ===\n`);
+});
