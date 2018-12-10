@@ -9,7 +9,6 @@ class Carousel {
         this.lBtn.addEventListener('click', () => this.moveLeft()); // Setting left button click
         this.rBtn.addEventListener('click', () => this.moveRight()); // Setting right button click
     }
-
     moveLeft() {
         this.index--; // Moves the index down 1
         this.setImg(); // Invoking setImg function
@@ -28,10 +27,9 @@ class Carousel {
         this.img[this.index].style.display = 'flex'; // Sets current array index image to display
     }
 }
-
 let carousel = document.querySelectorAll('.carousel').forEach(item => new Carousel(item)); // Creates carousel object
 
-
+// Credit 
 let credits = document.querySelector('footer span');
 let creditContent = document.querySelector('.footerContent')
-credits.addEventListener('click', () => creditContent.classList.toggle('display'))
+$(credits).click( () => $(creditContent).slideToggle( "slow"));
