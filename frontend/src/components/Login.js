@@ -14,7 +14,8 @@ class Login extends React.Component {
       username: '',
       password: '',
       showSignupFail: false,
-      showSignupSuccess: false
+      showSignupSuccess: false,
+      showLoginFail: false
 
     }
 
@@ -42,6 +43,17 @@ class Login extends React.Component {
       if (this.props.signupStatus === 'FAILURE') {
 
         this.setState({showSignupFail: true});
+        this.props.acknowledge();
+
+      }
+
+    }
+
+    if (this.props.loginStatus !== prevProps.loginStatus) {
+
+      if (this.props.loginStatus === 'FAILURE') {
+
+        this.setState({showLoginFail: true});
         this.props.acknowledge();
 
       }
@@ -123,6 +135,7 @@ class Login extends React.Component {
         className='login-form'
         onSubmit={this.handleSubmit}>
 
+        {this.state.showLoginFail && <p>Username/Password not recognized. Please try again.</p>}
         {this.state.showSignupFail && <p>Username already exists. Pick new username.</p>}
         {this.state.showSignupSuccess && <p>Registered!</p>}
         {this.createFormInput('username')}
@@ -143,7 +156,8 @@ function stateToProps(state) {
 
   return {
 
-    signupStatus: state.signupStatus
+    signupStatus: state.signupStatus,
+    loginStatus: state.loginStatus
 
   }
 

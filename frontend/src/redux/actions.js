@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-const LOGIN = 'LOGIN';
+const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+const LOGIN_FAIL = 'LOGIN_FAIL';
 const QUIZ_SUCCESS = 'QUIZ_SUCCESS';
 const QUIZ_FAIL = 'QUIZ_FAIL';
 const FETCHING = 'FETCHING';
@@ -8,21 +9,21 @@ const SIGNUP_SUCCESS = 'SIGNUP_SUCCESS';
 const SIGNUP_FAILURE = 'SIGNUP_FAILURE';
 const ACKNOWLEDGEMENT = 'ACKNOWLEDGEMENT';
 
-export { LOGIN, QUIZ_SUCCESS, FETCHING, QUIZ_FAIL, SIGNUP_SUCCESS, SIGNUP_FAILURE, ACKNOWLEDGEMENT };
+export { LOGIN_SUCCESS, LOGIN_FAIL, QUIZ_SUCCESS, FETCHING, QUIZ_FAIL, SIGNUP_SUCCESS, SIGNUP_FAILURE, ACKNOWLEDGEMENT };
+
 
 export const login = (user, pass) => dispatch => {
 
-  return {
+  axios.post('http://localhost:5000/api/login', { username: user, password: pass})
+    .then(res => dispatch({
 
-    type: LOGIN,
-    payload: {
+      type: LOGIN_SUCCESS,
+      payload: user
 
-      loggedIn: true,
-      username: user
-
-    }
-
-  }
+    }))
+    .catch(err => dispatch({
+      type: LOGIN_FAIL
+    }));
 
 }
 

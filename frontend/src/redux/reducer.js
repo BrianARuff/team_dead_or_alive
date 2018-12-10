@@ -1,4 +1,4 @@
-import { LOGIN, QUIZ_SUCCESS, FETCHING, QUIZ_FAIL, SIGNUP_SUCCESS, SIGNUP_FAILURE, ACKNOWLEDGEMENT } from './actions';
+import { LOGIN_SUCCESS, LOGIN_FAIL, QUIZ_SUCCESS, FETCHING, QUIZ_FAIL, SIGNUP_SUCCESS, SIGNUP_FAILURE, ACKNOWLEDGEMENT } from './actions';
 
 const initialState = {
 
@@ -6,7 +6,8 @@ const initialState = {
   quizzes: [],
   fetching: false,
   error: null,
-  signupStatus: null
+  signupStatus: null,
+  loginStatus: null
 
 }
 
@@ -14,10 +15,11 @@ export default function reducer(state = initialState, action) {
 
   switch(action.type) {
 
-    case LOGIN:
-      if (action.payload.loggedIn)
-        return {...state, username: action.payload.username}
-      return state;
+    case LOGIN_SUCCESS:
+      return {...state, username: action.payload, loginStatus: 'SUCCESS'}
+
+    case LOGIN_FAIL:
+      return {...state, loginStatus: 'FAILURE'}
 
     case FETCHING:
       return {...state, fetching: true}
@@ -35,7 +37,7 @@ export default function reducer(state = initialState, action) {
       return {...state, signupStatus: 'FAILURE'}
 
     case ACKNOWLEDGEMENT:
-      return {...state, signupStatus: null}
+      return {...state, signupStatus: null, loginStatus: null}
 
     default:
       return state;
