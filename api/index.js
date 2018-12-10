@@ -1,12 +1,12 @@
 const express = require('express');
 const cors = require('cors')
-const server = express();
+const server = require('./server.js')
 server.use(cors())
 server.use(express.json())
 
 
 
-module.exports = server;
+// module.exports = server;
 const port = process.env.PORT || 5000;
 
 server.listen(port, function() {
