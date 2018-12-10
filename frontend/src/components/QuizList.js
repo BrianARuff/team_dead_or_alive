@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { fetchQuizzes } from '../redux/actions';
+import QuizPreview from './QuizPreview';
 
 class QuizList extends React.Component {
 
@@ -25,7 +26,7 @@ class QuizList extends React.Component {
 
       <div className='quiz-list'>
 
-        {this.props.quizzes.map(quiz => <h3>First Quiz</h3>)}
+        {this.props.quizzes.map((quiz, id) => <QuizPreview key={id} quizData={quiz} />)}
 
       </div>
 
