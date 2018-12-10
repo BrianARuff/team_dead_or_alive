@@ -253,6 +253,7 @@ footer {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: 15px;
 }
 footer h3 {
   font-size: 1rem;
@@ -265,6 +266,7 @@ footer span {
 }
 footer .footerContent {
   margin-top: 10px;
+  line-height: 1.5;
 }
 footer .display {
   display: none;
