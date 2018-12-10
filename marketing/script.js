@@ -33,3 +33,18 @@ let carousel = document.querySelectorAll('.carousel').forEach(item => new Carous
 let credits = document.querySelector('footer span');
 let creditContent = document.querySelector('.footerContent')
 $(credits).click( () => $(creditContent).slideToggle( "slow"));
+
+
+//login modal
+let login = document.querySelector('.login')
+
+login.addEventListener('click', () => {
+    document.getElementById('id01').style.display = 'block'
+})
+
+// When the user clicks anywhere outside of the modal, close it
+window.addEventListener('click', event => {
+    let modal = document.getElementById('id01');
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }})
