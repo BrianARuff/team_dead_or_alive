@@ -3,7 +3,7 @@ const request = require('supertest')
 const server = require('./index.js')
 
 describe('server', () => {
-  describe('/ route', () => {
+  describe('/api/dead_or_alive  route', () => {
     it('should return status code 200', async () => {
       let response = await request(server).get('/')
       expect(response.status).toBe(200)

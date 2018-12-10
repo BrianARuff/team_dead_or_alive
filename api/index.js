@@ -1,9 +1,9 @@
 
 const express = require('express');
 const cors = require('cors')
-// const knex = require('knex')
-// const knexConfig = require('./knexfile.js')
-// const db = knex(knexConfig.development)
+const knex = require('knex')
+const knexConfig = require('./knexfile.js')
+const db = knex(knexConfig.development)
 const server = express();
 server.use(cors())
 server.use(express.json())
@@ -24,6 +24,22 @@ server.get('/api/dead_or_alive', (req, res) => {
   res.status(200).json(data)
 })
 
+
+server.post('/api/register', () => {
+  const {name, password} = req.body
+    if(name.length >= 1 && password.length >= 1) {
+      //make a database insert
+      // if db insert is a success then send a response
+
+    } else {
+
+    }
+
+
+
+
+
+} )
 
 
 module.exports = server;
