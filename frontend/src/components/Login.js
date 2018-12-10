@@ -10,7 +10,6 @@ class Login extends React.Component {
 
     this.state = {
 
-      usernameTxt: '',
       passwordTxt: '',
       username: '',
       password: ''
@@ -22,8 +21,29 @@ class Login extends React.Component {
   handleChange = e => {
 
     this.setState({
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.name === 'password' ? e.target.value.split('').map(char => '*').join('') : e.target.value
     })
+
+    if (e.target.name === 'password') {
+
+      let newPassword = '';
+
+      if (e.target.value.length === 1) {
+        this.setState({passwordTxt: e.target.value});
+        return;
+      }
+
+      else if (e.target.value[e.target.value.length - 1] !== '*' && e.target.value[e.target.value.length - 1] !== undefined)
+        newPassword = this.state.passwordTxt + e.target.value[e.target.value.length - 1];
+
+      else
+        newPassword = this.state.passwordTxt.slice(0, -1);
+
+      this.setState({
+        passwordTxt: newPassword
+      });
+
+    }
 
   }
 
@@ -45,7 +65,7 @@ class Login extends React.Component {
 
     e.preventDefault();
 
-    this.props.login(this.state.username, this.state.password);
+    this.props.login(this.state.username, this.state.passwordTxt);
 
   }
 
