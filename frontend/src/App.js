@@ -11,7 +11,7 @@ class App extends Component {
   render() {
     return (
       <div className="app">
-        {!this.props.username ? <Login /> : <BrowserRouter><Router /></BrowserRouter>}
+        {this.props.username ? <Login /> : <BrowserRouter><Router /></BrowserRouter>}
       </div>
     );
   }
