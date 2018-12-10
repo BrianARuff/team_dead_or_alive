@@ -6,3 +6,5 @@
 
 2. Branch Merging
     - `git checkout doa_dev_heroku`
+    - `git pull`
+    - `git merge your_new_branch`
