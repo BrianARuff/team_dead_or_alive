@@ -4,12 +4,13 @@ const LOGIN = 'LOGIN';
 const QUIZ_SUCCESS = 'QUIZ_SUCCESS';
 const QUIZ_FAIL = 'QUIZ_FAIL';
 const FETCHING = 'FETCHING';
+const SIGNUP_SUCCESS = 'SIGNUP_SUCCESS';
+const SIGNUP_FAILURE = 'SIGNUP_FAILURE';
+const ACKNOWLEDGEMENT = 'ACKNOWLEDGEMENT';
 
-export { LOGIN, QUIZ_SUCCESS, FETCHING, QUIZ_FAIL };
+export { LOGIN, QUIZ_SUCCESS, FETCHING, QUIZ_FAIL, SIGNUP_SUCCESS, SIGNUP_FAILURE, ACKNOWLEDGEMENT };
 
-export const login = (user, pass) => {
-
-  // Login logic will go here
+export const login = (user, pass) => dispatch => {
 
   return {
 
@@ -22,6 +23,18 @@ export const login = (user, pass) => {
     }
 
   }
+
+}
+
+export const signup = (user, pass) => dispatch => {
+
+  axios.post('http://localhost:5000/api/register', {username: user, password: pass})
+    .then(res => dispatch({
+      type: SIGNUP_SUCCESS
+    }))
+    .catch(err => dispatch({
+      type: SIGNUP_FAILURE
+    }));
 
 }
 
@@ -42,5 +55,15 @@ export const fetchQuizzes = () => dispatch => {
       type: QUIZ_FAIL,
       payload: err
     }));
+
+}
+
+export const acknowledge = () => {
+
+  return {
+
+    type: ACKNOWLEDGEMENT
+
+  }
 
 }

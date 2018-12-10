@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { login } from '../redux/actions';
+import { login, signup, acknowledge } from '../redux/actions';
 
 class Login extends React.Component {
 
@@ -12,7 +12,37 @@ class Login extends React.Component {
 
       passwordTxt: '',
       username: '',
-      password: ''
+      password: '',
+      showSignupFail: false
+
+    }
+
+  }
+
+  componentDidUpdate(prevProps) {
+
+    if (this.props.signupStatus !== prevProps.signupStatus) {
+
+      if (this.props.signupStatus === 'SUCCESS') {
+
+        this.setState({
+
+          passwordTxt: '',
+          username: '',
+          password: ''
+
+        });
+
+        this.props.acknowledge();
+
+      }
+
+      if (this.props.signupStatus === 'FAILURE') {
+
+        this.setState({showSignupFail: true});
+        this.props.acknowledge();
+
+      }
 
     }
 
@@ -23,6 +53,9 @@ class Login extends React.Component {
     this.setState({
       [e.target.name]: e.target.name === 'password' ? e.target.value.split('').map(char => '*').join('') : e.target.value
     })
+
+    if (e.target.name === 'username' && this.state.showSignupFail)
+      this.setState({showSignupFail: false});
 
     if (e.target.name === 'password') {
 
@@ -73,7 +106,7 @@ class Login extends React.Component {
 
     e.preventDefault();
 
-    // Put sign up stuff here
+    this.props.signup(this.state.username, this.state.passwordTxt);
 
   }
 
@@ -85,6 +118,7 @@ class Login extends React.Component {
         className='login-form'
         onSubmit={this.handleSubmit}>
 
+        {this.state.showSignupFail && <p>Username already exists. Pick new username.</p>}
         {this.createFormInput('username')}
         {this.createFormInput('password')}
 
@@ -99,4 +133,14 @@ class Login extends React.Component {
 
 }
 
-export default connect(null, { login })(Login);
+function stateToProps(state) {
+
+  return {
+
+    signupStatus: state.signupStatus
+
+  }
+
+}
+
+export default connect(stateToProps, { login, signup, acknowledge })(Login);
