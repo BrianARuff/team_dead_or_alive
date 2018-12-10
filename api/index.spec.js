@@ -1,5 +1,5 @@
 const request = require('supertest')
-const server = require('./index.js')
+const server = require('./server.js')
 const knex = require('knex')
 const knexConfig = require('./knexfile.js')
 const db = knex(knexConfig.development)
@@ -37,10 +37,16 @@ describe('server', () => {
        expect(response.status).toBe(422)
     })
 
+    it('should return a message if there is a duplicate of the username', async () => {
+      let fakeUser = await request(server).post('/api/register').send({username: 'foobar', password: '123'})
+      let response = await request(server).post('/api/register').send({username: 'foobar', password: '123'})
+      expect(response.message).toEqual("There is already a user registered by that name")
+    })
+
     it.skip('should return a jwt so that the user is logged in after ame or password', async () => {
       let response = await request(server).post('/api/register')
         .send({username: 'user', password: 'password'})
-       expect(response.body).toBe('string')
+       expect(typeof response.token).toBe('string')
     })
   })
 
@@ -50,7 +56,7 @@ describe('server', () => {
       let response = await request(server).post('/api/login')
         .send({username: 'chad', password: '123'})
        expect(response.status).toBe(200)
-    }) 
+    })
 
     it('should return the status 422 if there is a missing username or password', async () => {
       let response = await request(server).post('/api/login')
@@ -60,7 +66,6 @@ describe('server', () => {
 
     it('should return a jwt so that the user is logged in', async () => {
       const loggedInUser = await request(server).post('/api/register').send({username: 'chad', password: '123'})
-
       let response = await request(server).post('/api/login')
         .send({username: 'chad', password: '123'})
        expect(typeof response.body.token).toBe('string')
