@@ -69,6 +69,14 @@ class Login extends React.Component {
 
   }
 
+  signUp = e => {
+
+    e.preventDefault();
+
+    // Put sign up stuff here
+
+  }
+
   render() {
 
     return (
@@ -81,6 +89,7 @@ class Login extends React.Component {
         {this.createFormInput('password')}
 
         <button>Log In</button>
+        <button onClick={this.signUp}>Sign Up</button>
 
       </form>
 
