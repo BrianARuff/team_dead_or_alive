@@ -15,7 +15,7 @@ server.use(express.json())
     {name: "Betty White", dob: "January 17, 1922", dod: null, image: "https://en.wikipedia.org/wiki/Betty_White#/media/File:Betty_White_2010.jpg"},
     {name: "Heath Ledger", dob: "April 4, 1979", dod: "January 22, 2008" , image: "https://en.wikipedia.org/wiki/Heath_Ledger#/media/File:Heath_Ledger_(Berlin_Film_Festival_2006)_revised.jpg"},
     {name: "Wilford Brimley", dob: "September 27, 1934", dod: null, image: "https://en.wikipedia.org/wiki/Wilford_Brimley#/media/File:Wilford_Brimley.jpg"},
-  ]
+    {name: "Stan Lee", dob: "December 28, 1922", dod: "November 12, 2018", image: "https://en.wikipedia.org/wiki/Stan_Lee#/media/File:Stan_Lee_by_Gage_Skidmore_3.jpg"}, ]
 
 
 // Json token generator
