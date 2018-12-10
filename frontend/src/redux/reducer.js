@@ -7,7 +7,8 @@ const initialState = {
   fetching: false,
   error: null,
   signupStatus: null,
-  loginStatus: null
+  loginStatus: null,
+  token: null
 
 }
 
@@ -16,7 +17,7 @@ export default function reducer(state = initialState, action) {
   switch(action.type) {
 
     case LOGIN_SUCCESS:
-      return {...state, username: action.payload, loginStatus: 'SUCCESS'}
+      return {...state, username: action.payload.username, loginStatus: 'SUCCESS', token: action.payload.token}
 
     case LOGIN_FAIL:
       return {...state, loginStatus: 'FAILURE'}

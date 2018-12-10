@@ -18,7 +18,10 @@ export const login = (user, pass) => dispatch => {
     .then(res => dispatch({
 
       type: LOGIN_SUCCESS,
-      payload: user
+      payload: {
+        token: res.data.token,
+        username: user
+      }
 
     }))
     .catch(err => dispatch({
