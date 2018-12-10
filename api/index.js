@@ -1,12 +1,14 @@
 
 const express = require('express');
+const cors = require('cors')
 // const knex = require('knex')
 // const knexConfig = require('./knexfile.js')
 // const db = knex(knexConfig.development)
 const server = express();
+server.use(cors())
 server.use(express.json())
 
-  //test data 
+  //test data
   const data = [
     {name: "Betty White", dob: "January 17, 1922", dod: null, image: "https://en.wikipedia.org/wiki/Betty_White#/media/File:Betty_White_2010.jpg"},
     {name: "Heath Ledger", dob: "April 4, 1979", dod: "January 22, 2008" , image: "https://en.wikipedia.org/wiki/Heath_Ledger#/media/File:Heath_Ledger_(Berlin_Film_Festival_2006)_revised.jpg"},
