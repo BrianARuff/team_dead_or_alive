@@ -12,6 +12,13 @@
 
     text-decoration: none;
     padding: 10px;
+    color: purple;
+
+    &:hover {
+
+      color: lighten(purple, 10%);
+
+    }
 
   }
 

@@ -1,1 +1,36 @@
 // QuizPreview.scss
+
+.quiz-preview {
+
+  display: flex;
+  cursor: pointer;
+  background-color: darkgrey;
+  color: black;
+  width: 100%;
+  justify-content: space-between;
+
+  .details {
+
+    display: flex;
+
+  }
+
+  &:hover {
+
+    background-color: grey;
+
+  }
+
+  p {
+
+    padding: 10px;
+
+  }
+
+  h2 {
+
+    margin-left: 15px;
+
+  }
+
+}
