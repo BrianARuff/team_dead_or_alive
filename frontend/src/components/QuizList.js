@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import { fetchQuizzes } from '../redux/actions';
 import QuizPreview from './QuizPreview';
 
+import './QuizList.scss';
+
 class QuizList extends React.Component {
 
   componentDidMount() {

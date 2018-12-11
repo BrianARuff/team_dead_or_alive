@@ -2,6 +2,7 @@ import axios from 'axios';
 
 const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 const LOGIN_FAIL = 'LOGIN_FAIL';
+const LOGOUT = 'LOGOUT';
 const QUIZ_SUCCESS = 'QUIZ_SUCCESS';
 const QUIZ_FAIL = 'QUIZ_FAIL';
 const FETCHING = 'FETCHING';
@@ -9,7 +10,7 @@ const SIGNUP_SUCCESS = 'SIGNUP_SUCCESS';
 const SIGNUP_FAILURE = 'SIGNUP_FAILURE';
 const ACKNOWLEDGEMENT = 'ACKNOWLEDGEMENT';
 
-export { LOGIN_SUCCESS, LOGIN_FAIL, QUIZ_SUCCESS, FETCHING, QUIZ_FAIL, SIGNUP_SUCCESS, SIGNUP_FAILURE, ACKNOWLEDGEMENT };
+export { LOGIN_SUCCESS, LOGIN_FAIL, QUIZ_SUCCESS, FETCHING, QUIZ_FAIL, SIGNUP_SUCCESS, SIGNUP_FAILURE, ACKNOWLEDGEMENT, LOGOUT };
 
 
 export const login = (user, pass) => dispatch => {
@@ -39,6 +40,16 @@ export const signup = (user, pass) => dispatch => {
     .catch(err => dispatch({
       type: SIGNUP_FAILURE
     }));
+
+}
+
+export const logout = () => {
+
+  return {
+
+    type: LOGOUT
+
+  }
 
 }
 

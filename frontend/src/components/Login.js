@@ -2,6 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { login, signup, acknowledge } from '../redux/actions';
 
+import './Login.scss';
+
 class Login extends React.Component {
 
   constructor() {
@@ -73,6 +75,9 @@ class Login extends React.Component {
 
     if (e.target.name === 'username' && this.state.showSignupSuccess)
       this.setState({showSignupSuccess: false});
+
+    if (this.state.showLoginFail)
+      this.setState({showLoginFail: false});
 
     if (e.target.name === 'password') {
 
