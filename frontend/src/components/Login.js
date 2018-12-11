@@ -111,6 +111,7 @@ class Login extends React.Component {
         onChange={this.handleChange}
         placeholder={name}
         value={this.state[name]}
+        autocomplete='off'
         required
       />);
 
