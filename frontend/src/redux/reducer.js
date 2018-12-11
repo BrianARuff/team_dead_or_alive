@@ -1,4 +1,4 @@
-import { LOGIN_SUCCESS, LOGIN_FAIL, QUIZ_SUCCESS, FETCHING, QUIZ_FAIL, SIGNUP_SUCCESS, SIGNUP_FAILURE, ACKNOWLEDGEMENT } from './actions';
+import { LOGIN_SUCCESS, LOGIN_FAIL, QUIZ_SUCCESS, FETCHING, QUIZ_FAIL, SIGNUP_SUCCESS, SIGNUP_FAILURE, ACKNOWLEDGEMENT, LOGOUT } from './actions';
 
 const initialState = {
 
@@ -17,6 +17,7 @@ export default function reducer(state = initialState, action) {
   switch(action.type) {
 
     case LOGIN_SUCCESS:
+      localStorage.token = action.payload.token;
       return {...state, username: action.payload.username, loginStatus: 'SUCCESS', token: action.payload.token}
 
     case LOGIN_FAIL:
@@ -39,6 +40,10 @@ export default function reducer(state = initialState, action) {
 
     case ACKNOWLEDGEMENT:
       return {...state, signupStatus: null, loginStatus: null}
+
+    case LOGOUT:
+      localStorage.clear();
+      return {...state, token: null, username: null}
 
     default:
       return state;
