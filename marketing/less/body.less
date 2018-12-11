@@ -1,83 +1,81 @@
-body{
-    font-family: 'Roboto', sans-serif;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    position: inherit;
+body {
+	font-family: 'Roboto', sans-serif;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	position: inherit;
 
-    .or{
-        margin: -48px auto;
-        position: relative;
-        left: 0%;
-        top: 137px;
-        color: #343434;
-        font-family: 'Economica', sans-serif;
-        font-size: 6rem;
-    
-        @media @mobile{
-            display: none;
-        }
+	.or {
+		margin: -48px auto;
+		position: relative;
+		left: 0%;
+		top: 137px;
+		color: #343434;
+		font-family: 'Economica', sans-serif;
+		font-size: 6rem;
 
-        span{
-            color: #fff;
-        }
-    
-    }
+		@media @mobile {
+			display: none;
+		}
 
-    .signUp{
-        position: relative;
-        left: 0;
-        top: 363px;
-        width: 55px;
-        font-size: 1rem;
-        padding: 10px 15px;
-        border: 1px solid #343434;
-        border-radius: 4px;
-        background-color: #fff;
-        margin: -38px auto 0;
+		span {
+			color: #fff;
+		}
+	}
 
-        &:hover{
-            background-color: #007bff;
-        }
-        
-        @media @mobile{
-            display: none;
-        }        
+	.signUp {
+		position: relative;
+		left: 0;
+		top: 363px;
+		width: 55px;
+		font-size: 1rem;
+		padding: 10px 15px;
+		border: 1px solid #343434;
+		border-radius: 4px;
+		background-color: #fff;
+		margin: -38px auto 0;
 
-        a{
-            color: #343434;
-            text-decoration: none;  
-            
-            &:hover{
-                color: #fff;
-            }
-        }
-    }
+		&:hover {
+			background-color: #007bff;
+		}
 
-    .container{
-        max-width: 1000px;
-        margin: 0 auto;
-        display: flex;
-        flex-direction: column;
-        position: relative;
+		@media @mobile {
+			display: none;
+		}
 
-        .features{
-            display: flex;
+		a {
+			color: #343434;
+			text-decoration: none;
 
-            @media @mobile{
-                flex-direction: column;
-            }
+			&:hover {
+				color: #fff;
+			}
+		}
+	}
 
-            .feature{
-                max-width: 500px;
-                margin-top: 15px;
-                padding: 5px;
-            }
-        }
-        h1{
-            font-size: 2rem;
-            margin-bottom: 10px;
-        }
+	.container {
+		max-width: 1000px;
+		margin: 0 auto;
+		display: flex;
+		flex-direction: column;
+		position: relative;
 
-    }
+		.features {
+			display: flex;
+
+			@media @mobile {
+				flex-direction: column;
+			}
+
+			.feature {
+				max-width: 500px;
+				margin-top: 15px;
+				padding: 5px;
+			}
+		}
+		h1 {
+			font-size: 2rem;
+			margin-bottom: 10px;
+		}
+	}
 }
