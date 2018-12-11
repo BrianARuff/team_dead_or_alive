@@ -21,7 +21,10 @@
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "express": "^4.16.4",
+    "infobox-parser": "^3.0.3",
     "jsonwebtoken": "^8.4.0",
-    "knex": "^0.16.2"
+    "knex": "^0.16.2",
+    "wiki-infobox": "^0.4.0",
+    "wikijs": "^4.10.0"
   }
 }
