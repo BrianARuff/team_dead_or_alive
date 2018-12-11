@@ -136,20 +136,45 @@ class Login extends React.Component {
 
     return (
 
-      <form
-        className='login-form'
-        onSubmit={this.handleSubmit}>
+      <div id="id01" className="modal">
+        <form onSubmit={this.handleSubmit} className="modal-content animate">
+          <div className="container">
+            {this.state.showLoginFail && <p className='warning'>Username/Password not recognized. Please try again.</p>}
+            {this.state.showSignupFail && <p className='warning'>Username already exists. Pick new username.</p>}
+            {this.state.showSignupSuccess && <p className='warning'>Registered!</p>}
+            <label for="uname"><b>Username</b></label>
+            {this.createFormInput('username')}
 
-        {this.state.showLoginFail && <p>Username/Password not recognized. Please try again.</p>}
-        {this.state.showSignupFail && <p>Username already exists. Pick new username.</p>}
-        {this.state.showSignupSuccess && <p>Registered!</p>}
-        {this.createFormInput('username')}
-        {this.createFormInput('password')}
+            <label for="psw"><b>Password</b></label>
+            {this.createFormInput('password')}
 
-        <button>Log In</button>
-        <button onClick={this.signUp}>Sign Up</button>
+            <button type="submit">Login</button>
+            <button className='signup' onClick={this.signUp}>Sign Up</button>
+            <label>
+              <input type="checkbox" name="remember" /> Remember me
+            </label>
+          </div>
 
-      </form>
+          {/*<form
+            className='login-form'
+            onSubmit={this.handleSubmit}>
+
+            {this.state.showLoginFail && <p>Username/Password not recognized. Please try again.</p>}
+            {this.state.showSignupFail && <p>Username already exists. Pick new username.</p>}
+            {this.state.showSignupSuccess && <p>Registered!</p>}
+            {this.createFormInput('username')}
+            {this.createFormInput('password')}
+
+            <button>Log In</button>
+            <button onClick={this.signUp}>Sign Up</button>
+
+          </form>*/}
+
+          <div className="container" style={{backgroundColor:' #f1f1f1'}}>
+            <span className="psw">Forgot <a href="#">password?</a></span>
+          </div>
+        </form>
+      </div>
 
     );
 
