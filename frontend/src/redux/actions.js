@@ -1,4 +1,5 @@
 import axios from 'axios';
+import config from '../config.js';
 
 const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 const LOGIN_FAIL = 'LOGIN_FAIL';
@@ -15,7 +16,7 @@ export { LOGIN_SUCCESS, LOGIN_FAIL, QUIZ_SUCCESS, FETCHING, QUIZ_FAIL, SIGNUP_SU
 
 export const login = (user, pass) => dispatch => {
 
-  axios.post('http://localhost:5000/api/login', { username: user, password: pass})
+  axios.post(`${config.backendURL}:${config.backendPort}/api/login`, { username: user, password: pass})
     .then(res => dispatch({
 
       type: LOGIN_SUCCESS,
@@ -33,7 +34,7 @@ export const login = (user, pass) => dispatch => {
 
 export const signup = (user, pass) => dispatch => {
 
-  axios.post('http://localhost:5000/api/register', {username: user, password: pass})
+  axios.post(`${config.backendURL}:${config.backendPort}/api/register`, {username: user, password: pass})
     .then(res => dispatch({
       type: SIGNUP_SUCCESS
     }))
@@ -61,7 +62,7 @@ export const fetchQuizzes = () => dispatch => {
     type: FETCHING
   });
 
-  axios.get('http://localhost:5000/api/dead_or_alive')
+  axios.get(`${config.backendURL}:${config.backendPort}/api/dead_or_alive`)
     .then(res => dispatch({
       type: QUIZ_SUCCESS,
       payload: res.data

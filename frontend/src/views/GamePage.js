@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 
 import NavBar from '../components/NavBar';
+import config from '../config.js';
 
 import './GamePage.scss';
 
@@ -35,7 +36,7 @@ class GamePage extends React.Component {
 
   componentDidMount() {
 
-    axios.get('http://localhost:5000/api/celebrity_data')
+    axios.get(`${config.backendURL}:${config.backendPort}/api/celebrity_data`)
       .then(res => this.setState({gameData: res.data}))
       .catch(err => console.log(err));
 
