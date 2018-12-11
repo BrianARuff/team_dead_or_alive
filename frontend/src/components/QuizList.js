@@ -16,7 +16,7 @@ class QuizList extends React.Component {
 
   render() {
 
-    const { quizzes, fetching, error} = this.props;
+    const { quizzes, fetching, error, history} = this.props;
 
     if (error)
       return <h1>Error! {error}</h1>;
@@ -28,7 +28,7 @@ class QuizList extends React.Component {
 
       <div className='quiz-list'>
 
-        {this.props.quizzes.map((quiz, id) => <QuizPreview key={id} quizData={quiz} />)}
+        {this.props.quizzes.map((quiz, id) => <QuizPreview key={id} quizData={quiz} history={history} />)}
 
       </div>
 

@@ -5,7 +5,7 @@ import QuizList from '../components/QuizList';
 
 import './MainPage.scss';
 
-export default function MainPage(props) {
+export default function MainPage({history}) {
 
   return (
 
@@ -15,7 +15,7 @@ export default function MainPage(props) {
 
       <h1>Quizzes</h1>
 
-      <QuizList />
+      <QuizList history={history} />
 
     </div>
 
