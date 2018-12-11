@@ -7,6 +7,7 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  position: relative;
 
   a {
 
@@ -18,6 +19,39 @@
     &:hover {
 
       color: lighten(purple, 10%);
+
+    }
+
+  }
+
+  .user {
+
+    margin-right: 15px;
+    font-size: 1.6rem;
+    color: purple;
+    padding: 10px;
+    cursor: pointer;
+
+    &:hover {
+
+      color: lighten(purple, 10%);
+
+    }
+
+  }
+
+  .dropdown {
+
+    position: absolute;
+    right: 0;
+    top: 100%;
+    background-color: lightblue;
+    display: flex;
+    flex-direction: column;
+
+    a {
+
+      padding: 10px;
 
     }
 
