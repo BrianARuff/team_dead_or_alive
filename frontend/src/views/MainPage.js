@@ -11,6 +11,8 @@ export default function MainPage(props) {
 
     <div className='main-page'>
 
+      <NavBar />
+
       <h1>Quizzes</h1>
 
       <QuizList />

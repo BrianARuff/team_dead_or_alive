@@ -11,7 +11,6 @@ export default function Router() {
 
     <>
 
-      <NavBar />
       <Route exact path='/' render={props => <MainPage {...props} />} />
       <Route path='/create' render={props => <CreatePage {...props} /> } />
 
