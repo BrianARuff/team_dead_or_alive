@@ -309,6 +309,23 @@ body .container {
   flex-direction: column;
   position: relative;
 }
+body .container .features {
+  display: flex;
+}
+@media (max-width: 500px) {
+  body .container .features {
+    flex-direction: column;
+  }
+}
+body .container .features .feature {
+  max-width: 500px;
+  margin-top: 15px;
+  padding: 5px;
+}
+body .container h1 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
 .carousel {
   max-width: 100%;
   display: flex;

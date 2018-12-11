@@ -61,5 +61,23 @@ body{
         flex-direction: column;
         position: relative;
 
+        .features{
+            display: flex;
+
+            @media @mobile{
+                flex-direction: column;
+            }
+
+            .feature{
+                max-width: 500px;
+                margin-top: 15px;
+                padding: 5px;
+            }
+        }
+        h1{
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
     }
 }
