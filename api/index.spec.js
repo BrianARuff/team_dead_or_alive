@@ -7,6 +7,7 @@ const db = knex(knexConfig.development)
 beforeEach(async () => {
   await db('users').truncate()
   await db('quiz').truncate()
+  await db('celebrity').truncate()
 
 })
 
@@ -89,6 +90,35 @@ describe('server', () => {
     it('Should return 422 if there is a missing name', async () => {
       let response = await request(server).post('/api/quiz')
         .send({user_id: 2, name: ''})
+       expect(response.status).toBe(422)
+    })
+  })
+
+  describe('api/celebrity POST ', () => {
+   it('Should return the id of the new celebrity', async () => {
+      let response = await request(server).post('/api/celebrity')
+        .send({name: 'name', date_of_birth: 'January 1, 1999', date_of_death: null, image_link: 'https://wikipedia.com'})
+       expect(response.body[0]).toBe(1)
+    })
+
+   it('Should return 422 if there is a missing name', async () => {
+      let response = await request(server).post('/api/celebrity')
+        .send({name: '', date_of_birth: 'January 1, 1999', date_of_death: null, image_link: 'https://wikipedia.com'})
+       expect(response.status).toBe(422)
+    })
+
+   it('Should return 422 if there is a missing birthday', async () => {
+      let response = await request(server).post('/api/celebrity')
+        .send({name: 'name', date_of_birth: '', date_of_death: null, image_link: 'https://wikipedia.com'})
+       expect(response.status).toBe(422)
+    })
+
+   it('Should return a message if there is a duplicate', async () => {
+      // let fakeUser = await request(server).post('/api/register').send({username: 'foobar', password: '123'})
+      let first_celeb = await request(server).post('/api/celebrity')
+        .send({name: 'name', date_of_birth: '', date_of_death: null, image_link: 'https://wikipedia.com'})
+      let response = await request(server).post('/api/celebrity')
+        .send({name: 'name', date_of_birth: '', date_of_death: null, image_link: 'https://wikipedia.com'})
        expect(response.status).toBe(422)
     })
   })
