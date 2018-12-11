@@ -135,17 +135,51 @@ table {
   color: #343434;
   text-decoration: none;
 }
+@media (max-width: 500px) {
+  .login a {
+    color: #fff;
+    font-size: 1rem;
+    right: 30px;
+  }
+}
 .or {
   margin: -48px auto;
   position: relative;
   left: 0%;
-  top: 135px;
+  top: 179px;
   color: #343434;
   font-family: 'Economica', sans-serif;
   font-size: 6rem;
 }
+@media (max-width: 500px) {
+  .or {
+    top: 172px;
+    color: #8f0000;
+    display: none;
+  }
+}
 .or span {
   color: #fff;
+}
+@media (max-width: 500px) {
+  .or span {
+    color: #8f0000;
+    display: none;
+  }
+}
+.or2 {
+  display: none;
+}
+@media (max-width: 500px) {
+  .or2 {
+    margin: -25px auto;
+    display: block;
+    position: relative;
+    left: 0%;
+    top: 114px;
+    font-size: 3rem;
+    color: #8f0000;
+  }
 }
 header {
   display: flex;
@@ -154,6 +188,13 @@ header {
   font-family: 'Economica', sans-serif;
   font-size: 6rem;
   border-bottom: 1px solid #343434;
+}
+@media (max-width: 500px) {
+  header {
+    flex-direction: column;
+    height: 100%;
+    font-size: 3rem;
+  }
 }
 header .headerLeft {
   justify-content: center;
@@ -164,8 +205,21 @@ header .headerLeft {
   display: flex;
   flex-direction: column;
 }
+@media (max-width: 500px) {
+  header .headerLeft {
+    flex-direction: row;
+    padding: 25px 0;
+    justify-content: space-evenly;
+    font-size: 3rem;
+  }
+}
 header .headerLeft img {
   width: 128px;
+}
+@media (max-width: 500px) {
+  header .headerLeft img {
+    width: 64px;
+  }
 }
 header .headerRight {
   justify-content: center;
@@ -176,8 +230,22 @@ header .headerRight {
   display: flex;
   flex-direction: column;
 }
+@media (max-width: 500px) {
+  header .headerRight {
+    flex-direction: row;
+    padding: 25px 0;
+    justify-content: space-evenly;
+    font-size: 3rem;
+  }
+}
 header .headerRight img {
   width: 128px;
+}
+@media (max-width: 500px) {
+  header .headerRight img {
+    order: -1;
+    width: 64px;
+  }
 }
 body {
   font-family: 'Roboto', sans-serif;
@@ -200,6 +268,11 @@ body a.signUp:hover {
   background-color: #007bff;
   color: #fff;
 }
+@media (max-width: 500px) {
+  body a.signUp {
+    margin: 10px auto;
+  }
+}
 body .container {
   max-width: 1000px;
   margin: 0 auto;
@@ -217,6 +290,11 @@ body .container {
   position: relative;
   overflow: hidden;
   margin: 16px auto;
+}
+.carousel .fas,
+.carousel .fa-chevron-circle-left,
+.carousel .fa-chevron-circle-right {
+  display: block;
 }
 .carousel .left-button,
 .carousel .right-button {

@@ -2,6 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { login, signup, acknowledge } from '../redux/actions';
 
+import './Login.scss';
+
 class Login extends React.Component {
 
   constructor() {
@@ -74,6 +76,9 @@ class Login extends React.Component {
     if (e.target.name === 'username' && this.state.showSignupSuccess)
       this.setState({showSignupSuccess: false});
 
+    if (this.state.showLoginFail)
+      this.setState({showLoginFail: false});
+
     if (e.target.name === 'password') {
 
       let newPassword = '';
@@ -106,6 +111,7 @@ class Login extends React.Component {
         onChange={this.handleChange}
         placeholder={name}
         value={this.state[name]}
+        autocomplete='off'
         required
       />);
 
@@ -131,20 +137,45 @@ class Login extends React.Component {
 
     return (
 
-      <form
-        className='login-form'
-        onSubmit={this.handleSubmit}>
+      <div id="id01" className="modal">
+        <form onSubmit={this.handleSubmit} className="modal-content animate">
+          <div className="container">
+            {this.state.showLoginFail && <p className='warning'>Username/Password not recognized. Please try again.</p>}
+            {this.state.showSignupFail && <p className='warning'>Username already exists. Pick new username.</p>}
+            {this.state.showSignupSuccess && <p className='warning'>Registered!</p>}
+            <label for="uname"><b>Username</b></label>
+            {this.createFormInput('username')}
 
-        {this.state.showLoginFail && <p>Username/Password not recognized. Please try again.</p>}
-        {this.state.showSignupFail && <p>Username already exists. Pick new username.</p>}
-        {this.state.showSignupSuccess && <p>Registered!</p>}
-        {this.createFormInput('username')}
-        {this.createFormInput('password')}
+            <label for="psw"><b>Password</b></label>
+            {this.createFormInput('password')}
 
-        <button>Log In</button>
-        <button onClick={this.signUp}>Sign Up</button>
+            <button type="submit">Login</button>
+            <button className='signup' onClick={this.signUp}>Sign Up</button>
+            <label>
+              <input type="checkbox" name="remember" /> Remember me
+            </label>
+          </div>
 
-      </form>
+          {/*<form
+            className='login-form'
+            onSubmit={this.handleSubmit}>
+
+            {this.state.showLoginFail && <p>Username/Password not recognized. Please try again.</p>}
+            {this.state.showSignupFail && <p>Username already exists. Pick new username.</p>}
+            {this.state.showSignupSuccess && <p>Registered!</p>}
+            {this.createFormInput('username')}
+            {this.createFormInput('password')}
+
+            <button>Log In</button>
+            <button onClick={this.signUp}>Sign Up</button>
+
+          </form>*/}
+
+          <div className="container" style={{backgroundColor:' #f1f1f1'}}>
+            <span className="psw">Forgot <a href="#">password?</a></span>
+          </div>
+        </form>
+      </div>
 
     );
 

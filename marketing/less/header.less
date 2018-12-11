@@ -6,62 +6,117 @@
     font-family: 'Roboto', sans-serif;
     color: #343434;
     text-decoration: none;
+
+    @media @mobile{
+        color: #fff;
+        font-size: 1rem;
+        right: 30px;
+    }
 }
 .or{
     margin: -48px auto;
     position: relative;
     left: 0%;
-    top: 135px;
+    top: 179px;
     color: #343434;
     font-family: 'Economica', sans-serif;
     font-size: 6rem;
 
+    @media @mobile{
+        top: 172px;
+        color: rgb(143, 0, 0);
+        display: none;
+    }
 
     span{
         color: #fff;
+
+        @media @mobile{
+            color: rgb(143, 0, 0);
+            display: none;
+        }
+    }
+}
+
+.or2{
+    display: none;
+
+    @media @mobile{
+        margin: -25px auto;
+        display: block;
+        position: relative;
+        left: 0%;
+        top: 114px;
+        font-size: 3rem;
+        color: rgb(143, 0, 0);    
     }
 }
 
 
 header{
-    display: flex;
-    // justify-content: center;
-    // align-items:center;
+    display: flex;  
     width: 100%;
     height: 400px;;
     font-family: 'Economica', sans-serif;
     font-size: 6rem;
     border-bottom: 1px solid #343434;
+
+    @media @mobile{
+        flex-direction: column;
+        height: 100%;
+        font-size: 3rem;
+    }
  
     .headerLeft{
         .center();
         background-color: #343434;
         color: #fff;
-        // height: 300px;
         width: 100%;
         display: flex;
         flex-direction: column;
-        // align-items: flex-end;
-        // padding: 75xpx 100px;
+
+        @media @mobile{
+            flex-direction: row;
+            padding: 25px 0;
+            justify-content: space-evenly;
+            font-size: 3rem;
+        }
+    
 
         img{
             width: 128px;
+
+            @media @mobile{
+                width: 64px
             }
+        }
 
     }
 
     .headerRight{
+
         .center();
         background-color: #fff;
         color: #343434;
-        // height: 300px;
         width: 100%;
         display: flex;
         flex-direction: column;
-        // padding: 75px 100px;
+
+        @media @mobile{
+            flex-direction: row;
+            padding: 25px 0;
+            justify-content: space-evenly;
+            font-size: 3rem;
+        }
+
 
         img{
             width: 128px;
+
+            @media @mobile{
+                order: -1;
+                width: 64px
+            }
         }
 
     }
