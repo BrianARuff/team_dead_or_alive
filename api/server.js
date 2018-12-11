@@ -76,8 +76,8 @@ authentication = (req, res, next) => {
 
 // console.log(generateToken({id: 99, username: 'hello'}))
 
-server.get('/', (req, res) => {
-  res.status(200).json('working!')
+server.get('/api/celebrity_data', (req, res) => {
+  res.status(200).json(data)
 })
 
 server.get('/api/dead_or_alive', (req, res) => {
