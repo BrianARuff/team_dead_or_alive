@@ -110,7 +110,7 @@ class GamePage extends React.Component {
 
   timerFunc = () => {
 
-    this.setState({timeLeft: this.state.timeLeft - 0.01}, () => {
+    this.setState({timeLeft: Number(this.state.timeLeft - 0.01).toFixed(2)}, () => {
 
       if (this.state.timeLeft > 0)
         this.gameStuff.currentTimers.push(setTimeout(this.timerFunc, 10));
@@ -130,6 +130,9 @@ class GamePage extends React.Component {
     this.gameStuff.currentTimers.forEach(timer => clearTimeout(timer));
 
     this.gameStuff.currentTimers = [];
+
+    if (this.state.successView)
+      this.gameStuff.score += this.state.timeLeft * 100;
 
     if (this.gameStuff.index !== this.state.gameData.length)
       this.setState({successView: false, failView: false, timeLeft: 1.01}, () => this.gameStuff.currentTimers.push(this.timerFunc()))
@@ -156,7 +159,7 @@ class GamePage extends React.Component {
 
       <div className='game'>
 
-        <h1>{Number(timeLeft).toFixed(2)}</h1>
+        <h1>{timeLeft}</h1>
         <h2>{gameData[index].name}</h2>
         <img src={gameData[index].image_link} />
 
@@ -171,7 +174,16 @@ class GamePage extends React.Component {
 
   renderComplete = () => {
 
-    return <h1>Game over!</h1>
+    return (
+
+      <div className='gameover'>
+
+        <h1>Game over!</h1>
+        <h2>Score: {this.gameStuff.score}</h2>
+
+      </div>
+
+    );
 
   }
 
