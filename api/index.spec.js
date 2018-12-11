@@ -8,7 +8,6 @@ beforeEach(async () => {
   await db('users').truncate()
   await db('quiz').truncate()
   await db('celebrity').truncate()
-
 })
 
 describe('server', () => {
@@ -94,11 +93,27 @@ describe('server', () => {
     })
   })
 
+  describe('api/celebrity/:id GET', () => {
+   it('should return status code 200', async () => {
+      let data = await request(server).post('/api/celebrity')
+        .send({name: 'name', date_of_birth: 'january 1, 1999', date_of_death: null, image_link: 'https://wikipedia.com'})
+      let response = await request(server).get('/api/celebrity/1')
+      expect(response.status).toBe(200)
+    })
+
+   it('should return an object to celeb data', async () => {
+      let data = await request(server).post('/api/celebrity')
+        .send({name: 'name', date_of_birth: 'january 1, 1999', date_of_death: null, image_link: 'https://wikipedia.com'})
+      let response = await request(server).get('/api/celebrity/1')
+      expect(response.body).toEqual([{id: 1, name: 'name', date_of_birth: 'january 1, 1999', date_of_death: null, image_link: 'https://wikipedia.com'}])
+    })
+  })
+
   describe('api/celebrity POST ', () => {
-   it('Should return the id of the new celebrity', async () => {
+   it('should return the id of the new celebrity', async () => {
       let response = await request(server).post('/api/celebrity')
-        .send({name: 'name', date_of_birth: 'January 1, 1999', date_of_death: null, image_link: 'https://wikipedia.com'})
-       expect(response.body[0]).toBe(1)
+        .send({name: 'name', date_of_birth: 'january 1, 1999', date_of_death: null, image_link: 'https://wikipedia.com'})
+       expect(response.body[0]).tobe(1)
     })
 
    it('Should return 422 if there is a missing name', async () => {
@@ -109,7 +124,7 @@ describe('server', () => {
 
    it('Should return 422 if there is a missing birthday', async () => {
       let response = await request(server).post('/api/celebrity')
-        .send({name: 'name', date_of_birth: '', date_of_death: null, image_link: 'https://wikipedia.com'})
+        .send({ name: 'name', date_of_birth: '', date_of_death: null, image_link: 'https://wikipedia.com'})
        expect(response.status).toBe(422)
     })
 

@@ -138,6 +138,7 @@ server.post('/api/login', (req, res) => {
 
 server.post('/api/celebrity', (req, res) => {
   const {name, date_of_birth, date_of_death, image_link} = req.body
+
     if(name.length >= 1 && date_of_birth >= 1) {
       db('celebrity').insert(req.body)
       .then(id => {
@@ -148,7 +149,13 @@ server.post('/api/celebrity', (req, res) => {
     } else {
       res.status(422).json({message: "Name and birthday can't be blank"})
     }
+})
 
+server.get('/api/celebrity/:id', (req, res) => {
+  const celebId = req.params.id
+  db('celebrity').where({id: celebId})
+    .then(data => res.status(200).json(data))
+    .catch(err => status(500).json({err}))
 })
 
 
