@@ -11,29 +11,31 @@ const server = express();
 server.use(cors())
 server.use(express.json())
 
-  duplicateUser = (req, res, next) => {
-    const {username, password} = req.body
-    db('users').where({username: creds.username}).first()
-    .then(user => {
-      if(user.username === username) {
-        res.status(500).json({message: "There is already a user registered by that name"})
-      } else {
-        next()
-      }
-    })
+const wikiWare = (req, res, next) => {
+  infoBox(page, lang, (err, data) => {
+    if(err) {
+      res.status(500).json({message: 'We got an error from the API'})
+    } else {
+      req.wikidata = data
+     next()
+   }
+  })
+}
 
-  }
+  // duplicateUser = (req, res, next) => {
+  //   const {username, password} = req.body
+  //   db('users').where({username: creds.username}).first()
+  //   .then(user => {
+  //     if(user.username === username) {
+  //       res.status(500).json({message: "There is already a user registered by that name"})
+  //     } else {
+  //       next()
+  //     }
+  //   })
 
-  //test data 
-  const data = [
-    {name: "Betty White", dob: "January 17, 1922", dod: null, image: "https://en.wikipedia.org/wiki/Betty_White#/media/File:Betty_White_2010.jpg"},
-    {name: "Heath Ledger", dob: "April 4, 1979", dod: "January 22, 2008" , image: "https://en.wikipedia.org/wiki/Heath_Ledger#/media/File:Heath_Ledger_(Berlin_Film_Festival_2006)_revised.jpg"},
-    {name: "Wilford Brimley", dob: "September 27, 1934", dod: null, image: "https://en.wikipedia.org/wiki/Wilford_Brimley#/media/File:Wilford_Brimley.jpg"},
-    {name: "Stan Lee", dob: "December 28, 1922", dod: "November 12, 2018", image: "https://en.wikipedia.org/wiki/Stan_Lee#/media/File:Stan_Lee_by_Gage_Skidmore_3.jpg"}, ]
+  // }
 
 
-// Json token generator
-//
   generateToken = (user) => {
     const payload = {
       subject: user.id,
@@ -49,10 +51,22 @@ server.use(express.json())
     return jwt.sign(payload, secret, options)
   }
 
-// console.log(generateToken({id: 99, username: 'hello'}))
+authentication = (req, res, next) => {
+  const token = req.get('Authorization')
+    if(token) {
+      jwt.verify(token, 'dead_or_alives', (err, decoded) => {
+        req.decoded = decoded
+        next()
+      })
+    } else {
+      return res.status(401).json({message: "No token provided, must be set on authorization header"})
+    }
+}
 
-server.get('/', (req, res) => {
-  res.status(200).json('working!')
+
+server.get('/api/celebrity_data', (req, res) => {
+
+  res.status(200).json(data)
 })
 
 server.get('/api/dead_or_alive', (req, res) => {
@@ -60,6 +74,24 @@ server.get('/api/dead_or_alive', (req, res) => {
   res.status(200).json(data)
 })
 
+
+server.get('/api/user/:id', authentication,  (req, res) => {
+  res.status(201).json('working')
+
+})
+
+
+server.post('/api/quiz', (req, res) => {
+  const {user_id, name} = req.body
+    if(name.length >= 1) {
+      db('quiz').insert(req.body).then(id => {
+        res.status(201).json(id)
+      })
+    } else {
+      res.status(422).json({message: "The name can't be blank"})
+    }
+
+})
 
 server.post('/api/register', (req, res) => {
   // console.log(req.body)
@@ -90,10 +122,27 @@ server.post('/api/login', (req, res) => {
   }).catch(err => res.status(500).json({message: "Something went wrong"}))
 })
 
-// server.get('/api/celebrities', (req, res) => {
+server.post('/api/celebrity', (req, res) => {
+  const {name, date_of_birth, date_of_death, image_link} = req.body
 
+    if(name.length >= 1 && date_of_birth >= 1) {
+      db('celebrity').insert(req.body)
+      .then(id => {
+        res.status(201).json(id)
+      }).catch(err => {
+        res.status(500).json({message: "Did not create celebrity", error: err})
+      })
+    } else {
+      res.status(422).json({message: "Name and birthday can't be blank"})
+    }
+})
 
-// })
+server.get('/api/celebrity/:id', (req, res) => {
+  const celebId = req.params.id
+  db('celebrity').where({id: celebId})
+    .then(data => res.status(200).json(data))
+    .catch(err => status(500).json({err}))
+})
 
 
 module.exports = server;

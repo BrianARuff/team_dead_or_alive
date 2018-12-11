@@ -1,7 +1,13 @@
 Created by https://www.gitignore.io/api/node
 # Edit at https://www.gitignore.io/?templates=node
+<<<<<<< HEAD
 *.sqlite3
 .DS_Store
+=======
+api_test_file.js
+data/dead_or_alive.sqlite3
+*.sqlite3
+>>>>>>> doa_game_page
 ### Node ###
 # Logs
 logs
@@ -82,5 +88,7 @@ typings/
 
 #DynamoDB Local files
 .dynamodb/
+
+.DS_Store
 
 # End of https://www.gitignore.io/api/node
