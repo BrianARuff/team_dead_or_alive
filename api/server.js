@@ -10,18 +10,17 @@ const infoBox = require('wiki-infobox')
 const server = express();
 server.use(cors())
 server.use(express.json())
- 
-  const wikiWare = (req, res, next) => {
 
-    infoBox(page, lang, (err, data) => {
-      if(err) {
-        res.status(500).json({message: 'We got an error from the API'})
-      } else {
-        req.wikidata = data
-        next()
-      }
-    })
-  }
+const wikiWare = (req, res, next) => {
+  infoBox(page, lang, (err, data) => {
+    if(err) {
+      res.status(500).json({message: 'We got an error from the API'})
+    } else {
+      req.wikidata = data
+     next()
+   }
+  })
+}
 
   // duplicateUser = (req, res, next) => {
   //   const {username, password} = req.body
@@ -68,10 +67,15 @@ const data = [
   }
 
 authentication = (req, res, next) => {
-  console.log(req.body)
   const token = req.get('Authorization')
-  next()
-
+    if(token) {
+      jwt.verify(token, 'dead_or_alives', (err, decoded) => {
+        req.decoded = decoded
+        next()
+      })
+    } else {
+      return res.status(401).json({message: "No token provided, must be set on authorization header"})
+    }
 }
 
 // console.log(generateToken({id: 99, username: 'hello'}))
@@ -88,8 +92,6 @@ server.get('/api/dead_or_alive', (req, res) => {
 
 server.get('/api/user/:id', authentication,  (req, res) => {
   res.status(201).json('working')
-
-
 
 })
 
