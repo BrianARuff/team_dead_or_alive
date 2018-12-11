@@ -2,6 +2,7 @@ Created by https://www.gitignore.io/api/node
 # Edit at https://www.gitignore.io/?templates=node
 api_test_file.js
 data/dead_or_alive.sqlite3
+*.sqlite3
 ### Node ###
 # Logs
 logs
