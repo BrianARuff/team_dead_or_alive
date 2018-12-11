@@ -36,21 +36,6 @@ const wikiWare = (req, res, next) => {
   // }
 
 
-const data = [
-        { id: 1, name: "Betty White", date_of_birth: "January 17, 1922", date_of_death: null, image_link: "https://en.wikipedia.org/wiki/Betty_White#/media/File:Betty_White_2010.jpg"},
-        {id: 2, name: "Stan Lee", date_of_birth: "December 28, 1922", date_of_death: "November 12, 2018", image_link: "https://en.wikipedia.org/wiki/Betty_White#/media/File:Betty_White_2010.jpg"},
-        {id: 3, name: "Alec Baldwin", date_of_birth: "April 3, 1958", date_of_death: null, image_link: "https://en.wikipedia.org/wiki/Betty_White#/media/File:Betty_White_2010.jpg"},
-        {id: 4, name: "Samwise Gamgee", date_of_birth: "April 3, 1000", date_of_death: "April 3, 1100", image_link: "https://en.wikipedia.org/wiki/Betty_White#/media/File:Betty_White_2010.jpg"},
-        {id: 5, name: "Frodo Baggins", date_of_birth: "April 3, 1000", date_of_death: "April 3, 1100", image_link: "https://en.wikipedia.org/wiki/Betty_White#/media/File:Betty_White_2010.jpg"},
-        {id: 6, name: "Santa Clauze", date_of_birth: "April 3, 1000", date_of_death: "April 3, 1100", image_link: "https://en.wikipedia.org/wiki/Betty_White#/media/File:Betty_White_2010.jpg"},
-        {id: 7, name: "Yoko Ono", date_of_birth: "April 3, 1000", date_of_death: null, image_link: "https://en.wikipedia.org/wiki/Betty_White#/media/File:Betty_White_2010.jpg"},
-        {id: 8, name: "Paul McCartney", date_of_birth: "April 3, 1000", date_of_death: null, image_link: "https://en.wikipedia.org/wiki/Betty_White#/media/File:Betty_White_2010.jpg"},
-        {id: 9, name: "John Lennon", date_of_birth: "April 3, 1000", date_of_death: "April 3, 1100", image_link: "https://en.wikipedia.org/wiki/Betty_White#/media/File:Betty_White_2010.jpg"},
-        {id: 10, name: "Ringo Starr", date_of_birth: "April 3, 1000", date_of_death: null, image_link: "https://en.wikipedia.org/wiki/Betty_White#/media/File:Betty_White_2010.jpg"},
-        {id: 11, name: "George Harrison", date_of_birth: "April 3, 1000", date_of_death: "April 3, 1100", image_link: "https://en.wikipedia.org/wiki/Betty_White#/media/File:Betty_White_2010.jpg"},
-]
-
-
   generateToken = (user) => {
     const payload = {
       subject: user.id,
@@ -80,6 +65,7 @@ authentication = (req, res, next) => {
 
 
 server.get('/api/celebrity_data', (req, res) => {
+
   res.status(200).json(data)
 })
 
@@ -136,10 +122,27 @@ server.post('/api/login', (req, res) => {
   }).catch(err => res.status(500).json({message: "Something went wrong"}))
 })
 
-// server.get('/api/celebrities', (req, res) => {
+server.post('/api/celebrity', (req, res) => {
+  const {name, date_of_birth, date_of_death, image_link} = req.body
 
+    if(name.length >= 1 && date_of_birth >= 1) {
+      db('celebrity').insert(req.body)
+      .then(id => {
+        res.status(201).json(id)
+      }).catch(err => {
+        res.status(500).json({message: "Did not create celebrity", error: err})
+      })
+    } else {
+      res.status(422).json({message: "Name and birthday can't be blank"})
+    }
+})
 
-// })
+server.get('/api/celebrity/:id', (req, res) => {
+  const celebId = req.params.id
+  db('celebrity').where({id: celebId})
+    .then(data => res.status(200).json(data))
+    .catch(err => status(500).json({err}))
+})
 
 
 module.exports = server;
