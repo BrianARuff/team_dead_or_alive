@@ -138,12 +138,16 @@ server.post('/api/login', (req, res) => {
 
 server.post('/api/celebrity', (req, res) => {
   const {name, date_of_birth, date_of_death, image_link} = req.body
-  db('celebrity').insert(req.body)
-  .then(id => {
-    res.status(201).json(id)
-  }).catch(err => {
-    res.status(500).json({message: "Did not create celebrity", error: err})
-  })
+    if(name.length >= 1 && date_of_birth >= 1) {
+      db('celebrity').insert(req.body)
+      .then(id => {
+        res.status(201).json(id)
+      }).catch(err => {
+        res.status(500).json({message: "Did not create celebrity", error: err})
+      })
+    } else {
+      res.status(422).json({message: "Name and birthday can't be blank"})
+    }
 
 })
 
