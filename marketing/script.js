@@ -67,7 +67,6 @@ const titleR = document.querySelector('.titleRight');
 const alive = document.querySelector('.headerRight img');
 const signUp = document.querySelector('.signUp');
 let w = window.innerWidth;
-console.log(w);
 
 if (w >= 500) {
 	$(window).ready(() => {
@@ -94,12 +93,47 @@ if (w >= 500) {
 			.delay(4000)
 			.fadeIn(2000);
 	});
+} else if (w < 500) {
+	$(titleL)
+		.hide()
+		.fadeIn(3000);
+	$(dead)
+		.hide()
+		.fadeIn(3000);
+	$(titleR)
+		.hide()
+		.fadeIn(3000);
+	$(alive)
+		.hide()
+		.fadeIn(3000);
 }
+
+//Icon hovers - enter
+dead.addEventListener('mouseenter', () => {
+	dead.style.backgroundColor = 'red';
+	dead.style.borderRadius = '50%';
+});
+alive.addEventListener('mouseenter', () => {
+	alive.style.backgroundColor = 'green';
+	alive.style.borderRadius = '50%';
+});
+
+//Icon hovers - leave
+dead.addEventListener('mouseleave', () => {
+	dead.style.backgroundColor = '';
+	dead.style.borderRadius = '50%';
+});
+alive.addEventListener('mouseleave', () => {
+	alive.style.backgroundColor = '';
+	alive.style.borderRadius = '50%';
+});
 
 //Mobile Menu
 const hamburger = document.querySelector('.fa-bars');
 const menuContent = document.querySelector('.menuModal');
-hamburger.addEventListener('click',	() => (menuContent.style.display = 'block')
+hamburger.addEventListener(
+	'click',
+	() => (menuContent.style.display = 'block')
 );
 // When the user clicks anywhere outside of the modal, close it
 window.addEventListener('click', event => {
