@@ -78,7 +78,6 @@ authentication = (req, res, next) => {
     }
 }
 
-// console.log(generateToken({id: 99, username: 'hello'}))
 
 server.get('/api/celebrity_data', (req, res) => {
   res.status(200).json(data)
@@ -92,6 +91,19 @@ server.get('/api/dead_or_alive', (req, res) => {
 
 server.get('/api/user/:id', authentication,  (req, res) => {
   res.status(201).json('working')
+
+})
+
+
+server.post('/api/quiz', (req, res) => {
+  const {user_id, name} = req.body
+    if(name.length >= 1) {
+      db('quiz').insert(req.body).then(id => {
+        res.status(201).json(id)
+      })
+    } else {
+      res.status(422).json({message: "The name can't be blank"})
+    }
 
 })
 
