@@ -32,7 +32,7 @@ class GamePage extends React.Component {
       <div className='preview'>
 
         <h2>Game Title Goes Here</h2>
-        <h4>Author Goes Here</h4>
+        <p>By Joe Schmoe</p>
 
         <p>Maybe we could have some type of logo image right here</p>
 
