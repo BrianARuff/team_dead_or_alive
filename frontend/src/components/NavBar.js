@@ -7,7 +7,7 @@ export default function NavBar() {
 
     <div className='navbar'>
 
-      <NavLink activeStyle={{fontWeight: 'bold'}} to='/'>Home</NavLink>
+      <NavLink activeStyle={{fontWeight: 'bold'}} exact to='/'>Home</NavLink>
       <NavLink activeStyle={{fontWeight: 'bold'}} to='/create'>Create Quiz</NavLink>
 
     </div>
