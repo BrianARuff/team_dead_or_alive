@@ -10,6 +10,18 @@ const infoBox = require('wiki-infobox')
 const server = express();
 server.use(cors())
 server.use(express.json())
+ 
+  const wikiWare = (req, res, next) => {
+
+    infoBox(page, lang, (err, data) => {
+      if(err) {
+        res.status(500).json({message: 'We got an error from the API'})
+      } else {
+        req.wikidata = data
+        next()
+      }
+    })
+  }
 
   duplicateUser = (req, res, next) => {
     const {username, password} = req.body
@@ -25,6 +37,11 @@ server.use(express.json())
   }
 
   //test data 
+  //
+  //
+
+  // server.get('/api/celeb', )
+
   const data = [
     {name: "Betty White", dob: "January 17, 1922", dod: null, image: "https://en.wikipedia.org/wiki/Betty_White#/media/File:Betty_White_2010.jpg"},
     {name: "Heath Ledger", dob: "April 4, 1979", dod: "January 22, 2008" , image: "https://en.wikipedia.org/wiki/Heath_Ledger#/media/File:Heath_Ledger_(Berlin_Film_Festival_2006)_revised.jpg"},
