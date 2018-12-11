@@ -1,0 +1,84 @@
+<!-- less-watch-compiler less css index.less -->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Dead or Alive</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="shortcut icon" href="./favicon.ico">
+  <link rel="stylesheet" type="text/css" href="css/index.css" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css?family=Economica|Roboto" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.2/TweenMax.min.js" async></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="script.js" async></script>
+</head>
+
+<body>
+    <div class="login"><a href="#">Login</a></div>
+    <div class="or"><span>O</span>R</div>
+    <header>
+        <div class="headerLeft">
+            <div class="titleLeft">Dead</div>
+            <img src="img/dead.svg" alt="dead">
+        </div>
+        <div class="headerRight">
+            <div class="titleLeft">Alive</div>
+            <img src="img/happy.svg" alt="alive">
+        </div>
+    </header>
+    <a href="#" class="signUp">Sign Up</a>
+    <div class="container">
+        <div class="carousel">
+            <div class="left-button fas fa-chevron-circle-left"></i></div>
+            <img src="https://images.unsplash.com/photo-1544247340-c0c30d7ca1ab?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80" />
+            <img src="https://images.unsplash.com/photo-1466071624063-c556307cb4d2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1047&q=80" />
+            <img src="https://images.unsplash.com/photo-1472982728022-601a8d99e9af?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1489&q=80" />
+            <img src="https://images.unsplash.com/photo-1544084944-15269ec7b5a0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1051&q=80" />
+            <div class="right-button fas fa-chevron-circle-right"></i></div>
+        </div>
+
+        <footer>
+            <h3>Made with <img src="img/like.png" alt="love"> at Lambda School | <span class="credit">Credit</span></h3>
+            <div class="footerContent display">
+                <p>Michael Landers - Marketing Page</p>
+                <p>Jonathan Heinz - Web Application Development</p>
+                <p>Chad Jemmett - Backend Development</p>
+                <p>Brian Ruff - Scrum Master/Jack of All Trades</p>
+                <br>
+                <div>Icons made by <a href="https://www.flaticon.com/authors/smashicons" title="Smashicons">Smashicons</a> from <a href="https://www.flaticon.com/" 			    title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" 			    title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+
+                <div>Icons made by <a href="https://www.flaticon.com/authors/chanut" title="Chanut">Chanut</a> from <a href="https://www.flaticon.com/" 			    title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" 			    title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+    
+                <div>Icons made by <a href="https://www.flaticon.com/authors/chanut" title="Chanut">Chanut</a> from <a href="https://www.flaticon.com/" 			    title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" 			    title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+    </div>
+    
+        </div>
+        </footer>
+        </body>
+
+        <div id="id01" class="modal">
+                <form class="modal-content animate" action="/action_page.php">        
+                  <div class="container">
+                    <label for="uname"><b>Username</b></label>
+                    <input type="text" placeholder="Enter Username" name="uname" required>
+              
+                    <label for="psw"><b>Password</b></label>
+                    <input type="password" placeholder="Enter Password" name="psw" required>
+                      
+                    <button type="submit">Login</button>
+                    <label>
+                      <input type="checkbox" checked="checked" name="remember"> Remember me
+                    </label>
+                  </div>
+              
+                  <div class="container" style="background-color:#f1f1f1">
+                    <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+                    <span class="psw">Forgot <a href="#">password?</a></span>
+                  </div>
+                </form>
+              </div>
+</html>
