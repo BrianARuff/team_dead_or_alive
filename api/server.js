@@ -6,6 +6,7 @@ const knexConfig = require('./knexfile.js')
 const db = knex(knexConfig.development)
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const infoBox = require('wiki-infobox')
 const server = express();
 server.use(cors())
 server.use(express.json())
@@ -88,6 +89,11 @@ server.post('/api/login', (req, res) => {
     }
   }).catch(err => res.status(500).json({message: "Something went wrong"}))
 })
+
+// server.get('/api/celebrities', (req, res) => {
+
+
+// })
 
 
 module.exports = server;
