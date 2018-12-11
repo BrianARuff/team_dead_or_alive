@@ -10,7 +10,7 @@ export default function QuizPreview({quizData, history}) {
 
       <h2>Quiz Name</h2>
       <div className='details'>
-        <p>By Joe Schmoe</p>
+        <p>By <span className='user-link' onClick={e => { e.stopPropagation(); history.push('/users/1') }}>Joe Schmoe</span></p>
         <p>Number of questions: 42</p>
       </div>
 

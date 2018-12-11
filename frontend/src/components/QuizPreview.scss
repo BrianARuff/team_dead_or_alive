@@ -17,6 +17,19 @@
 
   }
 
+  .user-link {
+
+    text-decoration: underline;
+    color: darkblue;
+
+    &:hover {
+
+      color: blue;
+
+    }
+
+  }
+
   &:hover {
 
     background-color: grey;
