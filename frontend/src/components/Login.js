@@ -2,6 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { login, signup, acknowledge } from '../redux/actions';
 
+import './Login.scss';
+
 class Login extends React.Component {
 
   constructor() {

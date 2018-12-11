@@ -1,5 +1,7 @@
 import React from 'react';
 
+import './QuizPreview.scss';
+
 export default function QuizPreview({quizData}) {
 
   return (

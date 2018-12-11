@@ -6,6 +6,8 @@ import { BrowserRouter } from 'react-router-dom';
 import Login from './components/Login';
 import Router from './components/Router';
 
+import './App.scss';
+
 class App extends Component {
 
   render() {

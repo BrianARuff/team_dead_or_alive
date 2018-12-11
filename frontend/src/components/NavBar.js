@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 
 import { logout } from '../redux/actions';
 
+import './NavBar.scss';
+
 function NavBar({logout}) {
 
   return (
