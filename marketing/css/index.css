@@ -146,7 +146,7 @@ table {
   margin: -48px auto;
   position: relative;
   left: 0%;
-  top: 135px;
+  top: 179px;
   color: #343434;
   font-family: 'Economica', sans-serif;
   font-size: 6rem;
@@ -167,17 +167,17 @@ table {
     display: none;
   }
 }
-.fa-sort {
+.or2 {
   display: none;
 }
 @media (max-width: 500px) {
-  .fa-sort {
-    margin: -40px auto;
+  .or2 {
+    margin: -25px auto;
     display: block;
     position: relative;
     left: 0%;
-    top: 177px;
-    font-size: 5rem;
+    top: 114px;
+    font-size: 3rem;
     color: #8f0000;
   }
 }
@@ -193,6 +193,7 @@ header {
   header {
     flex-direction: column;
     height: 100%;
+    font-size: 3rem;
   }
 }
 header .headerLeft {
@@ -209,10 +210,16 @@ header .headerLeft {
     flex-direction: row;
     padding: 25px 0;
     justify-content: space-evenly;
+    font-size: 3rem;
   }
 }
 header .headerLeft img {
   width: 128px;
+}
+@media (max-width: 500px) {
+  header .headerLeft img {
+    width: 64px;
+  }
 }
 header .headerRight {
   justify-content: center;
@@ -228,6 +235,7 @@ header .headerRight {
     flex-direction: row;
     padding: 25px 0;
     justify-content: space-evenly;
+    font-size: 3rem;
   }
 }
 header .headerRight img {
@@ -236,6 +244,7 @@ header .headerRight img {
 @media (max-width: 500px) {
   header .headerRight img {
     order: -1;
+    width: 64px;
   }
 }
 body {
@@ -281,6 +290,11 @@ body .container {
   position: relative;
   overflow: hidden;
   margin: 16px auto;
+}
+.carousel .fas,
+.carousel .fa-chevron-circle-left,
+.carousel .fa-chevron-circle-right {
+  display: block;
 }
 .carousel .left-button,
 .carousel .right-button {
