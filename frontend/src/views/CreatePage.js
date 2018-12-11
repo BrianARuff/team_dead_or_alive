@@ -8,13 +8,17 @@ export default function CreatePage(props) {
 
   return (
 
-    <div className='create-page'>
+    <>
 
       <NavBar />
 
-      <h1>Create!</h1>
+      <div className='create-page'>
 
-    </div>
+        <h1>Create!</h1>
+
+      </div>
+
+    </>
 
   );
 

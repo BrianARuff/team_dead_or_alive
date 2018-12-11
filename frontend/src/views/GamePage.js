@@ -12,7 +12,8 @@ class GamePage extends React.Component {
 
     this.state = {
 
-      started: false
+      started: false,
+      gameData: []
 
     }
 

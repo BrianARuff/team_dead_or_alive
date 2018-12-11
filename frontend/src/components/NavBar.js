@@ -12,8 +12,13 @@ function NavBar({logout}) {
 
     <div className='navbar'>
 
-      <NavLink activeStyle={{fontWeight: 'bold'}} exact to='/'>Home</NavLink>
-      <NavLink activeStyle={{fontWeight: 'bold'}} exact to='/create'>Create Quiz</NavLink>
+      <div className='links'>
+
+        <NavLink activeStyle={{fontWeight: 'bold'}} exact to='/'>Home</NavLink>
+        <NavLink activeStyle={{fontWeight: 'bold'}} exact to='/create'>Create Quiz</NavLink>
+
+      </div>
+
       <Link to='#' onClick={logout}>Log Out</Link>
 
     </div>
