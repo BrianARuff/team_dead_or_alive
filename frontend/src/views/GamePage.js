@@ -14,7 +14,20 @@ class GamePage extends React.Component {
     this.state = {
 
       started: false,
-      gameData: []
+      gameData: [],
+      timeLeft: 1.01,
+      gameView: true,
+      successView: false,
+      failView: false,
+      completed: false
+
+    }
+
+    this.gameStuff = {
+
+      score: 0,
+      index: 0,
+      currentTimers: [],
 
     }
 
@@ -30,7 +43,7 @@ class GamePage extends React.Component {
 
   startGame = () => {
 
-    this.setState({started: true});
+    this.setState({started: true}, () => this.gameStuff.currentTimers.push(this.timerFunc()));
 
   }
 
@@ -55,17 +68,110 @@ class GamePage extends React.Component {
 
   }
 
+  renderSuccessView = () => {
+
+    return <h1>Correct!</h1>
+
+  }
+
+  renderFailView = () => {
+
+    return <h1>Incorrect!</h1>
+
+  }
+
+  check = val => {
+
+    console.log(this.state.gameData[this.gameStuff.index].date_of_death);
+
+    if (this.state.gameData[this.gameStuff.index].date_of_death) {
+
+      if (!val)
+        this.setState({successView: true});
+
+      else
+        this.setState({failView: true});
+
+    }
+
+    else {
+
+      if (val)
+        this.setState({successView: true});
+
+      else
+        this.setState({failView: true});
+
+    }
+
+    this.gameStuff.currentTimers.push(setTimeout(this.nextQuestion, 250));
+
+  }
+
+  timerFunc = () => {
+
+    this.setState({timeLeft: this.state.timeLeft - 0.01}, () => {
+
+      if (this.state.timeLeft > 0)
+        this.gameStuff.currentTimers.push(setTimeout(this.timerFunc, 10));
+
+      else {
+        this.setState({failView: true}, () => this.gameStuff.currentTimers.push(setTimeout(this.nextQuestion, 250)));
+      }
+
+    })
+
+  }
+
+  nextQuestion = () => {
+
+    this.gameStuff.index++;
+
+    this.gameStuff.currentTimers.forEach(timer => clearTimeout(timer));
+
+    this.gameStuff.currentTimers = [];
+
+    if (this.gameStuff.index !== this.state.gameData.length)
+      this.setState({successView: false, failView: false, timeLeft: 1.01}, () => this.gameStuff.currentTimers.push(this.timerFunc()))
+
+    else
+      this.setState({started: false, completed: true, timeLeft: 1.01});
+
+  }
+
   renderGame = () => {
+
+    const { timeLeft, gameData } = this.state;
+    const { index } = this.gameStuff;
+
+    if (this.state.successView)
+      return this.renderSuccessView();
+
+    if (this.state.failView)
+      return this.renderFailView();
+
+    console.log(this.state.gameData[this.gameStuff.index].date_of_death);
 
     return (
 
       <div className='game'>
 
-        {this.state.gameData.map(data => <p>{data.name}</p>)}
+        <h1>{Number(timeLeft).toFixed(2)}</h1>
+        <h2>{gameData[index].name}</h2>
+        <img src={gameData[index].image_link} />
+
+        <button className='dead' onClick={() => this.check(false)}>Dead</button>
+        <button className='alive' onClick={() => this.check(true)}>Alive</button>
 
       </div>
 
     );
+
+  }
+
+  renderComplete = () => {
+
+    return <h1>Game over!</h1>
 
   }
 
@@ -79,7 +185,9 @@ class GamePage extends React.Component {
 
         <div className='game-page'>
 
-          {this.state.started ? this.renderGame() : this.renderGamePreview()}
+          {this.state.started && this.renderGame()}
+          {!this.state.started && !this.state.completed && this.renderGamePreview()}
+          {this.state.completed && this.renderComplete()}
 
         </div>
 
