@@ -6,25 +6,73 @@ import { logout } from '../redux/actions';
 
 import './NavBar.scss';
 
-function NavBar({logout}) {
+class NavBar extends React.Component {
 
-  return (
+  constructor() {
 
-    <div className='navbar'>
+    super();
 
-      <div className='links'>
+    this.state = {
 
-        <NavLink activeStyle={{fontWeight: 'bold'}} exact to='/'>Home</NavLink>
-        <NavLink activeStyle={{fontWeight: 'bold'}} exact to='/create'>Create Quiz</NavLink>
+      showUserDropdown: false
+
+    }
+
+  }
+
+  toggleDropdown = () => {
+
+    this.setState({showUserDropdown: !this.state.showUserDropdown});
+
+  }
+
+  renderDropdown = () => {
+
+    return (
+
+      <div className='dropdown'>
+
+        <Link to='/users/1'>Profile</Link>
+        <Link to='' onClick={this.props.logout}>Log Out</Link>
 
       </div>
 
-      <Link to='#' onClick={logout}>Log Out</Link>
+    );
 
-    </div>
+  }
 
-  );
+  render() {
+
+    const {username} = this.props;
+
+    return (
+
+      <div className='navbar'>
+
+        <div className='links'>
+
+          <NavLink activeStyle={{fontWeight: 'bold'}} exact to='/'>Home</NavLink>
+          <NavLink activeStyle={{fontWeight: 'bold'}} exact to='/create'>Create Quiz</NavLink>
+
+        </div>
+
+        <span className='user' to='' onClick={this.toggleDropdown}>{username}</span>
+        {this.state.showUserDropdown && this.renderDropdown()}
+
+      </div>
+
+    );
+
+  }
 
 }
 
-export default connect(null, { logout })(NavBar);
+function stateToProps(state) {
+
+  return {
+    username: state.username
+  }
+
+}
+
+export default connect(stateToProps, { logout })(NavBar);

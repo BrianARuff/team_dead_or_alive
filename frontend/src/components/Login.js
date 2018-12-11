@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { login, signup, acknowledge } from '../redux/actions';
+import { login, signup, acknowledge, loginToken } from '../redux/actions';
 
 import './Login.scss';
 
@@ -18,6 +18,19 @@ class Login extends React.Component {
       showSignupFail: false,
       showSignupSuccess: false,
       showLoginFail: false
+
+    }
+
+  }
+
+  componentDidMount() {
+
+    // Check if token is invalid, if so, ask for password again and autofill username
+
+    if (localStorage.token) {
+
+      this.setState({username: localStorage.username});
+      this.props.loginToken();
 
     }
 
@@ -194,4 +207,4 @@ function stateToProps(state) {
 
 }
 
-export default connect(stateToProps, { login, signup, acknowledge })(Login);
+export default connect(stateToProps, { login, signup, acknowledge, loginToken })(Login);

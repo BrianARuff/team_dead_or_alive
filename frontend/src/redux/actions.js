@@ -82,3 +82,21 @@ export const acknowledge = () => {
   }
 
 }
+
+export const loginToken = () => dispatch => {
+
+  // check token on backend. Until implemented, token will always be accepted.
+
+  dispatch({
+
+    type: LOGIN_SUCCESS,
+    payload: {
+
+      token: localStorage.token,
+      username: localStorage.username
+
+    }
+
+  })
+
+}
