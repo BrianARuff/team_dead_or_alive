@@ -13,36 +13,6 @@ server.use(cors())
 server.use(express.json())
 
 
-  // duplicateUser = (req, res, next) => {
-  //   const {username, password} = req.body
-  //   db('users').where({username: creds.username}).first()
-  //   .then(user => {
-  //     if(user.username === username) {
-  //       res.status(500).json({message: "There is already a user registered by that name"})
-  //     } else {
-  //       next()
-  //     }
-  //   })
-
-  // }
-
-
-  generateToken = (user) => {
-    const payload = {
-      subject: user.id,
-      username: user.username
-    }
-
-    const secret = 'dead_or_alive' 
-
-    const options = {
-      expiresIn: '99hr'
-    }
-
-    return jwt.sign(payload, secret, options)
-  }
-
-
 
 server.get('/api/celebrity_data', (req, res) => {
 
@@ -94,7 +64,7 @@ server.post('/api/login', (req, res) => {
   db('users').where({username: creds.username}).first()
   .then(user => {
     if(user && bcrypt.compareSync(creds.password, user.password)) {
-      const token = generateToken(user)
+      const token = middleware.generateToken(user)
       res.status(200).json({message: 'welcome user', token})
     } else {
       res.status(422).json({message: "you are not logged in"})
@@ -104,9 +74,7 @@ server.post('/api/login', (req, res) => {
 
 server.post('/api/celebrity', middleware.checkDataBase, middleware.wikiWare, (req, res) => {
   db('celebrity').insert(req.body).then(id => {
-    db('celebrity').where('id', id[0]).then(celeb => {
-      res.status(200).json(celeb)
-    })
+      res.status(200).json(id)
   }).catch(err => {
     res.status(500).json({message: "Celebrity not added to database", err})
   })
