@@ -26,7 +26,13 @@ server.get('/api/dead_or_alive', (req, res) => {
 
 
 server.get('/api/user/:id', authentication,  (req, res) => {
-  res.status(201).json('working')
+  db.select('id', 'username', 'score').from('users').where('id', req.params.id)
+    .then(user => {
+      res.status(201).json(user)
+    })
+  .catch(error => {
+      res.status(500).json({message: "We can't access your user info at this time"})
+  })
 
 })
 
@@ -95,6 +101,16 @@ server.get('/api/quiz/:quizId', (req, res) => {
   db('celebQuiz').innerJoin('celebrity', 'celebrity.id', 'celebQuiz.celeb_id').where('celebQuiz.quiz_id', quizId)
   .then(celebData => res.status(200).json(celebData))
   .catch(err => res.status(500).json({message: "We aren't able to get the quiz at this time"}))
+})
+
+server.get('/api/quizzes', (req, res) => {
+  db.select().table('quiz')
+    // db('quiz').where('id', 2
+    .then(allQuizzes => {
+      res.status(200).json(allQuizzes)
+    })
+    .catch(error => res.status(500).json({message: "Can't get the list of quizzes at this time", error}))
+
 })
 
 server.post('/api/quiz/:id', (req, res) => {
