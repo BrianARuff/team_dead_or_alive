@@ -96,17 +96,17 @@ class CreatePage extends React.Component {
 
             <form onSubmit={this.handleFormSubmission}>
 
-              <input type='text' name='quizName' placeholder='quiz title' onChange={this.handleChange} value={this.state.quizName} required />
+              <input type='text' name='quizName' placeholder='Quiz title' onChange={this.handleChange} value={this.state.quizName} required />
 
               <form onSubmit={this.handleAddSubmission}>
 
                 {this.state.celebFail && <p>We were unable to find that celebrity in our database. It is possible that you entered a person that is not famous! Please try something else.</p>}
-                <input type='text' name='celebName' placeholder='celebrity name' onChange={this.handleChange} value={this.state.celebName} required />
-                <button>Add Celebrity!</button>
+                <input type='text' name='celebName' placeholder='Celebrity name' onChange={this.handleChange} value={this.state.celebName} required />
+                <button>Add Celebrity</button>
 
               </form>
 
-              <button>Create Quiz!</button>
+              <button>Create Quiz</button>
 
             </form>
 

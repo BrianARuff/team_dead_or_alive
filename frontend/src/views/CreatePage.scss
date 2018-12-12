@@ -1,1 +1,42 @@
 // CreatePage.scss
+
+.create-page{
+
+
+    h1{
+        border-bottom: 1px solid #343434;
+    }
+
+    .content{
+        padding: 15px;
+        display: flex;
+        justify-content: flex-start;
+
+        input{
+            margin-bottom: 10px;
+            margin-right: 10px;
+            padding: 5px;
+            height: 20px;
+        }
+        button{
+            padding: 5px 15px;
+            border: 1px solid #343434;
+            border-radius: 4px;
+
+            &:hover{
+                background-color: lightblue;
+            }
+        }
+
+        .quiz-display{
+            margin-left: 10%;
+            h2{
+                margin-bottom: 10px;
+            }
+
+            li{
+                font-size: 1.5rem;
+            }
+        }
+    }
+}
