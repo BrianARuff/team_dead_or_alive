@@ -2,7 +2,7 @@ import React from 'react';
 
 import NavBar from '../components/NavBar';
 import { connect } from 'react-redux';
-import { acknowledge, checkCeleb } from '../redux/actions';
+import { acknowledge, checkCeleb, addQuiz } from '../redux/actions';
 
 import './CreatePage.scss';
 
@@ -17,6 +17,7 @@ class CreatePage extends React.Component {
       celebName: '',
       celebFail: false,
       localList: [],
+      listToSend: [],
       quizName: ''
 
     }
@@ -30,10 +31,12 @@ class CreatePage extends React.Component {
       if (this.props.nameStatus === 'SUCCESS') {
 
         console.log(this.props.celebObj);
+        console.log(this.state.celebName);
 
         this.setState({
 
-          localList: [...this.state.localList, this.props.celebObj],
+          localList: [...this.state.localList, this.state.celebName],
+          listToSend: [...this.state.listToSend, this.props.celebObj],
           celebName: ''
 
         });
@@ -78,7 +81,14 @@ class CreatePage extends React.Component {
 
     e.preventDefault();
 
-    // Send list to server
+    this.props.addQuiz(this.state.listToSend);
+
+    this.setState({
+
+      localList: [],
+      listToSend: []
+
+    });
 
   }
 
@@ -129,7 +139,7 @@ class CreatePage extends React.Component {
 
                 <ul>
 
-                  {this.state.localList.map(celeb => <li key={celeb.id}>{celeb.name}</li>)}
+                  {this.state.localList.map((celeb, id) => <li key={id}>{celeb}</li>)}
 
                 </ul>
 
@@ -161,4 +171,4 @@ function stateToProps(state) {
 
 }
 
-export default connect(stateToProps, { checkCeleb, acknowledge })(CreatePage);
+export default connect(stateToProps, { checkCeleb, acknowledge, addQuiz })(CreatePage);

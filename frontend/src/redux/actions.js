@@ -123,3 +123,9 @@ export const checkCeleb = celebName => dispatch => {
     }))
 
 }
+
+export const addQuiz = quiz => dispatch => {
+
+  //axios.post()
+
+}

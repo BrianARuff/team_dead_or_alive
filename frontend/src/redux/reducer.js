@@ -50,7 +50,7 @@ export default function reducer(state = initialState, action) {
       return {...state, token: null, username: null}
 
     case NAME_SUCCESS:
-      return {...state, nameStatus: 'SUCCESS', celebObj: action.payload[0], searchingCelebDB: false}
+      return {...state, nameStatus: 'SUCCESS', celebObj: action.payload, searchingCelebDB: false}
 
     case NAME_FAILURE:
       return {...state, nameStatus: 'FAILURE', searchingCelebDB: false}

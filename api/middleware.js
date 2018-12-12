@@ -1,8 +1,39 @@
 const knex = require('knex')
 const knexConfig = require('./knexfile.js')
+const jwt = require('jsonwebtoken');
 const infoBox = require('wiki-infobox')
 const db = knex(knexConfig.development)
 
+generateToken = (user) => {
+  const payload = {
+    subject: user.id,
+    username: user.username
+  }
+
+  const secret = 'dead_or_alive' 
+
+  const options = {
+    expiresIn: '99hr'
+  }
+
+  return jwt.sign(payload, secret, options)
+}
+
+authentication = (req, res, next) => {
+  const token = req.get('Authorization')
+    if(token) {
+      jwt.verify(token, 'dead_or_alive', (err, decoded) => {
+        if(err) {
+          res.status(401).json({message: "invalid token"})
+        } else {
+          req.decodedToken = decoded
+          next()
+        }
+      })
+    } else {
+      return res.status(401).json({message: "No token provided, must be set on authorization header"})
+    }
+}
 
 checkDataBase = (req, res, next) => {
   const name = req.body.name
@@ -11,7 +42,8 @@ checkDataBase = (req, res, next) => {
     if(name.length === 0) {
       next()
     } else {
-      res.status(200).json(name)
+      // console.log(name[0].id)
+      res.status(200).json(name[0].id)
     }
   })
   .catch(error => {
@@ -45,7 +77,9 @@ wikiWare = (req, res, next) => {
 
 module.exports = {
   checkDataBase,
-  wikiWare
+  wikiWare,
+  authentication,
+  generateToken,
 
 
 
