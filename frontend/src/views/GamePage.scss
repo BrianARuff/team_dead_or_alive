@@ -22,6 +22,21 @@
     width: 50%;
     margin: 15px auto;
 
+    button{
+      padding: 5px 10px;
+      margin-top: 10px;
+      background-color: #fff;
+      border: 1px solid #343434;
+      border-radius: 4px;
+      font-size: 1.6rem;
+      cursor: pointer;
+
+      &:hover{
+        background-color: lightblue;
+      }
+    }
+
+
   }
 
   .correct {
@@ -72,6 +87,7 @@
       width: 200px;
       height: auto;
       margin: 10px auto;
+      border-radius: 4px;
 
     }
 
@@ -92,7 +108,8 @@
       margin: 0 5px;
       border: 1px solid black;
       background-color: white;
-      padding: 10px 40px;
+      padding: 10px 25px;
+      border-radius: 4px;
       cursor: pointer;
 
     }
@@ -100,6 +117,11 @@
     .dead {
 
       background-color: #d8370a;
+
+      img{
+        height: 40px;
+        width: 40px;
+      }
 
       &:hover {
 
@@ -113,6 +135,11 @@
 
       background-color: #209e04;
 
+      img{
+        height: 40px;
+        width: 40px;
+      }
+
       &:hover {
 
         background-color: lighten(#209e04, 10%);
@@ -121,6 +148,22 @@
 
     }
 
+  }
+
+  .gameover{
+    button{
+      padding: 5px 10px;
+      margin-top: 10px;
+      background-color: #fff;
+      border: 1px solid #343434;
+      border-radius: 4px;
+      font-size: 1.6rem;
+      cursor: pointer;
+
+      &:hover{
+        background-color: lightblue;
+      }
+    }
   }
 
 }
