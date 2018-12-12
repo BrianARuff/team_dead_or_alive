@@ -6,6 +6,9 @@ import config from '../config.js';
 
 import './GamePage.scss';
 
+import dead from '../img/dead.png';
+import alive from '../img/dead.png';
+
 class GamePage extends React.Component {
 
   constructor() {
@@ -223,8 +226,8 @@ class GamePage extends React.Component {
         <h2>{timeLeft}</h2>
         <img src={gameData[index].image_link} />
         <br />
-        <button className='dead' onClick={() => this.check(false)}>Dead</button>
-        <button className='alive' onClick={() => this.check(true)}>Alive</button>
+        <button className='dead' onClick={() => this.check(false)}><img  src={dead}/></button>
+        <button className='alive' onClick={() => this.check(true)}><img  src={alive}/></button>
 
       </div>
 
