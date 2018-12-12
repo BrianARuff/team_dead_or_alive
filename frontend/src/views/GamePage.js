@@ -162,7 +162,7 @@ class GamePage extends React.Component {
 
         <h1>{timeLeft}</h1>
         <h2>{gameData[index].name}</h2>
-        <img src={gameData[index].image_link} />
+        <img src={gameData[index].image_link} width='500px' height='500px' />
 
         <button className='dead' onClick={() => this.check(false)}>Dead</button>
         <button className='alive' onClick={() => this.check(true)}>Alive</button>
