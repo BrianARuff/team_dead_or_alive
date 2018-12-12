@@ -26,7 +26,13 @@ server.get('/api/dead_or_alive', (req, res) => {
 
 
 server.get('/api/user/:id', authentication,  (req, res) => {
-  res.status(201).json('working')
+  db('users').where('id', req.params.id)
+    .then(user => {
+      res.status(201).json(user)
+    })
+  .catch(error => {
+      res.status(500).json({message: "We can't access your user info at this time"})
+  })
 
 })
 
