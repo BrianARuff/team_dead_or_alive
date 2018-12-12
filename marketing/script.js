@@ -39,25 +39,25 @@ let creditContent = document.querySelector('.footerContent');
 $(credits).click(() => $(creditContent).slideToggle('slow'));
 
 //login modal
-const login = document.querySelector('.login');
-const modalLogin = document.querySelector('.mLogin');
+// const login = document.querySelector('.login');
+// const modalLogin = document.querySelector('.mLogin');
 
-login.addEventListener('click', () => {
-	document.querySelector('#loginForm').style.display = 'block';
-});
-modalLogin.addEventListener('click', () => {
-	let modal = document.querySelector('.menuModal');
-	modal.style.display = 'none';
-	document.querySelector('#loginForm').style.display = 'block';
-});
+// login.addEventListener('click', () => {
+// 	document.querySelector('#loginForm').style.display = 'block';
+// });
+// modalLogin.addEventListener('click', () => {
+// 	let modal = document.querySelector('.menuModal');
+// 	modal.style.display = 'none';
+// 	document.querySelector('#loginForm').style.display = 'block';
+// });
 
-// When the user clicks anywhere outside of the modal, close it
-window.addEventListener('click', event => {
-	let modal = document.querySelector('#loginForm');
-	if (event.target == modal) {
-		modal.style.display = 'none';
-	}
-});
+//Login modal -  When the user clicks anywhere outside of the modal, close it
+// window.addEventListener('click', event => {
+// 	let modal = document.querySelector('#loginForm');
+// 	if (event.target == modal) {
+// 		modal.style.display = 'none';
+// 	}
+// });
 
 //Fade in of header items
 const titleL = document.querySelector('.titleLeft');
@@ -131,9 +131,7 @@ alive.addEventListener('mouseleave', () => {
 //Mobile Menu
 const hamburger = document.querySelector('.fa-bars');
 const menuContent = document.querySelector('.menuModal');
-hamburger.addEventListener(
-	'click',
-	() => (menuContent.style.display = 'block')
+hamburger.addEventListener('click',() => (menuContent.style.display = 'block')
 );
 // When the user clicks anywhere outside of the modal, close it
 window.addEventListener('click', event => {
@@ -142,3 +140,10 @@ window.addEventListener('click', event => {
 		modal.style.display = 'none';
 	}
 });
+
+window.addEventListener('touchstart', event => {
+    let modal = document.querySelector('.menuModal');
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }})
+    
