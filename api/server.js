@@ -7,6 +7,7 @@ const middleware = require('./middleware.js')
 const db = knex(knexConfig.development)
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const jwtKey = require('./_secret/keys.js')
 const infoBox = require('wiki-infobox')
 const server = express();
 server.use(cors())

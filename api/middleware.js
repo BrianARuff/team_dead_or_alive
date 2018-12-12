@@ -2,6 +2,7 @@ const knex = require('knex')
 const knexConfig = require('./knexfile.js')
 const jwt = require('jsonwebtoken');
 const infoBox = require('wiki-infobox')
+const jwtKey = require('./_secret/keys.js').jwtKey
 const db = knex(knexConfig.development)
 
 generateToken = (user) => {
@@ -10,7 +11,7 @@ generateToken = (user) => {
     username: user.username
   }
 
-  const secret = 'dead_or_alive' 
+  const secret = jwtKey
 
   const options = {
     expiresIn: '99hr'
@@ -22,7 +23,7 @@ generateToken = (user) => {
 authentication = (req, res, next) => {
   const token = req.get('Authorization')
     if(token) {
-      jwt.verify(token, 'dead_or_alive', (err, decoded) => {
+      jwt.verify(token, jwtKey, (err, decoded) => {
         if(err) {
           res.status(401).json({message: "invalid token"})
         } else {
