@@ -3,6 +3,7 @@ const express = require('express');
 const cors = require('cors')
 const knex = require('knex')
 const knexConfig = require('./knexfile.js')
+const middleware = require('./middleware.js')
 const db = knex(knexConfig.development)
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
@@ -122,19 +123,12 @@ server.post('/api/login', (req, res) => {
   }).catch(err => res.status(500).json({message: "Something went wrong"}))
 })
 
-server.post('/api/celebrity', (req, res) => {
-  const {name, date_of_birth, date_of_death, image_link} = req.body
+server.post('/api/celebrity', middleware.checkDataBase, middleware.wikiWare, (req, res) => {
+  console.log(req.body)
+  db('celebrity').insert(req.body).then(result => console.log(result))
 
-    if(name.length >= 1 && date_of_birth >= 1) {
-      db('celebrity').insert(req.body)
-      .then(id => {
-        res.status(201).json(id)
-      }).catch(err => {
-        res.status(500).json({message: "Did not create celebrity", error: err})
-      })
-    } else {
-      res.status(422).json({message: "Name and birthday can't be blank"})
-    }
+
+  res.status(200).json(req.body)
 })
 
 server.get('/api/celebrity/:id', (req, res) => {
