@@ -42,17 +42,6 @@ server.use(express.json())
     return jwt.sign(payload, secret, options)
   }
 
-authentication = (req, res, next) => {
-  const token = req.get('Authorization')
-    if(token) {
-      jwt.verify(token, 'dead_or_alives', (err, decoded) => {
-        req.decoded = decoded
-        next()
-      })
-    } else {
-      return res.status(401).json({message: "No token provided, must be set on authorization header"})
-    }
-}
 
 
 server.get('/api/celebrity_data', (req, res) => {
@@ -72,7 +61,7 @@ server.get('/api/user/:id', authentication,  (req, res) => {
 })
 
 
-server.post('/api/quiz', (req, res) => {
+server.post('/api/quiz', authentication, (req, res) => {
   const {user_id, name} = req.body
     if(name.length >= 1) {
       db('quiz').insert(req.body).then(id => {
@@ -85,7 +74,7 @@ server.post('/api/quiz', (req, res) => {
 })
 
 server.post('/api/register', (req, res) => {
-  // console.log(req.body)
+   console.log(req.body)
   const {username, password} = req.body
     if(username.length >= 1 && password.length >= 1) {
     const creds = req.body
