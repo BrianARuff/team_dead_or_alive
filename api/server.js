@@ -120,6 +120,10 @@ server.post('/api/quiz', (req, res) => {
 
 })
 
+
+
+
+
 server.post('/api/register', (req, res) => {
   // console.log(req.body)
   const {username, password} = req.body
