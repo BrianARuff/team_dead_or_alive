@@ -100,7 +100,7 @@ class CreatePage extends React.Component {
 
               <form className='create-form' onSubmit={this.handleFormSubmission}>
 
-                <input type='text' name='quizName' placeholder='quiz title' onChange={this.handleChange} value={this.state.quizName} required />
+              <input type='text' name='quizName' placeholder='Quiz title' onChange={this.handleChange} value={this.state.quizName} required />
 
                 <form onSubmit={this.handleAddSubmission}>
 

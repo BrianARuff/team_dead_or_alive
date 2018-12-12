@@ -1,78 +1,77 @@
 // CreatePage.scss
 
-.create-page {
+.create-page{
 
-  h1 {
 
-    text-align: center;
-    margin: 20px;
-
-  }
-
-  .content {
-
-    display: flex;
-
-    .form-container {
-
-      width: 50%;
-      display: flex;
-      justify-content: center;
-
-      .create-form {
-
+    h1{
+        border-bottom: 1px solid #343434;
         text-align: center;
-
-        input {
-
-          padding: 5px;
-          margin-bottom: 5px;
-
-        }
-
-        button {
-
-          margin-bottom: 5px;
-
-        }
-
-      }
-
-      .fail {
-
-        color: red;
-        width: 30%;
-        margin: auto;
-
-      }
-
+        margin: 20px;
+        padding-bottom: 20px;
     }
 
-    .quiz-display {
-
-      width: 50%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-
-      h3 {
-
-        font-size: 1.6rem;
-        font-weight: bold;
-        margin: 10px 0;
-
-      }
-
-      ul {
-
+    .content{
+        padding: 15px;
         display: flex;
-        flex-direction: column;
-        align-items: center;
+        justify-content: flex-start;
 
-      }
+        .form-container {
 
+          width: 50%;
+          display: flex;
+          justify-content: center;
+
+          .create-form {
+
+            text-align: center;
+
+          }
+
+          input{
+              margin-bottom: 10px;
+              margin-right: 10px;
+              padding: 5px;
+              height: 20px;
+          }
+          button{
+              padding: 5px 15px;
+              border: 1px solid #343434;
+              border-radius: 4px;
+              margin-bottom: 5px;
+              &:hover{
+                  background-color: lightblue;
+              }
+          }
+
+        }
+
+        .quiz-display{
+          width: 50%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+            h2{
+                margin-bottom: 10px;
+            }
+            h3 {
+
+              font-size: 1.6rem;
+              font-weight: bold;
+              margin: 10px 0;
+
+            }
+
+            ul {
+
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+
+            }
+
+            li{
+                font-size: 1.5rem;
+            }
+        }
     }
-
-  }
-
 }

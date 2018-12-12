@@ -3,7 +3,7 @@
 .navbar {
 
   display: flex;
-  background-color: lightblue;
+  background-color: #343434;
   justify-content: space-between;
   align-items: center;
   width: 100%;
@@ -13,12 +13,12 @@
 
     text-decoration: none;
     padding: 10px;
-    color: purple;
+    color: #fff;
     font-size: 1.6rem;
 
     &:hover {
 
-      color: lighten(purple, 10%);
+      color: lightblue;
 
     }
 
@@ -26,15 +26,15 @@
 
   .user {
 
-    margin-right: 15px;
+    margin-right: 25px;
     font-size: 1.6rem;
-    color: purple;
+    color: #fff;
     padding: 10px;
     cursor: pointer;
 
     &:hover {
 
-      color: lighten(purple, 10%);
+      color: lightblue;
 
     }
 
@@ -43,9 +43,9 @@
   .dropdown {
 
     position: absolute;
-    right: 0;
+    right: 10px;
     top: 100%;
-    background-color: lightblue;
+    background-color: #343434;
     display: flex;
     flex-direction: column;
 
