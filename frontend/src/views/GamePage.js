@@ -26,9 +26,10 @@ class GamePage extends React.Component {
 
     this.gameStuff = {
 
-      score: 0,
+      score: 0.0,
       index: 0,
       currentTimers: [],
+      stopTime: null
 
     }
 
@@ -83,6 +84,8 @@ class GamePage extends React.Component {
 
   check = val => {
 
+    this.gameStuff.stopTime = this.state.timeLeft;
+
     console.log(this.state.gameData[this.gameStuff.index].date_of_death);
 
     if (this.state.gameData[this.gameStuff.index].date_of_death) {
@@ -132,8 +135,9 @@ class GamePage extends React.Component {
 
     this.gameStuff.currentTimers = [];
 
-    if (this.state.successView)
-      this.gameStuff.score += this.state.timeLeft * 100;
+    if (this.state.successView) {
+      this.gameStuff.score += this.gameStuff.stopTime * 100;
+    }
 
     if (this.gameStuff.index !== this.state.gameData.length)
       this.setState({successView: false, failView: false, timeLeft: 1.01}, () => this.gameStuff.currentTimers.push(this.timerFunc()))
@@ -154,15 +158,13 @@ class GamePage extends React.Component {
     if (this.state.failView)
       return this.renderFailView();
 
-    console.log(this.state.gameData[this.gameStuff.index].date_of_death);
-
     return (
 
       <div className='game'>
 
         <h1>{timeLeft}</h1>
         <h2>{gameData[index].name}</h2>
-        <img src={gameData[index].image_link} width='500px' height='500px' />
+        {/*<img src={gameData[index].image_link} width='500px' height='500px' />*/}
 
         <button className='dead' onClick={() => this.check(false)}>Dead</button>
         <button className='alive' onClick={() => this.check(true)}>Alive</button>
