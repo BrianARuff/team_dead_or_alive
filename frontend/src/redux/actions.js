@@ -10,8 +10,10 @@ const FETCHING = 'FETCHING';
 const SIGNUP_SUCCESS = 'SIGNUP_SUCCESS';
 const SIGNUP_FAILURE = 'SIGNUP_FAILURE';
 const ACKNOWLEDGEMENT = 'ACKNOWLEDGEMENT';
+const NAME_SUCCESS = 'NAME_SUCCESS';
+const NAME_FAILURE = 'NAME_FAILURE';
 
-export { LOGIN_SUCCESS, LOGIN_FAIL, QUIZ_SUCCESS, FETCHING, QUIZ_FAIL, SIGNUP_SUCCESS, SIGNUP_FAILURE, ACKNOWLEDGEMENT, LOGOUT };
+export { LOGIN_SUCCESS, LOGIN_FAIL, QUIZ_SUCCESS, FETCHING, QUIZ_FAIL, SIGNUP_SUCCESS, SIGNUP_FAILURE, ACKNOWLEDGEMENT, LOGOUT, NAME_SUCCESS, NAME_FAILURE };
 
 
 export const login = (user, pass) => dispatch => {
@@ -99,5 +101,31 @@ export const loginToken = () => dispatch => {
     }
 
   })
+
+}
+
+export const checkCeleb = celebName => dispatch => {
+
+  // Check celeb on backend. For now, it will always be accepted unless the name is Rome.
+
+  if (celebName !== 'Rome') {
+
+    dispatch({
+
+      type: NAME_SUCCESS
+
+    });
+
+  }
+
+  else {
+
+    dispatch({
+
+      type: NAME_FAILURE
+
+    });
+
+  }
 
 }

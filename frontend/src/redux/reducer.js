@@ -1,4 +1,4 @@
-import { LOGIN_SUCCESS, LOGIN_FAIL, QUIZ_SUCCESS, FETCHING, QUIZ_FAIL, SIGNUP_SUCCESS, SIGNUP_FAILURE, ACKNOWLEDGEMENT, LOGOUT } from './actions';
+import { LOGIN_SUCCESS, LOGIN_FAIL, QUIZ_SUCCESS, FETCHING, QUIZ_FAIL, SIGNUP_SUCCESS, SIGNUP_FAILURE, ACKNOWLEDGEMENT, LOGOUT, NAME_SUCCESS, NAME_FAILURE } from './actions';
 
 const initialState = {
 
@@ -8,6 +8,7 @@ const initialState = {
   error: null,
   signupStatus: null,
   loginStatus: null,
+  nameStatus: null,
   token: null
 
 }
@@ -40,11 +41,17 @@ export default function reducer(state = initialState, action) {
       return {...state, signupStatus: 'FAILURE'}
 
     case ACKNOWLEDGEMENT:
-      return {...state, signupStatus: null, loginStatus: null}
+      return {...state, signupStatus: null, loginStatus: null, nameStatus: null}
 
     case LOGOUT:
       localStorage.clear();
       return {...state, token: null, username: null}
+
+    case NAME_SUCCESS:
+      return {...state, nameStatus: 'SUCCESS'}
+
+    case NAME_FAILURE:
+      return {...state, nameStatus: 'FAILURE'}
 
     default:
       return state;
