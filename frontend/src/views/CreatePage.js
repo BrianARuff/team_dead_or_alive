@@ -96,32 +96,44 @@ class CreatePage extends React.Component {
 
           <div className='content'>
 
-            <form onSubmit={this.handleFormSubmission}>
+            <div className='form-container'>
 
-              <input type='text' name='quizName' placeholder='quiz title' onChange={this.handleChange} value={this.state.quizName} required />
+              <form className='create-form' onSubmit={this.handleFormSubmission}>
 
-              <form onSubmit={this.handleAddSubmission}>
+                <input type='text' name='quizName' placeholder='quiz title' onChange={this.handleChange} value={this.state.quizName} required />
+
+                <form onSubmit={this.handleAddSubmission}>
+
+                  <input type='text' name='celebName' placeholder='celebrity name' onChange={this.handleChange} value={this.state.celebName} required />
+                  <br />
+                  <button>Add Celebrity!</button>
+
+                </form>
+
+                <button>Create Quiz!</button>
 
                 {this.props.searchingCelebDB && <p>Searching for celebrity...</p>}
-                {this.state.celebFail && <p>We were unable to find that celebrity in our database. It is possible that you entered a person that is not famous! Please try something else.</p>}
-                <input type='text' name='celebName' placeholder='celebrity name' onChange={this.handleChange} value={this.state.celebName} required />
-                <button>Add Celebrity!</button>
+                {this.state.celebFail && <p className='fail'>We were unable to find that celebrity in our database. It is possible that you entered a person that is not famous! Please try something else.</p>}
 
               </form>
 
-              <button>Create Quiz!</button>
-
-            </form>
+            </div>
 
             <div className='quiz-display'>
 
               <h2>{this.state.quizName !== '' ? this.state.quizName : 'Quiz Name'}</h2>
 
-              <ul>
+              <div className='list-container'>
 
-                {this.state.localList.map(celeb => <li key={celeb.id}>{celeb.name}</li>)}
+                <h3>Celebrities:</h3>
 
-              </ul>
+                <ul>
+
+                  {this.state.localList.map(celeb => <li key={celeb.id}>{celeb.name}</li>)}
+
+                </ul>
+
+              </div>
 
             </div>
 

@@ -1,1 +1,78 @@
 // CreatePage.scss
+
+.create-page {
+
+  h1 {
+
+    text-align: center;
+    margin: 20px;
+
+  }
+
+  .content {
+
+    display: flex;
+
+    .form-container {
+
+      width: 50%;
+      display: flex;
+      justify-content: center;
+
+      .create-form {
+
+        text-align: center;
+
+        input {
+
+          padding: 5px;
+          margin-bottom: 5px;
+
+        }
+
+        button {
+
+          margin-bottom: 5px;
+
+        }
+
+      }
+
+      .fail {
+
+        color: red;
+        width: 30%;
+        margin: auto;
+
+      }
+
+    }
+
+    .quiz-display {
+
+      width: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      h3 {
+
+        font-size: 1.6rem;
+        font-weight: bold;
+        margin: 10px 0;
+
+      }
+
+      ul {
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+      }
+
+    }
+
+  }
+
+}
