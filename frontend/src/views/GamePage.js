@@ -242,10 +242,36 @@ class GamePage extends React.Component {
 
         <h1>Game over!</h1>
         <h2>Score: {this.gameStuff.score}</h2>
+        <button onClick={this.restart}>Play again!</button>
 
       </div>
 
     );
+
+  }
+
+  restart = () => {
+
+    this.setState({
+
+      started: false,
+      timeLeft: 1.01,
+      gameView: true,
+      successView: false,
+      failView: false,
+      completed: false
+
+    });
+
+    this.gameStuff = {
+
+      score: 0.0,
+      index: 0,
+      currentTimers: [],
+      stopTime: null,
+      streak: 0
+
+    }
 
   }
 
