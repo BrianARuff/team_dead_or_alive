@@ -15,12 +15,10 @@ server.use(express.json())
 
 
 server.get('/api/celebrity_data', (req, res) => {
-
   res.status(200).json(data)
 })
 
 server.get('/api/dead_or_alive', (req, res) => {
-  //send data with a few items. Name. birthdate. Image link, dead boolean? Brief info? .
   res.status(200).json(data)
 })
 
@@ -54,7 +52,7 @@ server.post('/api/register', (req, res) => {
   const {username, password} = req.body
     if(username.length >= 1 && password.length >= 1) {
     const creds = req.body
-      //the 2 is just of dev purposes
+      //the 2 is just for dev purposes, in real life the number needs to be higher
     const hash = bcrypt.hashSync(creds.password, 2)
     creds.password = hash
     db('users').insert(creds).then(id => {
@@ -78,7 +76,7 @@ server.post('/api/login', (req, res) => {
   }).catch(err => res.status(500).json({message: "Something went wrong"}))
 })
 
-server.post('/api/celebrity', middleware.checkDataBase, middleware.wikiWare, (req, res) => {
+server.post('/api/celebrity', middleware.authentication, middleware.checkDataBase, middleware.wikiWare, (req, res) => {
   db('celebrity').insert(req.body).then(id => {
       res.status(200).json(id)
   }).catch(err => {
@@ -113,7 +111,7 @@ server.get('/api/quizzes', (req, res) => {
 
 })
 
-server.post('/api/quiz/:id', (req, res) => {
+server.post('/api/quiz/:id', middleware.authentication, (req, res) => {
   const celebArray = req.body.celebId
     celebArray.forEach(item => {
       db('celebQuiz').insert({celeb_id: item, quiz_id: req.params.id})
