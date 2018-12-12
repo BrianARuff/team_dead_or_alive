@@ -4,12 +4,8 @@ const cors = require('cors')
 const knex = require('knex')
 const environment = process.env.NODE_ENV || 'development';
 const knexConfig = require('./knexfile.js')
-<<<<<<< HEAD
-const db = knex(knexConfig[environment]);
-=======
 const middleware = require('./middleware.js')
-const db = knex(knexConfig.development)
->>>>>>> doa_game_page
+const db = knex(knexConfig[environment])
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const infoBox = require('wiki-infobox')
