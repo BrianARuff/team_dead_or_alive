@@ -28,4 +28,14 @@ beforeEach(async () => {
         .send({user_id: 2, name: ''})
        expect(response.status).toBe(422)
     })
+
   })
+
+// describe('/api/quiz/:id  post to  request'< () => {
+//     it('Should return 200 after adding celebs to quiz', async () => {
+//       let response = await request(server).post('/api/quiz/1')
+//         .send({})
+//        expect(response.status).toBe(422)
+//     })
+
+})

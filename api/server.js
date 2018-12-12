@@ -12,16 +12,6 @@ const server = express();
 server.use(cors())
 server.use(express.json())
 
-const wikiWare = (req, res, next) => {
-  infoBox(page, lang, (err, data) => {
-    if(err) {
-      res.status(500).json({message: 'We got an error from the API'})
-    } else {
-      req.wikidata = data
-     next()
-   }
-  })
-}
 
   // duplicateUser = (req, res, next) => {
   //   const {username, password} = req.body
@@ -150,11 +140,13 @@ server.post('/api/login', (req, res) => {
 })
 
 server.post('/api/celebrity', middleware.checkDataBase, middleware.wikiWare, (req, res) => {
-  console.log(req.body)
-  db('celebrity').insert(req.body).then(result => console.log(result))
-
-
-  res.status(200).json(req.body)
+  db('celebrity').insert(req.body).then(id => {
+    db('celebrity').where('id', id[0]).then(celeb => {
+      res.status(200).json(celeb)
+    })
+  }).catch(err => {
+    res.status(500).json({message: "Celebrity not added to database", err})
+  })
 })
 
 server.get('/api/celebrity/:id', (req, res) => {
@@ -173,5 +165,16 @@ server.get('/api/quiz/:quizId', (req, res) => {
   .then(celebData => res.status(200).json(celebData))
   .catch(err => res.status(500).json({message: "We aren't able to get the quiz at this time"}))
 })
-
+server.post('/api/quiz/:id', (req, res) => {
+  const celebArray = req.body.celebId
+    celebArray.forEach(item => {
+      db('celebQuiz').insert({celeb_id: item, quiz_id: req.params.id})
+        .then(response => {
+          res.status(201).json(response)
+        })
+      .catch(error => {
+          res.status(400).json({message: "Cannot add quiz elements"})
+      })
+    })
+})
 module.exports = server;
