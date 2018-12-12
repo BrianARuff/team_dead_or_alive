@@ -2,8 +2,9 @@
 const express = require('express');
 const cors = require('cors')
 const knex = require('knex')
+const environment = process.env.NODE_ENV || 'development';
 const knexConfig = require('./knexfile.js')
-const db = knex(knexConfig.development)
+const db = knex(knexConfig)[environment];
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const infoBox = require('wiki-infobox')
