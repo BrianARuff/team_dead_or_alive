@@ -140,5 +140,18 @@ server.get('/api/quiz/:quizId', (req, res) => {
   .catch(err => res.status(500).json({message: "We aren't able to get the quiz at this time"}))
 })
 
+server.post('/api/quiz/:id', (req, res) => {
+  const celebArray = req.body.celebId
+    celebArray.forEach(item => {
+      db('celebQuiz').insert({celeb_id: item, quiz_id: req.params.id})
+        .then(response => {
+          res.status(201).json(response)
+        })
+      .catch(error => {
+          res.status(400).json({message: "Cannot add quiz elements"})
+      })
+    })
+})
+
 
 module.exports = server;
