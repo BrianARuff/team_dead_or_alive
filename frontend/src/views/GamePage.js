@@ -41,7 +41,7 @@ class GamePage extends React.Component {
 
   componentDidMount() {
 
-    axios.get(`${config.backendURL}:${config.backendPort}/api/quiz/${this.props.match.params.id}`)
+    axios.get(`${config.backendURL}:${config.backendPort}/api/celebrity_data`)
       .then(res => this.setState({gameData: res.data}))
       .catch(err => console.log(err));
 
