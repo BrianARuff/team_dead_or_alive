@@ -58,18 +58,19 @@ wikiWare = (req, res, next) => {
       if(err) {
         res.status(500).json({message: 'We got an error from the API'})
       } else {
-        req.body.name = data.name.value
-        // const bDay = data.birth_date.value.replace(/\D/g, ' ').trim()
-        req.body.date_of_birth = data.birth_date.value
-        req.body.image_link = data.image.value
-        if('death_date' in data) {
-          // console.log('death date', data.death_date)
-         // const death_day = data.death_date.value.replace(/\D/g, ' ').trim()
-         req.body.date_of_death = true 
+        if(data.name === undefined) {
+            res.status(500).json({message: "That name isn't working with the api", name: req.body.name})
         } else {
-          req.body.date_of_death = null 
+          req.body.name = data.name.value
+          req.body.date_of_birth = data.birth_date.value
+          req.body.image_link = data.image.value
+          if('death_date' in data) {
+           req.body.date_of_death = true 
+          } else {
+            req.body.date_of_death = null 
+          }
+         next()
         }
-       next()
      }
     })
 }
