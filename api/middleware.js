@@ -59,7 +59,7 @@ wikiWare = (req, res, next) => {
         res.status(500).json({message: 'We got an error from the API'})
       } else {
         if(data.name === undefined) {
-            res.status(500).json({message: "That name isn't working with the api"})
+            res.status(500).json({message: "That name isn't working with the api", name: req.body.name})
         } else {
           req.body.name = data.name.value
           req.body.date_of_birth = data.birth_date.value
