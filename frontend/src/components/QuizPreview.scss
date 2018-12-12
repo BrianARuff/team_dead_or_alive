@@ -4,12 +4,18 @@
 
   display: flex;
   cursor: pointer;
-  background-color: darkgrey;
+  background-color: rgb(240, 240, 240);
+  border-left: 4px solid rgb(240, 240, 240);
   color: black;
   width: 100%;
   justify-content: space-between;
   align-items: center;
   padding: 10px 5px;
+
+  &:nth-child(even){
+    background-color: #fff;
+
+  }
 
   .details {
 
@@ -32,7 +38,8 @@
 
   &:hover {
 
-    background-color: grey;
+    background-color: rgb(219, 219, 219);
+    border-left: 4px solid green;
 
   }
 

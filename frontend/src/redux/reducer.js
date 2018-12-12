@@ -1,4 +1,4 @@
-import { LOGIN_SUCCESS, LOGIN_FAIL, QUIZ_SUCCESS, FETCHING, QUIZ_FAIL, SIGNUP_SUCCESS, SIGNUP_FAILURE, ACKNOWLEDGEMENT, LOGOUT } from './actions';
+import { LOGIN_SUCCESS, LOGIN_FAIL, QUIZ_SUCCESS, FETCHING, QUIZ_FAIL, SIGNUP_SUCCESS, SIGNUP_FAILURE, ACKNOWLEDGEMENT, LOGOUT, NAME_SUCCESS, NAME_FAILURE, SEARCHING_CELEB_DB } from './actions';
 
 const initialState = {
 
@@ -8,7 +8,10 @@ const initialState = {
   error: null,
   signupStatus: null,
   loginStatus: null,
-  token: null
+  nameStatus: null,
+  token: null,
+  celebObj: null,
+  searchingCelebDB: false
 
 }
 
@@ -40,11 +43,20 @@ export default function reducer(state = initialState, action) {
       return {...state, signupStatus: 'FAILURE'}
 
     case ACKNOWLEDGEMENT:
-      return {...state, signupStatus: null, loginStatus: null}
+      return {...state, signupStatus: null, loginStatus: null, nameStatus: null}
 
     case LOGOUT:
       localStorage.clear();
       return {...state, token: null, username: null}
+
+    case NAME_SUCCESS:
+      return {...state, nameStatus: 'SUCCESS', celebObj: action.payload[0], searchingCelebDB: false}
+
+    case NAME_FAILURE:
+      return {...state, nameStatus: 'FAILURE', searchingCelebDB: false}
+
+    case SEARCHING_CELEB_DB:
+      return {...state, searchingCelebDB: true}
 
     default:
       return state;

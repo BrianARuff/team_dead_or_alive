@@ -10,8 +10,11 @@ const FETCHING = 'FETCHING';
 const SIGNUP_SUCCESS = 'SIGNUP_SUCCESS';
 const SIGNUP_FAILURE = 'SIGNUP_FAILURE';
 const ACKNOWLEDGEMENT = 'ACKNOWLEDGEMENT';
+const NAME_SUCCESS = 'NAME_SUCCESS';
+const NAME_FAILURE = 'NAME_FAILURE';
+const SEARCHING_CELEB_DB = 'SEARCHING_CELEB_DB';
 
-export { LOGIN_SUCCESS, LOGIN_FAIL, QUIZ_SUCCESS, FETCHING, QUIZ_FAIL, SIGNUP_SUCCESS, SIGNUP_FAILURE, ACKNOWLEDGEMENT, LOGOUT };
+export { LOGIN_SUCCESS, LOGIN_FAIL, QUIZ_SUCCESS, FETCHING, QUIZ_FAIL, SIGNUP_SUCCESS, SIGNUP_FAILURE, ACKNOWLEDGEMENT, LOGOUT, NAME_SUCCESS, NAME_FAILURE, SEARCHING_CELEB_DB };
 
 
 export const login = (user, pass) => dispatch => {
@@ -99,5 +102,24 @@ export const loginToken = () => dispatch => {
     }
 
   })
+
+}
+
+export const checkCeleb = celebName => dispatch => {
+
+  dispatch({
+    type: SEARCHING_CELEB_DB
+  });
+
+  axios.post(`${config.backendURL}:${config.backendPort}/api/celebrity`, {name: celebName})
+    .then(res => dispatch({
+
+      type: NAME_SUCCESS,
+      payload: res.data
+
+    }))
+    .catch(err => dispatch({
+      type: NAME_FAILURE
+    }))
 
 }

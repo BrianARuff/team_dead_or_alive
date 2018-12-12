@@ -6,6 +6,9 @@ import config from '../config.js';
 
 import './GamePage.scss';
 
+import dead from '../img/dead.png';
+import alive from '../img/dead.png';
+
 class GamePage extends React.Component {
 
   constructor() {
@@ -26,9 +29,11 @@ class GamePage extends React.Component {
 
     this.gameStuff = {
 
-      score: 0,
+      score: 0.0,
       index: 0,
       currentTimers: [],
+      stopTime: null,
+      streak: 0
 
     }
 
@@ -71,24 +76,46 @@ class GamePage extends React.Component {
 
   renderSuccessView = () => {
 
-    return <h1>Correct!</h1>
+    document.querySelector('body').classList.add('correct-bg');
+
+    return (
+
+      <div>
+        <h1 className='correct'>Correct!</h1>
+        {this.gameStuff.streak === 3 && <h2 className='bonus-txt'>+50 points for 3 correct answers in a row!</h2>}
+        {this.gameStuff.streak === 5 && <h2 className='bonus-txt'>+75 points for 5 correct answers in a row!</h2>}
+        {this.gameStuff.streak === 10 && <h2 className='bonus-txt'>+100 points for 10 correct answers in a row!</h2>}
+        {this.gameStuff.streak === 15 && <h2 className='bonus-txt'>+200 points for 15 correct answers in a row!</h2>}
+        {this.gameStuff.streak === this.state.gameData.length && <h2 className='bonus-txt'>+500 points for a perfect game!</h2>}
+      </div>
+
+    );
 
   }
 
   renderFailView = () => {
 
-    return <h1>Incorrect!</h1>
+    document.querySelector('body').classList.add('incorrect-bg');
+    this.gameStuff.streak = 0;
+    return <h1 className='incorrect'>Incorrect!</h1>
 
   }
 
   check = val => {
 
+    this.gameStuff.stopTime = this.state.timeLeft;
+
     console.log(this.state.gameData[this.gameStuff.index].date_of_death);
 
     if (this.state.gameData[this.gameStuff.index].date_of_death) {
 
-      if (!val)
+      if (!val) {
+
+        this.calculateBonus();
+
         this.setState({successView: true});
+
+      }
 
       else
         this.setState({failView: true});
@@ -97,15 +124,49 @@ class GamePage extends React.Component {
 
     else {
 
-      if (val)
+      if (val) {
+
+        this.calculateBonus();
         this.setState({successView: true});
+
+      }
 
       else
         this.setState({failView: true});
 
     }
 
-    this.gameStuff.currentTimers.push(setTimeout(this.nextQuestion, 250));
+    this.gameStuff.currentTimers.push(setTimeout(this.nextQuestion, 350));
+
+  }
+
+  calculateBonus = () => {
+
+    this.gameStuff.streak++;
+
+    switch (this.gameStuff.streak) {
+
+      case 3:
+        this.gameStuff.score += 50;
+        break;
+
+      case 5:
+        this.gameStuff.score += 75;
+        break;
+
+      case 10:
+        this.gameStuff.score += 100;
+        break;
+
+      case 15:
+        this.gameStuff.score += 200;
+        break;
+
+      case this.state.gameData.length:
+        this.gameStuff.score += 500;
+        break;
+
+    }
 
   }
 
@@ -132,8 +193,9 @@ class GamePage extends React.Component {
 
     this.gameStuff.currentTimers = [];
 
-    if (this.state.successView)
-      this.gameStuff.score += this.state.timeLeft * 100;
+    if (this.state.successView) {
+      this.gameStuff.score += this.gameStuff.stopTime * 100;
+    }
 
     if (this.gameStuff.index !== this.state.gameData.length)
       this.setState({successView: false, failView: false, timeLeft: 1.01}, () => this.gameStuff.currentTimers.push(this.timerFunc()))
@@ -154,18 +216,18 @@ class GamePage extends React.Component {
     if (this.state.failView)
       return this.renderFailView();
 
-    console.log(this.state.gameData[this.gameStuff.index].date_of_death);
+    document.querySelector('body').className = '';
 
     return (
 
       <div className='game'>
 
-        <h1>{timeLeft}</h1>
-        <h2>{gameData[index].name}</h2>
-        <img src={gameData[index].image_link} width='500px' height='500px' />
-
-        <button className='dead' onClick={() => this.check(false)}>Dead</button>
-        <button className='alive' onClick={() => this.check(true)}>Alive</button>
+        <h1>{gameData[index].name}</h1>
+        <h2>{timeLeft}</h2>
+        <img src={gameData[index].image_link} />
+        <br />
+        <button className='dead' onClick={() => this.check(false)}><img  src={dead}/></button>
+        <button className='alive' onClick={() => this.check(true)}><img  src={alive}/></button>
 
       </div>
 
@@ -175,16 +237,44 @@ class GamePage extends React.Component {
 
   renderComplete = () => {
 
+    document.querySelector('body').className = '';
+
     return (
 
       <div className='gameover'>
 
         <h1>Game over!</h1>
         <h2>Score: {this.gameStuff.score}</h2>
+        <button onClick={this.restart}>Play again!</button>
 
       </div>
 
     );
+
+  }
+
+  restart = () => {
+
+    this.setState({
+
+      started: false,
+      timeLeft: 1.01,
+      gameView: true,
+      successView: false,
+      failView: false,
+      completed: false
+
+    });
+
+    this.gameStuff = {
+
+      score: 0.0,
+      index: 0,
+      currentTimers: [],
+      stopTime: null,
+      streak: 0
+
+    }
 
   }
 

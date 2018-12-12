@@ -4,7 +4,12 @@ const cors = require('cors')
 const knex = require('knex')
 const environment = process.env.NODE_ENV || 'development';
 const knexConfig = require('./knexfile.js')
+<<<<<<< HEAD
 const db = knex(knexConfig[environment]);
+=======
+const middleware = require('./middleware.js')
+const db = knex(knexConfig.development)
+>>>>>>> doa_game_page
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const infoBox = require('wiki-infobox')
@@ -153,19 +158,12 @@ server.post('/api/login', (req, res) => {
   }).catch(err => res.status(500).json({message: "Something went wrong"}))
 })
 
-server.post('/api/celebrity', (req, res) => {
-  const {name, date_of_birth, date_of_death, image_link} = req.body
+server.post('/api/celebrity', middleware.checkDataBase, middleware.wikiWare, (req, res) => {
+  console.log(req.body)
+  db('celebrity').insert(req.body).then(result => console.log(result))
 
-    if(name.length >= 1 && date_of_birth >= 1) {
-      db('celebrity').insert(req.body)
-      .then(id => {
-        res.status(201).json(id)
-      }).catch(err => {
-        res.status(500).json({message: "Did not create celebrity", error: err})
-      })
-    } else {
-      res.status(422).json({message: "Name and birthday can't be blank"})
-    }
+
+  res.status(200).json(req.body)
 })
 
 server.get('/api/celebrity/:id', (req, res) => {
@@ -175,5 +173,14 @@ server.get('/api/celebrity/:id', (req, res) => {
     .catch(err => status(500).json({err}))
 })
 
+server.get('/api/quiz/:quizId', (req, res) => {
+  // select * from celebQuiz
+  //   inner join (celebrity) on celebrity.id = celebQuiz.celeb_id
+  //   where celebQuiz.quiz_id = 2
+  let quizId = req.params.quizId
+  db('celebQuiz').innerJoin('celebrity', 'celebrity.id', 'celebQuiz.celeb_id').where('celebQuiz.quiz_id', quizId)
+  .then(celebData => res.status(200).json(celebData))
+  .catch(err => res.status(500).json({message: "We aren't able to get the quiz at this time"}))
+})
 
 module.exports = server;
