@@ -13,57 +13,6 @@ const server = express();
 server.use(cors())
 server.use(express.json())
 
-const wikiWare = (req, res, next) => {
-  infoBox(page, lang, (err, data) => {
-    if(err) {
-      res.status(500).json({message: 'We got an error from the API'})
-    } else {
-      req.wikidata = data
-     next()
-   }
-  })
-}
-
-  // duplicateUser = (req, res, next) => {
-  //   const {username, password} = req.body
-  //   db('users').where({username: creds.username}).first()
-  //   .then(user => {
-  //     if(user.username === username) {
-  //       res.status(500).json({message: "There is already a user registered by that name"})
-  //     } else {
-  //       next()
-  //     }
-  //   })
-
-  // }
-
-
-  generateToken = (user) => {
-    const payload = {
-      subject: user.id,
-      username: user.username
-    }
-
-    const secret = 'dead_or_alive'
-
-    const options = {
-      expiresIn: '99hr'
-    }
-
-    return jwt.sign(payload, secret, options)
-  }
-
-authentication = (req, res, next) => {
-  const token = req.get('Authorization')
-    if(token) {
-      jwt.verify(token, 'dead_or_alives', (err, decoded) => {
-        req.decoded = decoded
-        next()
-      })
-    } else {
-      return res.status(401).json({message: "No token provided, must be set on authorization header"})
-    }
-}
 
 
 server.get('/api/celebrity_data', (req, res) => {
@@ -104,12 +53,18 @@ server.get('/api/dead_or_alive', (req, res) => {
 
 
 server.get('/api/user/:id', authentication,  (req, res) => {
-  res.status(201).json('working')
+  db.select('id', 'username', 'score').from('users').where('id', req.params.id)
+    .then(user => {
+      res.status(201).json(user)
+    })
+  .catch(error => {
+      res.status(500).json({message: "We can't access your user info at this time"})
+  })
 
 })
 
 
-server.post('/api/quiz', (req, res) => {
+server.post('/api/quiz', authentication, (req, res) => {
   const {user_id, name} = req.body
     if(name.length >= 1) {
       db('quiz').insert(req.body).then(id => {
@@ -126,11 +81,11 @@ server.post('/api/quiz', (req, res) => {
 
 
 server.post('/api/register', (req, res) => {
-  // console.log(req.body)
+   console.log(req.body)
   const {username, password} = req.body
     if(username.length >= 1 && password.length >= 1) {
     const creds = req.body
-      //the 2 is just of dev purposes
+      //the 2 is just for dev purposes, in real life the number needs to be higher
     const hash = bcrypt.hashSync(creds.password, 2)
     creds.password = hash
     db('users').insert(creds).then(id => {
@@ -146,7 +101,7 @@ server.post('/api/login', (req, res) => {
   db('users').where({username: creds.username}).first()
   .then(user => {
     if(user && bcrypt.compareSync(creds.password, user.password)) {
-      const token = generateToken(user)
+      const token = middleware.generateToken(user)
       res.status(200).json({message: 'welcome user', token})
     } else {
       res.status(422).json({message: "you are not logged in"})
@@ -154,12 +109,12 @@ server.post('/api/login', (req, res) => {
   }).catch(err => res.status(500).json({message: "Something went wrong"}))
 })
 
-server.post('/api/celebrity', middleware.checkDataBase, middleware.wikiWare, (req, res) => {
-  console.log(req.body)
-  db('celebrity').insert(req.body).then(result => console.log(result))
-
-
-  res.status(200).json(req.body)
+server.post('/api/celebrity', middleware.authentication, middleware.checkDataBase, middleware.wikiWare, (req, res) => {
+  db('celebrity').insert(req.body).then(id => {
+      res.status(200).json(id)
+  }).catch(err => {
+    res.status(500).json({message: "Celebrity not added to database", err})
+  })
 })
 
 server.get('/api/celebrity/:id', (req, res) => {
@@ -178,5 +133,29 @@ server.get('/api/quiz/:quizId', (req, res) => {
   .then(celebData => res.status(200).json(celebData))
   .catch(err => res.status(500).json({message: "We aren't able to get the quiz at this time"}))
 })
+
+server.get('/api/quizzes', (req, res) => {
+  db.select().table('quiz')
+    // db('quiz').where('id', 2
+    .then(allQuizzes => {
+      res.status(200).json(allQuizzes)
+    })
+    .catch(error => res.status(500).json({message: "Can't get the list of quizzes at this time", error}))
+
+})
+
+server.post('/api/quiz/:id', middleware.authentication, (req, res) => {
+  const celebArray = req.body.celebId
+    celebArray.forEach(item => {
+      db('celebQuiz').insert({celeb_id: item, quiz_id: req.params.id})
+        .then(response => {
+          res.status(201).json(response)
+        })
+      .catch(error => {
+          res.status(400).json({message: "Cannot add quiz elements"})
+      })
+    })
+})
+
 
 module.exports = server;

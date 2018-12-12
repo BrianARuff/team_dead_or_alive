@@ -1,4 +1,4 @@
-import { LOGIN_SUCCESS, LOGIN_FAIL, QUIZ_SUCCESS, FETCHING, QUIZ_FAIL, SIGNUP_SUCCESS, SIGNUP_FAILURE, ACKNOWLEDGEMENT, LOGOUT, NAME_SUCCESS, NAME_FAILURE, SEARCHING_CELEB_DB } from './actions';
+import { LOGIN_SUCCESS, LOGIN_FAIL, QUIZ_SUCCESS, FETCHING, QUIZ_FAIL, SIGNUP_SUCCESS, SIGNUP_FAILURE, ACKNOWLEDGEMENT, LOGOUT, NAME_SUCCESS, NAME_FAILURE, SEARCHING_CELEB_DB, ADD_QUIZ_SUCCESS, ADD_QUIZ_FAIL, ADD_DATA_FAIL } from './actions';
 
 const initialState = {
 
@@ -9,9 +9,10 @@ const initialState = {
   signupStatus: null,
   loginStatus: null,
   nameStatus: null,
+  addQuizStatus: null,
   token: null,
   celebObj: null,
-  searchingCelebDB: false
+  searchingCelebDB: false,
 
 }
 
@@ -31,7 +32,7 @@ export default function reducer(state = initialState, action) {
       return {...state, fetching: true}
 
     case QUIZ_SUCCESS:
-      return {...state, quizzes: [action.payload], fetching: false}
+      return {...state, quizzes: action.payload, fetching: false}
 
     case QUIZ_FAIL:
       return {...state, error: action.payload}
@@ -43,20 +44,31 @@ export default function reducer(state = initialState, action) {
       return {...state, signupStatus: 'FAILURE'}
 
     case ACKNOWLEDGEMENT:
-      return {...state, signupStatus: null, loginStatus: null, nameStatus: null}
+      return {...state, signupStatus: null, loginStatus: null, nameStatus: null, addQuizStatus: null}
 
     case LOGOUT:
       localStorage.clear();
       return {...state, token: null, username: null}
 
     case NAME_SUCCESS:
-      return {...state, nameStatus: 'SUCCESS', celebObj: action.payload[0], searchingCelebDB: false}
+      return {...state, nameStatus: 'SUCCESS', celebObj: action.payload, searchingCelebDB: false}
 
     case NAME_FAILURE:
       return {...state, nameStatus: 'FAILURE', searchingCelebDB: false}
 
     case SEARCHING_CELEB_DB:
       return {...state, searchingCelebDB: true}
+
+    case ADD_QUIZ_SUCCESS:
+      return {...state, addQuizStatus: 'SUCCESS'}
+
+    case ADD_QUIZ_FAIL:
+      console.log('add fail');
+      return {...state, addQuizStatus: 'FAILURE'}
+
+    case ADD_DATA_FAIL:
+      console.log('data fail');
+      return {...state, addQuizStatus: 'FAILURE'}
 
     default:
       return state;

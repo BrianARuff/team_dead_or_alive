@@ -24,6 +24,9 @@ class QuizList extends React.Component {
     if (fetching)
       return <h1>Fetching quizzes...</h1>;
 
+    console.log(this.props.quizzes['0']);
+    console.log("ASDASDASD");
+
     return (
 
       <div className='quiz-list'>

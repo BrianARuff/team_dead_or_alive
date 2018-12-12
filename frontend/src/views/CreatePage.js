@@ -2,7 +2,7 @@ import React from 'react';
 
 import NavBar from '../components/NavBar';
 import { connect } from 'react-redux';
-import { acknowledge, checkCeleb } from '../redux/actions';
+import { acknowledge, checkCeleb, addQuiz } from '../redux/actions';
 
 import './CreatePage.scss';
 
@@ -17,7 +17,10 @@ class CreatePage extends React.Component {
       celebName: '',
       celebFail: false,
       localList: [],
-      quizName: ''
+      listToSend: [],
+      quizName: '',
+      quizSuccess: false,
+      quizFailure: false
 
     }
 
@@ -30,10 +33,12 @@ class CreatePage extends React.Component {
       if (this.props.nameStatus === 'SUCCESS') {
 
         console.log(this.props.celebObj);
+        console.log(this.state.celebName);
 
         this.setState({
 
-          localList: [...this.state.localList, this.props.celebObj],
+          localList: [...this.state.localList, this.state.celebName],
+          listToSend: [...this.state.listToSend, this.props.celebObj],
           celebName: ''
 
         });
@@ -43,6 +48,26 @@ class CreatePage extends React.Component {
       else if (this.props.nameStatus === 'FAILURE') {
 
         this.setState({celebFail: true});
+
+      }
+
+      this.props.acknowledge();
+
+    }
+
+    if (this.props.quizStatus !== prevProps.quizStatus) {
+
+      if (this.props.quizStatus === 'SUCCESS') {
+
+        this.setState({
+          quizSuccess: true,
+        });
+
+      }
+
+      else if (this.props.quizStatus === 'FAILURE') {
+
+        this.setState({quizFailure: true});
 
       }
 
@@ -78,7 +103,14 @@ class CreatePage extends React.Component {
 
     e.preventDefault();
 
-    // Send list to server
+    this.props.addQuiz(this.state.quizName, this.state.listToSend, this.props.token);
+
+    this.setState({
+
+      localList: [],
+      listToSend: []
+
+    });
 
   }
 
@@ -114,6 +146,8 @@ class CreatePage extends React.Component {
 
                 {this.props.searchingCelebDB && <p>Searching for celebrity...</p>}
                 {this.state.celebFail && <p className='fail'>We were unable to find that celebrity in our database. It is possible that you entered a person that is not famous! Please try something else.</p>}
+                {this.state.quizSuccess && <p>Quiz success!</p>}
+                {this.state.quizFailure && <p className='fail'>Quiz adding failed</p>}
 
               </form>
 
@@ -129,7 +163,7 @@ class CreatePage extends React.Component {
 
                 <ul>
 
-                  {this.state.localList.map(celeb => <li key={celeb.id}>{celeb.name}</li>)}
+                  {this.state.localList.map((celeb, id) => <li key={id}>{celeb}</li>)}
 
                 </ul>
 
@@ -155,10 +189,12 @@ function stateToProps(state) {
 
     nameStatus: state.nameStatus,
     celebObj: state.celebObj,
-    searchingCelebDB: state.searchingCelebDB
+    searchingCelebDB: state.searchingCelebDB,
+    quizStatus: state.addQuizStatus,
+    token: state.token
 
   }
 
 }
 
-export default connect(stateToProps, { checkCeleb, acknowledge })(CreatePage);
+export default connect(stateToProps, { checkCeleb, acknowledge, addQuiz })(CreatePage);
