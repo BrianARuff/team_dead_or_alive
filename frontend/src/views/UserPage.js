@@ -14,7 +14,13 @@ function UserPage(props) {
 
       <div className='user-page'>
 
-        <h1>Joe Schmoe</h1>
+        <h1>Username goes here</h1>
+
+        <div className='quiz-list'>
+
+          <p>User quizzes will go here</p>
+
+        </div>
 
       </div>
 
