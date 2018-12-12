@@ -72,13 +72,17 @@ class GamePage extends React.Component {
 
   renderSuccessView = () => {
 
-    return <h1>Correct!</h1>
+    document.querySelector('body').classList.add('correct-bg');
+
+    return <h1 className='correct'>Correct!</h1>
 
   }
 
   renderFailView = () => {
 
-    return <h1>Incorrect!</h1>
+    document.querySelector('body').classList.add('incorrect-bg');
+
+    return <h1 className='incorrect'>Incorrect!</h1>
 
   }
 
@@ -108,7 +112,7 @@ class GamePage extends React.Component {
 
     }
 
-    this.gameStuff.currentTimers.push(setTimeout(this.nextQuestion, 250));
+    this.gameStuff.currentTimers.push(setTimeout(this.nextQuestion, 350));
 
   }
 
@@ -158,14 +162,16 @@ class GamePage extends React.Component {
     if (this.state.failView)
       return this.renderFailView();
 
+    document.querySelector('body').className = '';
+
     return (
 
       <div className='game'>
 
-        <h1>{timeLeft}</h1>
-        <h2>{gameData[index].name}</h2>
-        {/*<img src={gameData[index].image_link} width='500px' height='500px' />*/}
-
+        <h1>{gameData[index].name}</h1>
+        <h2>{timeLeft}</h2>
+        <img src={gameData[index].image_link} />
+        <br />
         <button className='dead' onClick={() => this.check(false)}>Dead</button>
         <button className='alive' onClick={() => this.check(true)}>Alive</button>
 
@@ -176,6 +182,8 @@ class GamePage extends React.Component {
   }
 
   renderComplete = () => {
+
+    document.querySelector('body').className = '';
 
     return (
 
