@@ -170,5 +170,14 @@ server.get('/api/celebrity/:id', (req, res) => {
     .catch(err => status(500).json({err}))
 })
 
+server.get('/api/quiz/:quizId', (req, res) => {
+  // select * from celebQuiz
+  //   inner join (celebrity) on celebrity.id = celebQuiz.celeb_id
+  //   where celebQuiz.quiz_id = 2
+  let quizId = req.params.quizId
+  db('celebQuiz').innerJoin('celebrity', 'celebrity.id', 'celebQuiz.celeb_id').where('celebQuiz.quiz_id', quizId)
+  .then(celebData => res.status(200).json(celebData))
+  .catch(err => res.status(500).json({message: "We aren't able to get the quiz at this time"}))
+})
 
 module.exports = server;
