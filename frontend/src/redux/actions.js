@@ -13,8 +13,11 @@ const ACKNOWLEDGEMENT = 'ACKNOWLEDGEMENT';
 const NAME_SUCCESS = 'NAME_SUCCESS';
 const NAME_FAILURE = 'NAME_FAILURE';
 const SEARCHING_CELEB_DB = 'SEARCHING_CELEB_DB';
+const ADD_QUIZ_SUCCESS = 'ADD_QUIZ_SUCCESS';
+const ADD_QUIZ_FAIL = 'ADD_QUIZ_FAIL';
+const ADD_DATA_FAIL = 'ADD_DATA_FAIL';
 
-export { LOGIN_SUCCESS, LOGIN_FAIL, QUIZ_SUCCESS, FETCHING, QUIZ_FAIL, SIGNUP_SUCCESS, SIGNUP_FAILURE, ACKNOWLEDGEMENT, LOGOUT, NAME_SUCCESS, NAME_FAILURE, SEARCHING_CELEB_DB };
+export { LOGIN_SUCCESS, LOGIN_FAIL, QUIZ_SUCCESS, FETCHING, QUIZ_FAIL, SIGNUP_SUCCESS, SIGNUP_FAILURE, ACKNOWLEDGEMENT, LOGOUT, NAME_SUCCESS, NAME_FAILURE, SEARCHING_CELEB_DB, ADD_QUIZ_SUCCESS, ADD_QUIZ_FAIL, ADD_DATA_FAIL };
 
 
 export const login = (user, pass) => dispatch => {
@@ -65,10 +68,10 @@ export const fetchQuizzes = () => dispatch => {
     type: FETCHING
   });
 
-  axios.get(`${config.backendURL}:${config.backendPort}/api/dead_or_alive`)
+  axios.get(`${config.backendURL}:${config.backendPort}/api/quizzes`)
     .then(res => dispatch({
       type: QUIZ_SUCCESS,
-      payload: res.data
+      payload: Array.from(res.data)
     }))
     .catch(err => dispatch({
       type: QUIZ_FAIL,
@@ -120,6 +123,32 @@ export const checkCeleb = celebName => dispatch => {
     }))
     .catch(err => dispatch({
       type: NAME_FAILURE
+    }))
+
+}
+
+export const addQuiz = (name, quiz, token) => dispatch => {
+
+  const options = {
+      headers: {
+        Authorization: token,
+      }
+    }
+
+  axios.post(`${config.backendURL}:${config.backendPort}/api/quiz`, { name: name }, options)
+    .then(res => {
+      console.log(res.data);
+      axios.post(`${config.backendURL}:${config.backendPort}/api/quiz/${res.data[0]}`, { celebId: quiz })
+        .then(res => dispatch({
+          type: ADD_QUIZ_SUCCESS
+        }))
+        .catch(err => dispatch({
+          type: ADD_DATA_FAIL
+        }));
+
+    })
+    .catch(err => dispatch({
+      type: ADD_QUIZ_FAIL
     }))
 
 }

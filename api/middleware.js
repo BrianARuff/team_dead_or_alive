@@ -1,8 +1,39 @@
 const knex = require('knex')
 const knexConfig = require('./knexfile.js')
+const jwt = require('jsonwebtoken');
 const infoBox = require('wiki-infobox')
 const db = knex(knexConfig.development)
 
+generateToken = (user) => {
+  const payload = {
+    subject: user.id,
+    username: user.username
+  }
+
+  const secret = 'dead_or_alive' 
+
+  const options = {
+    expiresIn: '99hr'
+  }
+
+  return jwt.sign(payload, secret, options)
+}
+
+authentication = (req, res, next) => {
+  const token = req.get('Authorization')
+    if(token) {
+      jwt.verify(token, 'dead_or_alive', (err, decoded) => {
+        if(err) {
+          res.status(401).json({message: "invalid token"})
+        } else {
+          req.decodedToken = decoded
+          next()
+        }
+      })
+    } else {
+      return res.status(401).json({message: "No token provided, must be set on authorization header"})
+    }
+}
 
 checkDataBase = (req, res, next) => {
   const name = req.body.name
@@ -11,7 +42,8 @@ checkDataBase = (req, res, next) => {
     if(name.length === 0) {
       next()
     } else {
-      res.status(200).json(name)
+      // console.log(name[0].id)
+      res.status(200).json(name[0].id)
     }
   })
   .catch(error => {
@@ -26,18 +58,19 @@ wikiWare = (req, res, next) => {
       if(err) {
         res.status(500).json({message: 'We got an error from the API'})
       } else {
-        req.body.name = data.name.value
-        const bDay = data.birth_date.value.replace(/\D/g, ' ').trim()
-        req.body.date_of_birth = new Date(bDay)
-        req.body.image_link = data.image.value
-        if('death_date' in data) {
-          // console.log('death date', data.death_date)
-         // const death_day = data.death_date.value.replace(/\D/g, ' ').trim()
-         req.body.date_of_death = true 
+        if(data.name === undefined) {
+            res.status(500).json({message: "That name isn't working with the api", name: req.body.name})
         } else {
-          req.body.date_of_death = false 
+          req.body.name = data.name.value
+          req.body.date_of_birth = data.birth_date.value
+          req.body.image_link = data.image.value
+          if('death_date' in data) {
+           req.body.date_of_death = true 
+          } else {
+            req.body.date_of_death = null 
+          }
+         next()
         }
-       next()
      }
     })
 }
@@ -45,7 +78,9 @@ wikiWare = (req, res, next) => {
 
 module.exports = {
   checkDataBase,
-  wikiWare
+  wikiWare,
+  authentication,
+  generateToken,
 
 
 
