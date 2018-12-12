@@ -13,8 +13,11 @@ const ACKNOWLEDGEMENT = 'ACKNOWLEDGEMENT';
 const NAME_SUCCESS = 'NAME_SUCCESS';
 const NAME_FAILURE = 'NAME_FAILURE';
 const SEARCHING_CELEB_DB = 'SEARCHING_CELEB_DB';
+const ADD_QUIZ_SUCCESS = 'ADD_QUIZ_SUCCESS';
+const ADD_QUIZ_FAIL = 'ADD_QUIZ_FAIL';
+const ADD_DATA_FAIL = 'ADD_DATA_FAIL';
 
-export { LOGIN_SUCCESS, LOGIN_FAIL, QUIZ_SUCCESS, FETCHING, QUIZ_FAIL, SIGNUP_SUCCESS, SIGNUP_FAILURE, ACKNOWLEDGEMENT, LOGOUT, NAME_SUCCESS, NAME_FAILURE, SEARCHING_CELEB_DB };
+export { LOGIN_SUCCESS, LOGIN_FAIL, QUIZ_SUCCESS, FETCHING, QUIZ_FAIL, SIGNUP_SUCCESS, SIGNUP_FAILURE, ACKNOWLEDGEMENT, LOGOUT, NAME_SUCCESS, NAME_FAILURE, SEARCHING_CELEB_DB, ADD_QUIZ_SUCCESS, ADD_QUIZ_FAIL, ADD_DATA_FAIL };
 
 
 export const login = (user, pass) => dispatch => {
@@ -124,8 +127,28 @@ export const checkCeleb = celebName => dispatch => {
 
 }
 
-export const addQuiz = quiz => dispatch => {
+export const addQuiz = (name, quiz, token) => dispatch => {
 
-  //axios.post()
+  const options = {
+      headers: {
+        Authorization: token,
+      }
+    }
+
+  axios.post(`${config.backendURL}:${config.backendPort}/api/quiz`, { name: name })
+    .then(res => {
+
+      axios.post(`${config.backendURL}:${config.backendPort}/api/quiz/${res.data}`, quiz)
+        .then(res => dispatch({
+          type: ADD_QUIZ_SUCCESS
+        }))
+        .catch(err => dispatch({
+          type: ADD_DATA_FAIL
+        }));
+
+    })
+    .catch(err => dispatch({
+      type: ADD_QUIZ_FAIL
+    }))
 
 }

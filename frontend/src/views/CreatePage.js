@@ -18,7 +18,9 @@ class CreatePage extends React.Component {
       celebFail: false,
       localList: [],
       listToSend: [],
-      quizName: ''
+      quizName: '',
+      quizSuccess: false,
+      quizFailure: false
 
     }
 
@@ -46,6 +48,26 @@ class CreatePage extends React.Component {
       else if (this.props.nameStatus === 'FAILURE') {
 
         this.setState({celebFail: true});
+
+      }
+
+      this.props.acknowledge();
+
+    }
+
+    if (this.props.quizStatus !== prevProps.quizStatus) {
+
+      if (this.props.quizStatus === 'SUCCESS') {
+
+        this.setState({
+          quizSuccess: true,
+        });
+
+      }
+
+      else if (this.props.quizStatus === 'FAILURE') {
+
+        this.setState({quizFailure: true});
 
       }
 
@@ -81,7 +103,7 @@ class CreatePage extends React.Component {
 
     e.preventDefault();
 
-    this.props.addQuiz(this.state.listToSend);
+    this.props.addQuiz(this.state.quizName, this.state.listToSend, this.props.token);
 
     this.setState({
 
@@ -124,6 +146,8 @@ class CreatePage extends React.Component {
 
                 {this.props.searchingCelebDB && <p>Searching for celebrity...</p>}
                 {this.state.celebFail && <p className='fail'>We were unable to find that celebrity in our database. It is possible that you entered a person that is not famous! Please try something else.</p>}
+                {this.state.quizSuccess && <p>Quiz success!</p>}
+                {this.state.quizFailure && <p className='fail'>Quiz adding failed</p>}
 
               </form>
 
@@ -165,7 +189,9 @@ function stateToProps(state) {
 
     nameStatus: state.nameStatus,
     celebObj: state.celebObj,
-    searchingCelebDB: state.searchingCelebDB
+    searchingCelebDB: state.searchingCelebDB,
+    quizStatus: state.addQuizStatus,
+    token: state.token
 
   }
 
