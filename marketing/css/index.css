@@ -286,21 +286,17 @@ body .signUp {
   border-radius: 4px;
   background-color: #fff;
   margin: -38px auto 0;
+  color: #343434;
+  text-decoration: none;
 }
 body .signUp:hover {
   background-color: #007bff;
+  color: #fff;
 }
 @media (max-width: 500px) {
   body .signUp {
     display: none;
   }
-}
-body .signUp a {
-  color: #343434;
-  text-decoration: none;
-}
-body .signUp a:hover {
-  color: #fff;
 }
 body .container {
   max-width: 1000px;
