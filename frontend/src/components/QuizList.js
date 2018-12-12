@@ -10,7 +10,7 @@ class QuizList extends React.Component {
 
   componentDidMount() {
 
-    //this.props.fetchQuizzes();
+    this.props.fetchQuizzes();
 
   }
 
@@ -24,11 +24,14 @@ class QuizList extends React.Component {
     if (fetching)
       return <h1>Fetching quizzes...</h1>;
 
+    console.log(this.props.quizzes['0']);
+    console.log("ASDASDASD");
+
     return (
 
       <div className='quiz-list'>
 
-        {/*this.props.quizzes.map((quiz, id) => <QuizPreview key={id} quizData={quiz} history={history} />)*/}
+        {this.props.quizzes.map((quiz, id) => <QuizPreview key={id} quizData={quiz} history={history} />)}
 
       </div>
 

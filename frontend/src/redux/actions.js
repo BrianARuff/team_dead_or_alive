@@ -68,10 +68,10 @@ export const fetchQuizzes = () => dispatch => {
     type: FETCHING
   });
 
-  axios.get(`${config.backendURL}:${config.backendPort}/api/dead_or_alive`)
+  axios.get(`${config.backendURL}:${config.backendPort}/api/quizzes`)
     .then(res => dispatch({
       type: QUIZ_SUCCESS,
-      payload: res.data
+      payload: Array.from(res.data)
     }))
     .catch(err => dispatch({
       type: QUIZ_FAIL,
@@ -135,10 +135,10 @@ export const addQuiz = (name, quiz, token) => dispatch => {
       }
     }
 
-  axios.post(`${config.backendURL}:${config.backendPort}/api/quiz`, { name: name })
+  axios.post(`${config.backendURL}:${config.backendPort}/api/quiz`, { name: name }, options)
     .then(res => {
-
-      axios.post(`${config.backendURL}:${config.backendPort}/api/quiz/${res.data}`, quiz)
+      console.log(res.data);
+      axios.post(`${config.backendURL}:${config.backendPort}/api/quiz/${res.data[0]}`, { celebId: quiz })
         .then(res => dispatch({
           type: ADD_QUIZ_SUCCESS
         }))
