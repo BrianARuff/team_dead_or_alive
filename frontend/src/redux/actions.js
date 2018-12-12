@@ -12,8 +12,9 @@ const SIGNUP_FAILURE = 'SIGNUP_FAILURE';
 const ACKNOWLEDGEMENT = 'ACKNOWLEDGEMENT';
 const NAME_SUCCESS = 'NAME_SUCCESS';
 const NAME_FAILURE = 'NAME_FAILURE';
+const SEARCHING_CELEB_DB = 'SEARCHING_CELEB_DB';
 
-export { LOGIN_SUCCESS, LOGIN_FAIL, QUIZ_SUCCESS, FETCHING, QUIZ_FAIL, SIGNUP_SUCCESS, SIGNUP_FAILURE, ACKNOWLEDGEMENT, LOGOUT, NAME_SUCCESS, NAME_FAILURE };
+export { LOGIN_SUCCESS, LOGIN_FAIL, QUIZ_SUCCESS, FETCHING, QUIZ_FAIL, SIGNUP_SUCCESS, SIGNUP_FAILURE, ACKNOWLEDGEMENT, LOGOUT, NAME_SUCCESS, NAME_FAILURE, SEARCHING_CELEB_DB };
 
 
 export const login = (user, pass) => dispatch => {
@@ -106,26 +107,19 @@ export const loginToken = () => dispatch => {
 
 export const checkCeleb = celebName => dispatch => {
 
-  // Check celeb on backend. For now, it will always be accepted unless the name is Rome.
+  dispatch({
+    type: SEARCHING_CELEB_DB
+  });
 
-  if (celebName !== 'Rome') {
+  axios.post(`${config.backendURL}:${config.backendPort}/api/celebrity`, {name: celebName})
+    .then(res => dispatch({
 
-    dispatch({
+      type: NAME_SUCCESS,
+      payload: res.data
 
-      type: NAME_SUCCESS
-
-    });
-
-  }
-
-  else {
-
-    dispatch({
-
+    }))
+    .catch(err => dispatch({
       type: NAME_FAILURE
-
-    });
-
-  }
+    }))
 
 }

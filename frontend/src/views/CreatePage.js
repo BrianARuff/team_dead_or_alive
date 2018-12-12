@@ -29,9 +29,11 @@ class CreatePage extends React.Component {
 
       if (this.props.nameStatus === 'SUCCESS') {
 
+        console.log(this.props.celebObj);
+
         this.setState({
 
-          localList: [...this.state.localList, this.state.celebName],
+          localList: [...this.state.localList, this.props.celebObj],
           celebName: ''
 
         });
@@ -100,6 +102,7 @@ class CreatePage extends React.Component {
 
               <form onSubmit={this.handleAddSubmission}>
 
+                {this.props.searchingCelebDB && <p>Searching for celebrity...</p>}
                 {this.state.celebFail && <p>We were unable to find that celebrity in our database. It is possible that you entered a person that is not famous! Please try something else.</p>}
                 <input type='text' name='celebName' placeholder='celebrity name' onChange={this.handleChange} value={this.state.celebName} required />
                 <button>Add Celebrity!</button>
@@ -116,7 +119,7 @@ class CreatePage extends React.Component {
 
               <ul>
 
-                {this.state.localList.map(celeb => <li>{celeb}</li>)}
+                {this.state.localList.map(celeb => <li key={celeb.id}>{celeb.name}</li>)}
 
               </ul>
 
@@ -138,7 +141,9 @@ function stateToProps(state) {
 
   return {
 
-    nameStatus: state.nameStatus
+    nameStatus: state.nameStatus,
+    celebObj: state.celebObj,
+    searchingCelebDB: state.searchingCelebDB
 
   }
 
