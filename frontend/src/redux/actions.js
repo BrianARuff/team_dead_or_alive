@@ -108,13 +108,19 @@ export const loginToken = () => dispatch => {
 
 }
 
-export const checkCeleb = celebName => dispatch => {
+export const checkCeleb = (celebName, token) => dispatch => {
 
   dispatch({
     type: SEARCHING_CELEB_DB
   });
 
-  axios.post(`${config.backendURL}:${config.backendPort}/api/celebrity`, {name: celebName})
+  const options = {
+      headers: {
+        Authorization: token,
+      }
+    }
+
+  axios.post(`${config.backendURL}:${config.backendPort}/api/celebrity`, {name: celebName}, options)
     .then(res => dispatch({
 
       type: NAME_SUCCESS,
@@ -138,7 +144,7 @@ export const addQuiz = (name, quiz, token) => dispatch => {
   axios.post(`${config.backendURL}:${config.backendPort}/api/quiz`, { name: name }, options)
     .then(res => {
       console.log(res.data);
-      axios.post(`${config.backendURL}:${config.backendPort}/api/quiz/${res.data[0]}`, { celebId: quiz })
+      axios.post(`${config.backendURL}:${config.backendPort}/api/quiz/${res.data[0]}`, { celebId: quiz }, options)
         .then(res => dispatch({
           type: ADD_QUIZ_SUCCESS
         }))

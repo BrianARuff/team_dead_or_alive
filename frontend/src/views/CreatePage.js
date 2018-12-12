@@ -95,7 +95,7 @@ class CreatePage extends React.Component {
     e.preventDefault();
     e.stopPropagation();
 
-    this.props.checkCeleb(this.state.celebName);
+    this.props.checkCeleb(this.state.celebName, this.props.token);
 
   }
 
