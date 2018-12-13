@@ -49,11 +49,19 @@
 
     padding: 10px;
 
+    @media (max-width: 400px) {
+      padding: 5px;
+    }
+
   }
 
   h2 {
 
     margin-left: 15px;
+
+    @media (max-width: 400px) {
+      margin-left: 5px;
+    }
 
   }
 
