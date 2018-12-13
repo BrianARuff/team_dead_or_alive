@@ -136,7 +136,7 @@ class GamePage extends React.Component {
 
     }
 
-    this.gameStuff.currentTimers.push(setTimeout(this.nextQuestion, 350));
+    this.gameStuff.currentTimers.push(setTimeout(this.nextQuestion, 500));
 
   }
 
@@ -217,6 +217,7 @@ class GamePage extends React.Component {
       return this.renderFailView();
 
     document.querySelector('body').className = '';
+    console.log("IMGLINK",gameData[index].image_link);
 
     return (
 
