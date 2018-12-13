@@ -22,11 +22,19 @@
         display: flex;
         justify-content: center;
 
+        @media (max-width: 400px) {
+            flex-direction: column;
+        }  
+
         .form-container {
 
           width: 50%;
           display: flex;
           justify-content: center;
+          
+          @media (max-width: 400px) {
+            width: 100%;
+          }
 
           .create-form {
 
@@ -57,6 +65,11 @@
           display: flex;
           flex-direction: column;
           align-items: left;
+
+          @media (max-width: 400px) {
+            width: 100%;
+            margin-top: 15px;
+          }
 
             h2{
                 margin-bottom: 10px;
