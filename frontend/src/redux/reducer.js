@@ -13,6 +13,7 @@ const initialState = {
   token: null,
   celebObj: null,
   searchingCelebDB: false,
+  userID: null
 
 }
 
@@ -23,7 +24,8 @@ export default function reducer(state = initialState, action) {
     case LOGIN_SUCCESS:
       localStorage.token = action.payload.token;
       localStorage.username = action.payload.username;
-      return {...state, username: action.payload.username, loginStatus: 'SUCCESS', token: action.payload.token}
+      localStorage.id = action.payload.id;
+      return {...state, username: action.payload.username, loginStatus: 'SUCCESS', token: action.payload.token, userID: action.payload.id}
 
     case LOGIN_FAIL:
       return {...state, loginStatus: 'FAILURE'}
