@@ -26,7 +26,7 @@ class CreatePage extends React.Component {
 
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps, prevState) {
 
     if (this.props.nameStatus !== prevProps.nameStatus) {
 
@@ -72,6 +72,12 @@ class CreatePage extends React.Component {
       }
 
       this.props.acknowledge();
+
+    }
+
+    if (this.state.quizSuccess && !prevState.quizSuccess) {
+
+      setTimeout(() => this.setState({quizSuccess: false}), 2000);
 
     }
 
