@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import { connect } from 'react-redux';
 
 import NavBar from '../components/NavBar';
 import config from '../config.js';
@@ -8,6 +9,8 @@ import './GamePage.scss';
 
 import dead from '../img/dead.png';
 import alive from '../img/dead.png';
+
+import { fetchQuizzes } from '../redux/actions';
 
 class GamePage extends React.Component {
 
@@ -23,7 +26,8 @@ class GamePage extends React.Component {
       gameView: true,
       successView: false,
       failView: false,
-      completed: false
+      completed: false,
+      metaData: null
 
     }
 
@@ -39,11 +43,49 @@ class GamePage extends React.Component {
 
   }
 
+  componentDidUpdate(prevProps) {
+
+    if (!this.props.fetching && prevProps.fetching) {
+
+      console.log('getting quiz metadata...');
+
+      axios.get(`${config.backendURL}:${config.backendPort}/api/quiz/${this.props.match.params.id}`)
+        .then(res => this.setState({gameData: res.data}, this.getMetaData))
+        .catch(err => console.log(err));
+
+    }
+
+  }
+
   componentDidMount() {
 
-    axios.get(`${config.backendURL}:${config.backendPort}/api/quiz/${this.props.match.params.id}`)
-      .then(res => this.setState({gameData: res.data}))
-      .catch(err => console.log(err));
+    if (this.props.quizzes.length === 0) {
+
+      console.log('getting quizzes...');
+      this.props.fetchQuizzes();
+
+    }
+
+    else {
+
+      console.log('have quizzes. Getting quiz metadata');
+      axios.get(`${config.backendURL}:${config.backendPort}/api/quiz/${this.props.match.params.id}`)
+        .then(res => this.setState({gameData: res.data}, this.getMetaData))
+        .catch(err => console.log(err));
+
+    }
+
+  }
+
+  getMetaData = () => {
+
+    console.log('got metadata');
+
+    const data = this.props.quizzes.find(quiz => {
+      return quiz.id == this.props.match.params.id
+    });
+
+    this.setState({metaData: data});
 
   }
 
@@ -55,14 +97,17 @@ class GamePage extends React.Component {
 
   renderGamePreview = () => {
 
+    if (!this.state.metaData)
+      return <h1>Getting quiz...</h1>
+
+    console.log(this.state.metaData);
+
     return (
 
       <div className='preview'>
 
-        <h2>Game Title Goes Here</h2>
-        <p>By Joe Schmoe</p>
-
-        <p>Maybe we could have some type of logo image right here</p>
+        <h2>{this.state.metaData.name}</h2>
+        <p className='author'>By <span className='user-link' onClick={e => { e.stopPropagation(); this.props.history.push(`/users/${this.state.metaData.user_id}`) }}>Joe Schmoe</span></p>
 
         <p>Number of questions: 0</p>
 
@@ -302,4 +347,15 @@ class GamePage extends React.Component {
 
 }
 
-export default GamePage;
+function stateToProps(state) {
+
+  return {
+
+    quizzes: state.quizzes,
+    fetching: state.fetching
+
+  }
+
+}
+
+export default connect(stateToProps, { fetchQuizzes })(GamePage);
