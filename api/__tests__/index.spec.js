@@ -14,7 +14,7 @@ beforeEach(async () => {
 describe('server', () => {
   describe('/api/dead_or_alive  route', () => {
     it('should return status code 200', async () => {
-      let response = await request(server).get('/')
+      let response = await request(server).get('/dead_or_alive')
       expect(response.status).toBe(200)
     })
   })
