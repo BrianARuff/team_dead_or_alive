@@ -28,7 +28,8 @@ export const login = (user, pass) => dispatch => {
       type: LOGIN_SUCCESS,
       payload: {
         token: res.data.token,
-        username: user
+        username: user,
+        id: 1
       }
 
     }))
@@ -133,7 +134,7 @@ export const checkCeleb = (celebName, token) => dispatch => {
 
 }
 
-export const addQuiz = (name, quiz, token) => dispatch => {
+export const addQuiz = (name, quiz, token, id) => dispatch => {
 
   const options = {
       headers: {
@@ -141,7 +142,7 @@ export const addQuiz = (name, quiz, token) => dispatch => {
       }
     }
 
-  axios.post(`${config.backendURL}:${config.backendPort}/api/quiz`, { name: name }, options)
+  axios.post(`${config.backendURL}:${config.backendPort}/api/quiz`, { name: name, user_id: id }, options)
     .then(res => {
       console.log(res.data);
       axios.post(`${config.backendURL}:${config.backendPort}/api/quiz/${res.data[0]}`, { celebId: quiz }, options)

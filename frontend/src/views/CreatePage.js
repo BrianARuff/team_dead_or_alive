@@ -103,7 +103,7 @@ class CreatePage extends React.Component {
 
     e.preventDefault();
 
-    this.props.addQuiz(this.state.quizName, this.state.listToSend, this.props.token);
+    this.props.addQuiz(this.state.quizName, this.state.listToSend, this.props.token, this.props.userID);
 
     this.setState({
 
@@ -191,7 +191,8 @@ function stateToProps(state) {
     celebObj: state.celebObj,
     searchingCelebDB: state.searchingCelebDB,
     quizStatus: state.addQuizStatus,
-    token: state.token
+    token: state.token,
+    userID: state.userID
 
   }
 
