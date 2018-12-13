@@ -19,6 +19,8 @@ server.use(express.json())
 ///////
 //sanity-test endpoints
 //////
+
+
 server.get('/api/celebrity_data', (req, res) => {
 
   res.status(200).json([
