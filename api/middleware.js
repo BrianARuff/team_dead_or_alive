@@ -4,8 +4,9 @@ const knexConfig = require('./knexfile.js')
 const jwt = require('jsonwebtoken');
 const infoBox = require('wiki-infobox')
 const wtf = require('wtf_wikipedia')
-const jwtKey = process.env.JWT_KEY
-const db = knex(knexConfig.development)
+const jwtKey = process.env.JWT_KEY;
+const environment = process.env.NODE_ENV || 'development';
+const db = knex(knexConfig[environment])
 
 generateToken = (user) => {
   const payload = {
