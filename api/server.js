@@ -5,7 +5,8 @@ const knex = require('knex')
 const environment = process.env.NODE_ENV || 'development';
 const knexConfig = require('./knexfile.js')
 const middleware = require('./middleware.js')
-const db = knex(knexConfig[environment])
+const environment = process.env.NODE_ENV || 'development';
+const db = knex(knexConfig[environment]);
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 // const jwtKey = require('./_secret/keys.js')
@@ -19,7 +20,6 @@ server.use(express.json())
 //sanity-test endpoints
 //////
 server.get('/api/celebrity_data', (req, res) => {
-<<<<<<< HEAD
 
   res.status(200).json([
     { id: 1, name: "Betty White", date_of_birth: "January 17, 1922", date_of_death: null, image_link: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/Betty_White_2010.jpg/800px-Betty_White_2010.jpg"},
@@ -53,13 +53,6 @@ server.get('/api/dead_or_alive', (req, res) => {
         {id: 11, name: "George Harrison", date_of_birth: "April 3, 1000", date_of_death: "April 3, 1100", image_link: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/George_Harrison_1974_edited.jpg/330px-George_Harrison_1974_edited.jpg"},
 
   ])
-=======
-  res.status(200).json('this is working.')
-})
-
-server.get('/api/dead_or_alive', (req, res) => {
-  res.status(200).json('this is working, too')
->>>>>>> doa_game_page
 })
 
 
