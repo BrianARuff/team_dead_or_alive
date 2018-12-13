@@ -25,6 +25,7 @@
     "jsonwebtoken": "^8.4.0",
     "knex": "^0.16.2",
     "wiki-infobox": "^0.4.0",
-    "wikijs": "^4.10.0"
+    "wikijs": "^4.10.0",
+    "wtf_wikipedia": "^7.1.1"
   }
 }

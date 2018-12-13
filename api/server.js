@@ -3,7 +3,7 @@ const express = require('express');
 const cors = require('cors')
 const knex = require('knex')
 const knexConfig = require('./knexfile.js')
-const {checkDataBase, wikiWare, authentication, generateToken  } = require('./middleware.js')
+const {checkDataBase, wikiWare, authentication, generateToken, getPhoto  } = require('./middleware.js')
 const db = knex(knexConfig.development)
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
@@ -135,7 +135,7 @@ server.post('/api/quiz/:id', authentication, (req, res) => {
 //celebrity endpoints
 ////////
 //POST//
-server.post('/api/celebrity', authentication, checkDataBase, wikiWare, (req, res) => {
+server.post('/api/celebrity', authentication, checkDataBase, wikiWare, getPhoto, (req, res) => {
   db('celebrity').insert(req.body).then(id => {
       res.status(200).json(id[0])
   }).catch(err => {
