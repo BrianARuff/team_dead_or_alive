@@ -109,7 +109,7 @@ class GamePage extends React.Component {
         <h2>{this.state.metaData.name}</h2>
         <p className='author'>By <span className='user-link' onClick={e => { e.stopPropagation(); this.props.history.push(`/users/${this.state.metaData.user_id}`) }}>Joe Schmoe</span></p>
 
-        <p>Number of questions: 0</p>
+        <p>Number of questions: {this.state.gameData.length}</p>
 
         <button onClick={this.startGame}>Start Game!</button>
 
