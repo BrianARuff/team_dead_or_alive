@@ -81,7 +81,7 @@ class UserPage extends React.Component {
 
         <div className='user-page'>
 
-          <h1>{this.state.userData.username}</h1>
+          <h1>Quizzes by {this.state.userData.username}</h1>
 
           <div className='quiz-list'>
 

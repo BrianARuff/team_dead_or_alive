@@ -27,7 +27,8 @@ class GamePage extends React.Component {
       successView: false,
       failView: false,
       completed: false,
-      metaData: null
+      metaData: null,
+      username: null
 
     }
 
@@ -79,6 +80,12 @@ class GamePage extends React.Component {
 
   getMetaData = () => {
 
+    const options = {
+        headers: {
+          Authorization: this.props.token,
+        }
+      }
+
     console.log('got metadata');
 
     const data = this.props.quizzes.find(quiz => {
@@ -86,6 +93,10 @@ class GamePage extends React.Component {
     });
 
     this.setState({metaData: data});
+
+    axios.get(`${config.backendURL}:${config.backendPort}/api/user/${data.user_id}`, options)
+      .then(res => this.setState({username: res.data['0'].username}))
+      .catch(err => console.log('ERROR!@#!@#!@#!@#', err));
 
   }
 
@@ -97,7 +108,7 @@ class GamePage extends React.Component {
 
   renderGamePreview = () => {
 
-    if (!this.state.metaData)
+    if (!this.state.metaData || !this.state.username)
       return <h1>Getting quiz...</h1>
 
     console.log(this.state.metaData);
@@ -107,7 +118,7 @@ class GamePage extends React.Component {
       <div className='preview'>
 
         <h2>{this.state.metaData.name}</h2>
-        <p className='author'>By <span className='user-link' onClick={e => { e.stopPropagation(); this.props.history.push(`/users/${this.state.metaData.user_id}`) }}>Joe Schmoe</span></p>
+        <p className='author'>By <span className='user-link' onClick={e => { e.stopPropagation(); this.props.history.push(`/users/${this.state.metaData.user_id}`) }}>{this.state.username}</span></p>
 
         <p>Number of questions: {this.state.gameData.length}</p>
 
@@ -352,7 +363,8 @@ function stateToProps(state) {
   return {
 
     quizzes: state.quizzes,
-    fetching: state.fetching
+    fetching: state.fetching,
+    token: state.token
 
   }
 
