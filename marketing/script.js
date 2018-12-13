@@ -38,27 +38,6 @@ let credits = document.querySelector('footer span');
 let creditContent = document.querySelector('.footerContent');
 $(credits).click(() => $(creditContent).slideToggle('slow'));
 
-//login modal
-// const login = document.querySelector('.login');
-// const modalLogin = document.querySelector('.mLogin');
-
-// login.addEventListener('click', () => {
-// 	document.querySelector('#loginForm').style.display = 'block';
-// });
-// modalLogin.addEventListener('click', () => {
-// 	let modal = document.querySelector('.menuModal');
-// 	modal.style.display = 'none';
-// 	document.querySelector('#loginForm').style.display = 'block';
-// });
-
-//Login modal -  When the user clicks anywhere outside of the modal, close it
-// window.addEventListener('click', event => {
-// 	let modal = document.querySelector('#loginForm');
-// 	if (event.target == modal) {
-// 		modal.style.display = 'none';
-// 	}
-// });
-
 //Fade in of header items
 const titleL = document.querySelector('.titleLeft');
 const dead = document.querySelector('.headerLeft img');
