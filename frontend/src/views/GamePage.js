@@ -60,11 +60,6 @@ class GamePage extends React.Component {
 
   componentDidMount() {
 
-<<<<<<< HEAD
-    axios.get(`${config.backendURL}:${config.backendPort}/api/celebrity_data`)
-      .then(res => this.setState({gameData: res.data}))
-      .catch(err => console.log(err));
-=======
     if (this.props.quizzes.length === 0) {
 
       console.log('getting quizzes...');
@@ -102,7 +97,6 @@ class GamePage extends React.Component {
     axios.get(`${config.backendURL}:${config.backendPort}/api/user/${data.user_id}`, options)
       .then(res => this.setState({username: res.data['0'].username}))
       .catch(err => console.log('ERROR!@#!@#!@#!@#', err));
->>>>>>> doa_game_page
 
   }
 
