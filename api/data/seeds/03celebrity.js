@@ -16,6 +16,7 @@ exports.seed = function(knex, Promise) {
         {id: 9, name: "John Lennon", date_of_birth: "April 3, 1000", date_of_death: "April 3, 1100", image_link: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/Betty_White_2010.jpg/800px-Betty_White_2010.jpg"},
         {id: 10, name: "Ringo Starr", date_of_birth: "April 3, 1000", date_of_death: null, image_link: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/Betty_White_2010.jpg/800px-Betty_White_2010.jpg"},
         {id: 11, name: "George Harrison", date_of_birth: "April 3, 1000", date_of_death: "April 3, 1100", image_link: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/Betty_White_2010.jpg/800px-Betty_White_2010.jpg"},
+        {id: 12, name: "Heath Ledger", date_of_birth: "April 3, 1000", date_of_death: 1, image_link: ""https://wikipedia.org/wiki/Special:Redirect/file/Heath_Ledger_(Berlin_Film_Festival_2006)_revised.jpg""},
 
       ]);
     });

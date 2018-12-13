@@ -4,6 +4,7 @@ const knexConfig = require('./knexfile.js')
 const jwt = require('jsonwebtoken');
 const infoBox = require('wiki-infobox')
 const wtf = require('wtf_wikipedia')
+const jwtKey = process.env.JWT_KEY
 const db = knex(knexConfig.development)
 
 generateToken = (user) => {
@@ -56,7 +57,7 @@ checkDataBase = (req, res, next) => {
 getPhoto = (req, res, next) => {
   const name = req.body.name
     wtf.fetch(name).then(data => {
-      req.body.image_link = data.images(0).src()
+      req.body.image_link = data.images(0).thumb()
       next()
     })
 }
