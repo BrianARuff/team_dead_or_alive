@@ -136,7 +136,7 @@ class CreatePage extends React.Component {
 
                 <form onSubmit={this.handleAddSubmission}>
 
-                  <input type='text' name='celebName' placeholder='celebrity name' onChange={this.handleChange} value={this.state.celebName} required />
+                  <input type='text' name='celebName' placeholder='Celebrity name' onChange={this.handleChange} value={this.state.celebName} required />
                   <br />
                   <button>Add Celebrity!</button>
 
