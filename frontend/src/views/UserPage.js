@@ -35,9 +35,15 @@ class UserPage extends React.Component {
 
     }
 
+    if (this.props.match.params.id !== prevProps.match.params.id) {
+
+      this.init();
+
+    }
+
   }
 
-  componentDidMount() {
+  init = () => {
 
     const options = {
         headers: {
@@ -53,6 +59,12 @@ class UserPage extends React.Component {
 
       }))
       .catch(err => console.log('ERROR!@#!@#!@#!@#', err));
+
+  }
+
+  componentDidMount() {
+
+    this.init();
 
   }
 
