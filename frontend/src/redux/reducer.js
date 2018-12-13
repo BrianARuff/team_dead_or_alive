@@ -24,6 +24,7 @@ export default function reducer(state = initialState, action) {
     case LOGIN_SUCCESS:
       localStorage.token = action.payload.token;
       localStorage.username = action.payload.username;
+      localStorage.id = action.payload.id;
       return {...state, username: action.payload.username, loginStatus: 'SUCCESS', token: action.payload.token, userID: action.payload.id}
 
     case LOGIN_FAIL:

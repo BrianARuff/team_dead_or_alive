@@ -29,7 +29,7 @@ export const login = (user, pass) => dispatch => {
       payload: {
         token: res.data.token,
         username: user,
-        id: 1
+        id: res.data.user_id
       }
 
     }))
@@ -101,7 +101,8 @@ export const loginToken = () => dispatch => {
     payload: {
 
       token: localStorage.token,
-      username: localStorage.username
+      username: localStorage.username,
+      id: localStorage.id
 
     }
 
