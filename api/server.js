@@ -41,7 +41,7 @@ sendUserError = (message, res) => {
 
 server.post("/api/register", (req, res) => {
     const creds = req.body;
-    // console.log(req.body)
+    console.log(creds)
     const { username, password } = req.body;
     if (!username || !password) {
         sendUserError("Username or password are invalid", res);
@@ -60,6 +60,7 @@ server.post("/api/register", (req, res) => {
 
 server.post("/api/login", (req, res) => {
     const creds = req.body;
+    console.log(creds);
     db("users")
         .where({ username: creds.username })
         .first()
