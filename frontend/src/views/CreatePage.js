@@ -125,6 +125,8 @@ class CreatePage extends React.Component {
         <div className='create-page'>
 
           <h1>Create Quiz</h1>
+          <p>Use the form below to create your quiz. You can see the quiz name and the added celebrities on the right as you build it. When done click on "Create Quiz!"</p>
+
 
           <div className='content'>
 

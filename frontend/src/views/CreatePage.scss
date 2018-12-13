@@ -2,6 +2,16 @@
 
 .create-page{
 
+    p{
+        width: 60%;
+        margin: 0 auto;
+
+        @media(max-width: 400px){
+            width: 90%;
+        }
+
+    }
+
   .fail {
 
     color: red;
