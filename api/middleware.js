@@ -64,8 +64,8 @@ wikiWare = (req, res, next) => {
         } else {
           req.body.name = data.name.value
           req.body.date_of_birth = data.birth_date.value
-          req.body.image_link = data.image.value
-          if('death_date' in data) {
+          req.body.image_link = "https://commons.wikimedia.org/wiki/File:" + data.image.value.split(' ').join('_')
+          if('death_date' in data && data.death_date.value.length > 0) {
            req.body.date_of_death = true 
           } else {
             req.body.date_of_death = null 

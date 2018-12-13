@@ -3,6 +3,7 @@ Created by https://www.gitignore.io/api/node
 api_test_file.js
 data/dead_or_alive.sqlite3
 *.sqlite3
+api_test.js
 ### Node ###
 # Logs
 logs

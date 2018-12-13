@@ -18,5 +18,11 @@ exports.seed = function(knex, Promise) {
         {id: 11, name: "George Harrison", date_of_birth: "April 3, 1000", date_of_death: "April 3, 1100", image_link: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/Betty_White_2010.jpg/800px-Betty_White_2010.jpg"},
 
       ]);
-    });
+      const ComponentHere = props => {
+        return (
+            <div>
+            </div>
+            );
+      };});
 };
+// https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/Betty_White_2010.jpg/800px-Betty_White_2010.jpg
