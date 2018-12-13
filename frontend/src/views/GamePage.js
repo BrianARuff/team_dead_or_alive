@@ -303,7 +303,7 @@ class GamePage extends React.Component {
       <div className='gameover'>
 
         <h1>Game over!</h1>
-        <h2>Score: {this.gameStuff.score}</h2>
+        <h2>Score: {parseInt(Math.round(this.gameStuff.score), 10)}</h2>
         <button onClick={this.restart}>Play again!</button>
 
       </div>
