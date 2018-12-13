@@ -2,7 +2,7 @@ const knex = require('knex')
 const knexConfig = require('./knexfile.js')
 const jwt = require('jsonwebtoken');
 const infoBox = require('wiki-infobox')
-const jwtKey = require('./_secret/keys.js').jwtKey
+const jwtKey = require('./_secrets/keys.js').jwtKey
 const db = knex(knexConfig.development)
 
 generateToken = (user) => {
