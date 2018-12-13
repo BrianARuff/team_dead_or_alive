@@ -7,6 +7,10 @@ Created by https://www.gitignore.io/api/node
 api_test_file.js
 data/dead_or_alive.sqlite3
 *.sqlite3
+<<<<<<< HEAD
+>>>>>>> doa_game_page
+=======
+api_test.js
 >>>>>>> doa_game_page
 ### Node ###
 # Logs

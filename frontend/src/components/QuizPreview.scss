@@ -12,16 +12,32 @@
   align-items: center;
   padding: 10px 5px;
 
+  @media(max-width: 400px){
+    padding: 0;
+  }
+
+
   &:nth-child(even){
     background-color: #fff;
     border-left: 4px solid #fff;
+<<<<<<< HEAD
 
+=======
+>>>>>>> doa_game_page
 
   }
 
   .details {
 
     display: flex;
+
+    .author{
+
+      @media(max-width: 400px){
+        display: none;
+      }
+    
+    }
 
   }
 
@@ -49,19 +65,33 @@
 
     padding: 10px;
 
+<<<<<<< HEAD
     @media (max-width: 400px) {
       padding: 5px;
     }
 
+=======
+    @media(max-width: 400px){
+      padding: 5px;
+    }
+  
+>>>>>>> doa_game_page
   }
 
   h2 {
 
     margin-left: 15px;
 
+<<<<<<< HEAD
     @media (max-width: 400px) {
       margin-left: 5px;
     }
+=======
+    @media(max-width: 400px){
+      margin-left: 5px;
+    }
+  
+>>>>>>> doa_game_page
 
   }
 
