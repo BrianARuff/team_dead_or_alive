@@ -131,7 +131,7 @@ server.post('/api/quiz/:id', authentication, (req, res) => {
 
 server.post('/api/celebrity', authentication, checkDataBase, wikiWare, (req, res) => {
   db('celebrity').insert(req.body).then(id => {
-      res.status(200).json(id)
+      res.status(200).json(id[0])
   }).catch(err => {
     res.status(500).json({message: "Celebrity not added to database", err})
   })
