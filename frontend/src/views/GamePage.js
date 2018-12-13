@@ -22,7 +22,7 @@ class GamePage extends React.Component {
 
       started: false,
       gameData: [],
-      timeLeft: 1.01,
+      timeLeft: 3.01,
       gameView: true,
       successView: false,
       failView: false,
@@ -192,7 +192,7 @@ class GamePage extends React.Component {
 
     }
 
-    this.gameStuff.currentTimers.push(setTimeout(this.nextQuestion, 500));
+    this.gameStuff.currentTimers.push(setTimeout(this.nextQuestion, 1000));
 
   }
 
@@ -254,10 +254,10 @@ class GamePage extends React.Component {
     }
 
     if (this.gameStuff.index !== this.state.gameData.length)
-      this.setState({successView: false, failView: false, timeLeft: 1.01}, () => this.gameStuff.currentTimers.push(this.timerFunc()))
+      this.setState({successView: false, failView: false, timeLeft: 3.01}, () => this.gameStuff.currentTimers.push(this.timerFunc()))
 
     else
-      this.setState({started: false, completed: true, timeLeft: 1.01});
+      this.setState({started: false, completed: true, timeLeft: 3.01});
 
   }
 
@@ -314,7 +314,7 @@ class GamePage extends React.Component {
     this.setState({
 
       started: false,
-      timeLeft: 1.01,
+      timeLeft: 3.01,
       gameView: true,
       successView: false,
       failView: false,
