@@ -14,7 +14,7 @@ beforeEach(async () => {
   describe('api/celebrity/:id GET', () => {
    it('should return status code 200', async () => {
       let data = await request(server).post('/api/celebrity')
-        .send({name: 'name', date_of_birth: 'january 1, 1999', date_of_death: null, image_link: 'https://wikipedia.com'})
+        .send({name: "Kristen Bell"})
       let response = await request(server).get('/api/celebrity/1')
       expect(response.status).toBe(200)
     })
