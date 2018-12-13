@@ -135,7 +135,7 @@ table {
     display: block;
     font-size: 1.4rem;
     color: #fff;
-    background-color: #343434;
+    background-color: #2f3f60;
     width: 100%;
     padding: 5px 5px;
   }
@@ -191,7 +191,7 @@ header {
   height: 400px;
   font-family: 'Economica', sans-serif;
   font-size: 6rem;
-  border-bottom: 1px solid #343434;
+  border-bottom: 1px solid #2f3f60;
 }
 @media (max-width: 500px) {
   header {
@@ -203,7 +203,7 @@ header {
 header .headerLeft {
   justify-content: center;
   align-items: center;
-  background-color: #343434;
+  background-color: #2f3f60;
   color: #fff;
   width: 100%;
   display: flex;
@@ -389,6 +389,20 @@ footer span {
 footer .footerContent {
   margin-top: 10px;
   line-height: 1.5;
+  background-color: #2f3f60;
+  color: #fff;
+  width: 100%;
+  display: flex;
+}
+footer .footerContent .fContent {
+  width: 90%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+footer .footerContent .fContent a {
+  color: #fff;
 }
 footer .display {
   display: none;
