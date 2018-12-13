@@ -82,10 +82,11 @@ server.get('/api/user/:id', authentication,  (req, res) => {
 //////
 // '/api/user/:id/quiz'
 // Need, the user ID for the insert body. Can't create a quiz without user id.
-server.post('/api/quiz', authentication, (req, res) => {
+server.post('/api/user/:id/quiz', authentication, (req, res) => {
+  const userId = req.params.id
   const {user_id, name} = req.body
     if(name.length >= 1) {
-      db('quiz').insert(req.body).then(id => {
+      db('quiz').insert({name: name, user_id: userId}).then(id => {
         res.status(201).json(id)
       })
     } else {
