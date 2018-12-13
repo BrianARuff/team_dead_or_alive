@@ -7,8 +7,8 @@ const knexConfig = require('./knexfile.js')
 const {checkDataBase, wikiWare, authentication, generateToken, getPhoto  } = require('./middleware.js')
 const db = knex(knexConfig.development)
 const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const infoBox = require('wiki-infobox')
+// const jwt = require('jsonwebtoken');
+// const infoBox = require('wiki-infobox')
 const server = express();
 server.use(cors())
 server.use(express.json())
