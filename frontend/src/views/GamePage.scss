@@ -15,16 +15,17 @@
 .game-page {
 
   text-align: center;
+  padding: 10px;
 
   .preview {
 
     text-align: center;
-    width: 50%;
-    margin: 15px auto;
+    max-width: 500px;
+    margin: 5% auto;
     background-color: #fff;
     border: 1px solid #cacaca;
     border-radius: 4px;
-    padding: 10px;
+    padding: 10px;  
 
     h2{
       font-weight: 300;
@@ -109,10 +110,13 @@
 
   .game {
 
-    width: 100%;
+    max-width: 500px;
+    margin: 5% auto;
     text-align: center;
-    position: absolute;
-    top: 20%;
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #cacaca;
+    border-radius: 4px;
 
     img {
 
@@ -183,6 +187,14 @@
   }
 
   .gameover{
+
+    max-width: 500px;
+    margin: 5% auto;
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #cacaca;
+    border-radius: 4px;
+
     button{
       padding: 5px 10px;
       margin-top: 10px;
