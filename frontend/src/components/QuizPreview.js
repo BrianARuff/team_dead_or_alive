@@ -4,6 +4,8 @@ import './QuizPreview.scss';
 
 export default function QuizPreview({quizData, history}) {
 
+  console.log(quizData);
+
   return (
 
     <div className='quiz-preview' onClick={() => history.push(`/game/${quizData.id}`)}>
