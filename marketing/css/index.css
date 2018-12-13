@@ -126,6 +126,43 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
+.mobileMenu {
+  display: none;
+  flex-direction: column;
+}
+@media (max-width: 500px) {
+  .mobileMenu {
+    display: block;
+    font-size: 1.4rem;
+    color: #fff;
+    background-color: #2f3f60;
+    padding: 5px 5px;
+  }
+}
+.menuModal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: rgba(0, 0, 0, 0.8);
+  padding-top: 60px;
+}
+.menuModal a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  text-decoration: none;
+  margin: 0 auto;
+  padding: 10px 0;
+  width: 150px;
+  font-size: 1.8rem;
+  font-weight: 200;
+}
 .login a {
   position: absolute;
   top: 20px;
@@ -139,46 +176,8 @@ table {
   .login a {
     color: #fff;
     font-size: 1rem;
-    right: 30px;
-  }
-}
-.or {
-  margin: -48px auto;
-  position: relative;
-  left: 0%;
-  top: 179px;
-  color: #343434;
-  font-family: 'Economica', sans-serif;
-  font-size: 6rem;
-}
-@media (max-width: 500px) {
-  .or {
-    top: 172px;
-    color: #8f0000;
+    right: 10px;
     display: none;
-  }
-}
-.or span {
-  color: #fff;
-}
-@media (max-width: 500px) {
-  .or span {
-    color: #8f0000;
-    display: none;
-  }
-}
-.or2 {
-  display: none;
-}
-@media (max-width: 500px) {
-  .or2 {
-    margin: -25px auto;
-    display: block;
-    position: relative;
-    left: 0%;
-    top: 114px;
-    font-size: 3rem;
-    color: #8f0000;
   }
 }
 header {
@@ -187,7 +186,7 @@ header {
   height: 400px;
   font-family: 'Economica', sans-serif;
   font-size: 6rem;
-  border-bottom: 1px solid #343434;
+  border-bottom: 1px solid #2f3f60;
 }
 @media (max-width: 500px) {
   header {
@@ -199,7 +198,7 @@ header {
 header .headerLeft {
   justify-content: center;
   align-items: center;
-  background-color: #343434;
+  background-color: #2f3f60;
   color: #fff;
   width: 100%;
   display: flex;
@@ -208,7 +207,7 @@ header .headerLeft {
 @media (max-width: 500px) {
   header .headerLeft {
     flex-direction: row;
-    padding: 25px 0;
+    padding: 15px 0;
     justify-content: space-evenly;
     font-size: 3rem;
   }
@@ -233,7 +232,7 @@ header .headerRight {
 @media (max-width: 500px) {
   header .headerRight {
     flex-direction: row;
-    padding: 25px 0;
+    padding: 15px 0;
     justify-content: space-evenly;
     font-size: 3rem;
   }
@@ -254,23 +253,44 @@ body {
   justify-content: center;
   position: inherit;
 }
-body a.signUp {
-  margin: -80px auto 50px;
-  font-size: 2rem;
+body .or {
+  margin: -48px auto;
+  position: relative;
+  left: 0%;
+  top: 137px;
+  color: #343434;
+  font-family: 'Economica', sans-serif;
+  font-size: 6rem;
+}
+@media (max-width: 500px) {
+  body .or {
+    display: none;
+  }
+}
+body .or span {
+  color: #fff;
+}
+body .signUp {
+  position: relative;
+  left: 0;
+  top: 363px;
+  width: 55px;
+  font-size: 1rem;
   padding: 10px 15px;
   border: 1px solid #343434;
   border-radius: 4px;
   background-color: #fff;
+  margin: -38px auto 0;
   color: #343434;
   text-decoration: none;
 }
-body a.signUp:hover {
+body .signUp:hover {
   background-color: #007bff;
   color: #fff;
 }
 @media (max-width: 500px) {
-  body a.signUp {
-    margin: 10px auto;
+  body .signUp {
+    display: none;
   }
 }
 body .container {
@@ -279,6 +299,23 @@ body .container {
   display: flex;
   flex-direction: column;
   position: relative;
+}
+body .container .features {
+  display: flex;
+}
+@media (max-width: 500px) {
+  body .container .features {
+    flex-direction: column;
+  }
+}
+body .container .features .feature {
+  max-width: 500px;
+  margin-top: 15px;
+  padding: 5px;
+}
+body .container h1 {
+  font-size: 2rem;
+  margin-bottom: 10px;
 }
 .carousel {
   max-width: 100%;
@@ -290,6 +327,8 @@ body .container {
   position: relative;
   overflow: hidden;
   margin: 16px auto;
+  border: 1px solid #343434;
+  border-radius: 4px;
 }
 .carousel .fas,
 .carousel .fa-chevron-circle-left,
@@ -302,7 +341,7 @@ body .container {
   justify-content: center;
   align-items: none;
   flex-direction: row;
-  color: #fff;
+  color: #343434;
   font-size: 40px;
   border-radius: 50%;
   position: absolute;
@@ -332,7 +371,7 @@ footer {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 15px;
+  margin: 25px 0;
 }
 footer h3 {
   font-size: 1rem;
@@ -342,86 +381,26 @@ footer img {
 }
 footer span {
   cursor: pointer;
+  text-decoration: underline;
 }
 footer .footerContent {
   margin-top: 10px;
   line-height: 1.5;
+  background-color: #2f3f60;
+  color: #fff;
+  width: 100%;
+  display: flex;
+}
+footer .footerContent .fContent {
+  width: 90%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+footer .footerContent .fContent a {
+  color: #fff;
 }
 footer .display {
   display: none;
-}
-/* Full-width input fields */
-input[type=text],
-input[type=password] {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  box-sizing: border-box;
-}
-/* Set a style for all buttons */
-button {
-  background-color: #4CAF50;
-  color: white;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  cursor: pointer;
-  width: 100%;
-}
-button:hover {
-  opacity: 0.8;
-}
-.cancelbtn {
-  width: auto;
-  padding: 10px 18px;
-  background-color: #f44336;
-}
-/* The Modal (background) */
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 1;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  /* Enable scroll if needed */
-  background-color: #000000;
-  /* Fallback color */
-  background-color: rgba(0, 0, 0, 0.4);
-  /* Black w/ opacity */
-  padding-top: 60px;
-}
-.modal .modal-content {
-  background-color: #fefefe;
-  margin: 5% auto 15% auto;
-  border: 1px solid #888;
-  max-width: 300px;
-}
-.modal .modal-content .container {
-  padding: 16px;
-}
-/* Add Zoom Animation */
-.animate {
-  -webkit-animation: animatezoom 0.6s;
-  animation: animatezoom 0.6s;
-}
-@-webkit-keyframes animatezoom {
-  from {
-    -webkit-transform: scale(0);
-  }
-  to {
-    -webkit-transform: scale(1);
-  }
-}
-@keyframes animatezoom {
-  from {
-    transform: scale(0);
-  }
-  to {
-    transform: scale(1);
-  }
 }

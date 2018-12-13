@@ -232,6 +232,9 @@ class GamePage extends React.Component {
         this.gameStuff.score += 500;
         break;
 
+      default:
+        break;
+
     }
 
   }
@@ -290,10 +293,10 @@ class GamePage extends React.Component {
 
         <h1>{gameData[index].name}</h1>
         <h2>{timeLeft}</h2>
-        <img src={gameData[index].image_link} />
+        <img alt={gameData[index].name} src={gameData[index].image_link} />
         <br />
-        <button className='dead' onClick={() => this.check(false)}><img  src={dead}/></button>
-        <button className='alive' onClick={() => this.check(true)}><img  src={alive}/></button>
+        <button className='dead' onClick={() => this.check(false)}><img alt="dead" src={dead}/></button>
+        <button className='alive' onClick={() => this.check(true)}><img alt="alive" src={alive}/></button>
 
       </div>
 
@@ -310,7 +313,7 @@ class GamePage extends React.Component {
       <div className='gameover'>
 
         <h1>Game over!</h1>
-        <h2>Score: {this.gameStuff.score}</h2>
+        <h2>Score: {parseInt(Math.round(this.gameStuff.score), 10)}</h2>
         <button onClick={this.restart}>Play again!</button>
 
       </div>

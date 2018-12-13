@@ -21,7 +21,11 @@
     width:90%;
   }
 
+ &:nth-child(even){
+    background-color: #fff;
+    border-left: 4px solid #fff;
 
+  }
   // &:nth-child(even){
   //   background-color: #fff;
   // }
