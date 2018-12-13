@@ -7,48 +7,31 @@ const middleware = require('./middleware.js')
 const db = knex(knexConfig.development)
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+// const jwtKey = require('./_secret/keys.js')
 const infoBox = require('wiki-infobox')
 const server = express();
 server.use(cors())
 server.use(express.json())
 
 
-
+///////
+//sanity-test endpoints
+//////
 server.get('/api/celebrity_data', (req, res) => {
-  res.status(200).json(data)
+  res.status(200).json('this is working.')
 })
 
 server.get('/api/dead_or_alive', (req, res) => {
-  res.status(200).json(data)
+  res.status(200).json('this is working, too')
 })
 
 
-server.get('/api/user/:id', authentication,  (req, res) => {
-  db.select('id', 'username', 'score').from('users').where('id', req.params.id)
-    .then(user => {
-      res.status(201).json(user)
-    })
-  .catch(error => {
-      res.status(500).json({message: "We can't access your user info at this time"})
-  })
-
-})
-
-
-server.post('/api/quiz', authentication, (req, res) => {
-  const {user_id, name} = req.body
-    if(name.length >= 1) {
-      db('quiz').insert(req.body).then(id => {
-        res.status(201).json(id)
-      })
-    } else {
-      res.status(422).json({message: "The name can't be blank"})
-    }
-
-})
+///////
+//user endpoints
+//////
 
 server.post('/api/register', (req, res) => {
-   console.log(req.body)
+   // console.log(req.body)
   const {username, password} = req.body
     if(username.length >= 1 && password.length >= 1) {
     const creds = req.body
@@ -67,28 +50,41 @@ server.post('/api/login', (req, res) => {
   const creds = req.body
   db('users').where({username: creds.username}).first()
   .then(user => {
+     console.log(user)
     if(user && bcrypt.compareSync(creds.password, user.password)) {
       const token = middleware.generateToken(user)
-      res.status(200).json({message: 'welcome user', token})
+      res.status(200).json({message: 'welcome user', token, user_id: user.id})
     } else {
       res.status(422).json({message: "you are not logged in"})
     }
   }).catch(err => res.status(500).json({message: "Something went wrong"}))
 })
 
-server.post('/api/celebrity', middleware.authentication, middleware.checkDataBase, middleware.wikiWare, (req, res) => {
-  db('celebrity').insert(req.body).then(id => {
-      res.status(200).json(id)
-  }).catch(err => {
-    res.status(500).json({message: "Celebrity not added to database", err})
+server.get('/api/user/:id', authentication,  (req, res) => {
+  db.select('id', 'username', 'score').from('users').where('id', req.params.id)
+    .then(user => {
+      res.status(201).json(user)
+    })
+  .catch(error => {
+      res.status(500).json({message: "We can't access your user info at this time"})
   })
+
 })
 
-server.get('/api/celebrity/:id', (req, res) => {
-  const celebId = req.params.id
-  db('celebrity').where({id: celebId})
-    .then(data => res.status(200).json(data))
-    .catch(err => status(500).json({err}))
+
+///////
+//quiz endpoints
+//////
+server.post('/api/quiz', authentication, (req, res) => {
+  const {user_id, name} = req.body
+    if(name.length >= 1) {
+      db('quiz').insert(req.body).then(id => {
+        res.status(201).json(id)
+      })
+    } else {
+      res.status(422).json({message: "The name can't be blank"})
+    }
+
 })
 
 server.get('/api/quiz/:quizId', (req, res) => {
@@ -123,6 +119,26 @@ server.post('/api/quiz/:id', middleware.authentication, (req, res) => {
       })
     })
 })
+
+///////
+//celebrity endpoints
+////////
+
+server.post('/api/celebrity', middleware.authentication, middleware.checkDataBase, middleware.wikiWare, (req, res) => {
+  db('celebrity').insert(req.body).then(id => {
+      res.status(200).json(id)
+  }).catch(err => {
+    res.status(500).json({message: "Celebrity not added to database", err})
+  })
+})
+
+server.get('/api/celebrity/:id', (req, res) => {
+  const celebId = req.params.id
+  db('celebrity').where({id: celebId})
+    .then(data => res.status(200).json(data))
+    .catch(err => status(500).json({err}))
+})
+
 
 
 module.exports = server;
