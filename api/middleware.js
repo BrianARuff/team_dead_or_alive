@@ -57,7 +57,7 @@ checkDataBase = (req, res, next) => {
 getPhoto = (req, res, next) => {
   const name = req.body.name
     wtf.fetch(name).then(data => {
-      req.body.image_link = data.images(0).src()
+      req.body.image_link = data.images(0).thumb()
       next()
     })
 }
