@@ -80,6 +80,8 @@ server.get('/api/user/:id', authentication,  (req, res) => {
 ///////
 //quiz endpoints
 //////
+// '/api/user/:id/quiz'
+// Need, the user ID for the insert body. Can't create a quiz without user id.
 server.post('/api/quiz', authentication, (req, res) => {
   const {user_id, name} = req.body
     if(name.length >= 1) {
@@ -111,6 +113,7 @@ server.get('/api/quizzes', (req, res) => {
     .catch(error => res.status(500).json({message: "Can't get the list of quizzes at this time", error}))
 
 })
+
 
 server.post('/api/quiz/:id', authentication, (req, res) => {
   const celebArray = req.body.celebId
