@@ -3,7 +3,7 @@ const express = require('express');
 const cors = require('cors')
 const knex = require('knex')
 const knexConfig = require('./knexfile.js')
-const middleware = require('./middleware.js')
+const {checkDataBase, wikiWare, authentication, generateToken  } = require('./middleware.js')
 const db = knex(knexConfig.development)
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
@@ -13,6 +13,11 @@ const server = express();
 server.use(cors())
 server.use(express.json())
 
+  sendUserError = (message, res) => {
+    res.status(422)
+    res.json({Error: message})
+    return;
+  }
 
 ///////
 //sanity-test endpoints
@@ -31,31 +36,31 @@ server.get('/api/dead_or_alive', (req, res) => {
 //////
 
 server.post('/api/register', (req, res) => {
+    const creds = req.body
    // console.log(req.body)
   const {username, password} = req.body
-    if(username.length >= 1 && password.length >= 1) {
-    const creds = req.body
+    if(!username ||  !password ) {
+      sendUserError("Username or password are invalid", res)
+    } else {
       //the 2 is just for dev purposes, in real life the number needs to be higher
     const hash = bcrypt.hashSync(creds.password, 2)
     creds.password = hash
     db('users').insert(creds).then(id => {
       res.status(201).json(id)
     }).catch(err => res.status(500).json({message: "Status 500"}))
-    } else {
-      res.status(422).json({message: "username or password are invalid."})
     }
 } )
 
-server.post('/api/login', (req, res) => { 
+server.post('/api/login', (req, res) => {
   const creds = req.body
   db('users').where({username: creds.username}).first()
   .then(user => {
      console.log(user)
     if(user && bcrypt.compareSync(creds.password, user.password)) {
-      const token = middleware.generateToken(user)
+      const token = generateToken(user)
       res.status(200).json({message: 'welcome user', token, user_id: user.id})
     } else {
-      res.status(422).json({message: "you are not logged in"})
+      sendUserError("You are not logged in", res)
     }
   }).catch(err => res.status(500).json({message: "Something went wrong"}))
 })
@@ -107,7 +112,7 @@ server.get('/api/quizzes', (req, res) => {
 
 })
 
-server.post('/api/quiz/:id', middleware.authentication, (req, res) => {
+server.post('/api/quiz/:id', authentication, (req, res) => {
   const celebArray = req.body.celebId
     celebArray.forEach(item => {
       db('celebQuiz').insert({celeb_id: item, quiz_id: req.params.id})
@@ -124,7 +129,7 @@ server.post('/api/quiz/:id', middleware.authentication, (req, res) => {
 //celebrity endpoints
 ////////
 
-server.post('/api/celebrity', middleware.authentication, middleware.checkDataBase, middleware.wikiWare, (req, res) => {
+server.post('/api/celebrity', authentication, checkDataBase, wikiWare, (req, res) => {
   db('celebrity').insert(req.body).then(id => {
       res.status(200).json(id)
   }).catch(err => {
