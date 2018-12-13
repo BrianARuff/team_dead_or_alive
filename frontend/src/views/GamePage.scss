@@ -1,13 +1,5 @@
 // GamePage.scss
 
-.preview{
-
-  h2{
-    font-weight: 300;
-    font-size: 3rem;
-  }
-}
-
 .correct-bg {
 
   background-color: green;
@@ -29,6 +21,26 @@
     text-align: center;
     width: 50%;
     margin: 15px auto;
+    background-color: #fff;
+    border: 1px solid #cacaca;
+    border-radius: 4px;
+    padding: 10px;
+
+    h2{
+      font-weight: 300;
+      font-size: 3rem;
+    }
+
+    .author{
+      margin: 10px 0;
+
+      .user-link{
+        text-decoration: underline;
+        cursor: pointer;
+      }
+    }
+  
+  
 
     button{
       padding: 5px 10px;
