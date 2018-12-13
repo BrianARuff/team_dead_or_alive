@@ -35,7 +35,7 @@
         @media(max-width: 400px){
             flex-direction: column;
         }
-      
+
 
         .form-container {
 
@@ -56,7 +56,8 @@
           @media(max-width: 400px){
             align-self: center;
           }
-      
+
+
           .create-form {
 
             text-align: center;
@@ -69,7 +70,7 @@
               padding: 10px;
               height: 20px;
               width: 150px;
-          
+
           }
           button{
               padding: 10px 15px;
@@ -78,7 +79,7 @@
               margin-bottom: 5px;
               width: 174px;
               font-size: 1.4rem;
-              
+
               &:hover{
                   background-color: lightblue;
               }
@@ -101,12 +102,12 @@
           padding: 15px;
           margin-left: 15px;
 
-          
+
           @media(max-width: 400px){
             margin-top: 15px;
             width: 85%;
         }
-      
+
 
           @media (max-width: 400px) {
             width: 100%;
@@ -135,6 +136,21 @@
 
             li{
                 font-size: 1.5rem;
+                padding: 10px;
+                span {
+
+                  float: right;
+                  margin-right: 10px;
+                  cursor: pointer;
+
+                }
+
+                &:hover {
+
+                  background-color: lightgrey;
+
+                }
+
             }
         }
     }

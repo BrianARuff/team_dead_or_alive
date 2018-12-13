@@ -120,6 +120,22 @@ class CreatePage extends React.Component {
 
   }
 
+  removeFromList = id => {
+
+    let localList = [...this.state.localList];
+    let listToSend = [...this.state.listToSend];
+    localList.splice(id, 1);
+    listToSend.splice(id, 1);
+
+    this.setState({
+
+      localList: localList,
+      listToSend: listToSend
+
+    })
+
+  }
+
   render() {
 
     return (
@@ -171,7 +187,7 @@ class CreatePage extends React.Component {
 
                 <ul>
 
-                  {this.state.localList.map((celeb, id) => <li key={id}>{celeb}</li>)}
+                  {this.state.localList.map((celeb, id) => <li key={id}>{celeb}<span onClick={() => this.removeFromList(id)}>X</span></li>)}
 
                 </ul>
 
