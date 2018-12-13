@@ -7,6 +7,7 @@ exports.up = function(knex, Promise) {
       .notNullable()
       .unique()
     quiz.integer('user_id')
+      .notNullable()
       .unsigned()
       .references('id')
       .inTable('users')
