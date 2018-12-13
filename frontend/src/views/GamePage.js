@@ -107,7 +107,7 @@ class GamePage extends React.Component {
 
     console.log(this.state.gameData[this.gameStuff.index].date_of_death);
 
-    if (this.state.gameData[this.gameStuff.index] === 1) {
+    if (this.state.gameData[this.gameStuff.index].date_of_death) {
 
       if (!val) {
 

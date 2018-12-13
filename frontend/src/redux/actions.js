@@ -143,7 +143,7 @@ export const addQuiz = (name, quiz, token, id) => dispatch => {
       }
     }
 
-  axios.post(`${config.backendURL}:${config.backendPort}/api/quiz`, { name: name, user_id: id }, options)
+  axios.post(`${config.backendURL}:${config.backendPort}/api/user/${id}/quiz`, { name: name, user_id: id }, options)
     .then(res => {
       console.log(res.data);
       axios.post(`${config.backendURL}:${config.backendPort}/api/quiz/${res.data[0]}`, { celebId: quiz }, options)
