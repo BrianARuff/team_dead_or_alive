@@ -150,7 +150,8 @@ class Login extends React.Component {
 
     return (
 
-      <div id="id01" className="modal">
+      <div id="loginForm" className="modal">
+        <p>Dead or Alive</p>
         <form onSubmit={this.handleSubmit} className="modal-content animate">
           <div className="container">
             {this.state.showLoginFail && <p className='warning'>Username/Password not recognized. Please try again.</p>}
