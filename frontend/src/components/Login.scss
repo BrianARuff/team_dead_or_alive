@@ -2,7 +2,7 @@
 
 #loginForm{
 
-  p{
+  h1{
     text-align: center;
     color: #fff;
     font-size: 6rem;
@@ -37,6 +37,15 @@
 
         .container {
             padding: 16px;
+
+            .warning-txt {
+
+              color: red;
+              font-size: 1.4rem;
+              text-align: center;
+
+            }
+
           }
       }
 

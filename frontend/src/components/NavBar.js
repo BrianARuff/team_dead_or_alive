@@ -32,7 +32,7 @@ class NavBar extends React.Component {
 
       <div className='dropdown'>
 
-        <Link to='/users/1'>Profile</Link>
+        <Link to={`/users/${this.props.userID}`}>Profile</Link>
         <Link to='' onClick={this.props.logout}>Log Out</Link>
 
       </div>
@@ -70,7 +70,8 @@ class NavBar extends React.Component {
 function stateToProps(state) {
 
   return {
-    username: state.username
+    username: state.username,
+    userID: state.userID
   }
 
 }

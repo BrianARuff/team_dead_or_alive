@@ -23,13 +23,13 @@ server.use(express.json())
 ///////
 //sanity-test endpoints
 //////
-server.get('/api/celebrity_data', (req, res) => {
-  res.status(200).json('this is working.')
-})
+// server.get('/api/celebrity_data', (req, res) => {
+//   res.status(200).json('this is working.')
+// })
 
-server.get('/api/dead_or_alive', (req, res) => {
-  res.status(200).json('this is working, too')
-})
+// server.get('/api/dead_or_alive', (req, res) => {
+  // res.status(200).json('this is working, too')
+// })
 
 
 ///////
@@ -85,18 +85,20 @@ server.get('/api/user/:id', authentication,  (req, res) => {
 ///////
 //quiz endpoints
 //////
-server.post('/api/quiz', authentication, (req, res) => {
-  const {user_id, name} = req.body
+//POST
+server.post('/api/user/:id/quiz', authentication, (req, res) => {
+  const userId = req.params.id
+  const { name} = req.body
     if(name.length >= 1) {
-      db('quiz').insert(req.body).then(id => {
+      db('quiz').insert({name: name, user_id: userId}).then(id => {
         res.status(201).json(id)
       })
     } else {
       res.status(422).json({message: "The name can't be blank"})
     }
-
 })
 
+//GET///
 server.get('/api/quiz/:quizId', (req, res) => {
   // select * from celebQuiz
   //   inner join (celebrity) on celebrity.id = celebQuiz.celeb_id
@@ -107,9 +109,11 @@ server.get('/api/quiz/:quizId', (req, res) => {
   .catch(err => res.status(500).json({message: "We aren't able to get the quiz at this time"}))
 })
 
+//GET///
 server.get('/api/quizzes', (req, res) => {
+    // db.select("*").count('celebQuiz.celeb_id').from('quiz').innerJoin('celebQuiz', 'quiz.id', 'celebQuiz.quiz_id').groupBy('quiz.id')
+    // .then(quizzes => res.status(200).json(quizzes))
   db.select().table('quiz')
-    // db('quiz').where('id', 2
     .then(allQuizzes => {
       res.status(200).json(allQuizzes)
     })
@@ -117,6 +121,8 @@ server.get('/api/quizzes', (req, res) => {
 
 })
 
+
+//POST///
 server.post('/api/quiz/:id', authentication, (req, res) => {
   const celebArray = req.body.celebId
     celebArray.forEach(item => {
@@ -133,7 +139,7 @@ server.post('/api/quiz/:id', authentication, (req, res) => {
 ///////
 //celebrity endpoints
 ////////
-
+//POST//
 server.post('/api/celebrity', authentication, checkDataBase, wikiWare, (req, res) => {
   db('celebrity').insert(req.body).then(id => {
       res.status(200).json(id[0])
@@ -142,6 +148,7 @@ server.post('/api/celebrity', authentication, checkDataBase, wikiWare, (req, res
   })
 })
 
+//GET//
 server.get('/api/celebrity/:id', (req, res) => {
   const celebId = req.params.id
   db('celebrity').where({id: celebId})

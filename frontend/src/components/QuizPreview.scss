@@ -3,20 +3,26 @@
 .quiz-preview {
 
   display: flex;
-  cursor: pointer;
-  background-color: rgb(240, 240, 240);
-  border-left: 4px solid rgb(240, 240, 240);
-  color: black;
-  width: 100%;
+  flex-direction: column;
   justify-content: space-between;
-  align-items: center;
-  padding: 10px 5px;
+  cursor: pointer;
+  background-color: #fff;
+  // background-color: rgb(240, 240, 240);
+  border: 1px solid #cacaca;
+  border-radius: 4px;
+  color: black;
+  width: 250px;
+  height: 150px;
+  // padding: 5px;
+  margin: 5px;
 
   @media(max-width: 400px){
     padding: 0;
+    width:90%;
   }
 
 
+<<<<<<< HEAD
   &:nth-child(even){
     background-color: #fff;
     border-left: 4px solid #fff;
@@ -26,44 +32,66 @@
 >>>>>>> doa_game_page
 
   }
+=======
+  // &:nth-child(even){
+  //   background-color: #fff;
+  // }
+>>>>>>> doa_game_page
 
   .details {
 
     display: flex;
+    // flex-direction: column;
+    align-items: flex-end;
+    background-color: rgb(231, 231, 231);
+    border-bottom-right-radius: 4px;
+    border-bottom-left-radius: 4px;
+    border-top: 1px solid #cacaca;
 
     .author{
+      border-right: 1px solid #cacaca;
+      width: 50%;
+
 
       @media(max-width: 400px){
-        display: none;
+        // display: none;
       }
     
     }
 
-  }
+    .user-link {
 
-  .user-link {
-
-    text-decoration: underline;
-    color: darkblue;
-
-    &:hover {
-
-      color: blue;
-
+      text-decoration: underline;
+      color: darkblue;
+  
+      &:hover {
+  
+        color: blue;
+  
+      }
+  
     }
+  
 
   }
+
 
   &:hover {
 
-    background-color: rgb(219, 219, 219);
-    border-left: 4px solid green;
+    // background-color: rgb(219, 219, 219);
+    // box-shadow: 3px 3px 2px #1aad3a, -3px -3px 2px #1aad3a;
+    box-shadow: -3px 4px 5px 0px #1aad3a, 
+                3px -3px 5px 0px #1aad3a, 
+                -3px -3px 5px 0px #1aad3a, 
+                3px 3px 5px 0px #1aad3a;
 
   }
 
   p {
 
     padding: 10px;
+    text-align: center;
+
 
 <<<<<<< HEAD
     @media (max-width: 400px) {
@@ -80,7 +108,9 @@
 
   h2 {
 
-    margin-left: 15px;
+    margin-left: 10px;
+    margin-top: 10px;
+    font-size: 2.2rem;
 
 <<<<<<< HEAD
     @media (max-width: 400px) {
@@ -96,3 +126,83 @@
   }
 
 }
+
+// .quiz-preview {
+
+//   display: flex;
+//   cursor: pointer;
+//   background-color: rgb(240, 240, 240);
+//   border-left: 4px solid rgb(240, 240, 240);
+//   color: black;
+//   width: 100%;
+//   justify-content: space-between;
+//   align-items: center;
+//   padding: 10px 5px;
+
+//   @media(max-width: 400px){
+//     padding: 0;
+//   }
+
+
+//   &:nth-child(even){
+//     background-color: #fff;
+//     border-left: 4px solid #fff;
+
+//   }
+
+//   .details {
+
+//     display: flex;
+
+//     .author{
+
+//       @media(max-width: 400px){
+//         display: none;
+//       }
+    
+//     }
+
+//   }
+
+//   .user-link {
+
+//     text-decoration: underline;
+//     color: darkblue;
+
+//     &:hover {
+
+//       color: blue;
+
+//     }
+
+//   }
+
+//   &:hover {
+
+//     background-color: rgb(219, 219, 219);
+//     border-left: 4px solid green;
+
+//   }
+
+//   p {
+
+//     padding: 10px;
+
+//     @media(max-width: 400px){
+//       padding: 5px;
+//     }
+  
+//   }
+
+//   h2 {
+
+//     margin-left: 15px;
+
+//     @media(max-width: 400px){
+//       margin-left: 5px;
+//     }
+  
+
+//   }
+
+// }

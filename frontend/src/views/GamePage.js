@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import { connect } from 'react-redux';
 
 import NavBar from '../components/NavBar';
 import config from '../config.js';
@@ -8,6 +9,8 @@ import './GamePage.scss';
 
 import dead from '../img/dead.png';
 import alive from '../img/dead.png';
+
+import { fetchQuizzes } from '../redux/actions';
 
 class GamePage extends React.Component {
 
@@ -19,11 +22,13 @@ class GamePage extends React.Component {
 
       started: false,
       gameData: [],
-      timeLeft: 1.01,
+      timeLeft: 3.01,
       gameView: true,
       successView: false,
       failView: false,
-      completed: false
+      completed: false,
+      metaData: null,
+      username: null
 
     }
 
@@ -39,11 +44,65 @@ class GamePage extends React.Component {
 
   }
 
+  componentDidUpdate(prevProps) {
+
+    if (!this.props.fetching && prevProps.fetching) {
+
+      console.log('getting quiz metadata...');
+
+      axios.get(`${config.backendURL}:${config.backendPort}/api/quiz/${this.props.match.params.id}`)
+        .then(res => this.setState({gameData: res.data}, this.getMetaData))
+        .catch(err => console.log(err));
+
+    }
+
+  }
+
   componentDidMount() {
 
+<<<<<<< HEAD
     axios.get(`${config.backendURL}:${config.backendPort}/api/celebrity_data`)
       .then(res => this.setState({gameData: res.data}))
       .catch(err => console.log(err));
+=======
+    if (this.props.quizzes.length === 0) {
+
+      console.log('getting quizzes...');
+      this.props.fetchQuizzes();
+
+    }
+
+    else {
+
+      console.log('have quizzes. Getting quiz metadata');
+      axios.get(`${config.backendURL}:${config.backendPort}/api/quiz/${this.props.match.params.id}`)
+        .then(res => this.setState({gameData: res.data}, this.getMetaData))
+        .catch(err => console.log(err));
+
+    }
+
+  }
+
+  getMetaData = () => {
+
+    const options = {
+        headers: {
+          Authorization: this.props.token,
+        }
+      }
+
+    console.log('got metadata');
+
+    const data = this.props.quizzes.find(quiz => {
+      return quiz.id == this.props.match.params.id
+    });
+
+    this.setState({metaData: data});
+
+    axios.get(`${config.backendURL}:${config.backendPort}/api/user/${data.user_id}`, options)
+      .then(res => this.setState({username: res.data['0'].username}))
+      .catch(err => console.log('ERROR!@#!@#!@#!@#', err));
+>>>>>>> doa_game_page
 
   }
 
@@ -55,16 +114,19 @@ class GamePage extends React.Component {
 
   renderGamePreview = () => {
 
+    if (!this.state.metaData || !this.state.username)
+      return <h1>Getting quiz...</h1>
+
+    console.log(this.state.metaData);
+
     return (
 
       <div className='preview'>
 
-        <h2>Game Title Goes Here</h2>
-        <p>By Joe Schmoe</p>
+        <h2>{this.state.metaData.name}</h2>
+        <p className='author'>By <span className='user-link' onClick={e => { e.stopPropagation(); this.props.history.push(`/users/${this.state.metaData.user_id}`) }}>{this.state.username}</span></p>
 
-        <p>Maybe we could have some type of logo image right here</p>
-
-        <p>Number of questions: 0</p>
+        <p>Number of questions: {this.state.gameData.length}</p>
 
         <button onClick={this.startGame}>Start Game!</button>
 
@@ -86,7 +148,7 @@ class GamePage extends React.Component {
         {this.gameStuff.streak === 5 && <h2 className='bonus-txt'>+75 points for 5 correct answers in a row!</h2>}
         {this.gameStuff.streak === 10 && <h2 className='bonus-txt'>+100 points for 10 correct answers in a row!</h2>}
         {this.gameStuff.streak === 15 && <h2 className='bonus-txt'>+200 points for 15 correct answers in a row!</h2>}
-        {this.gameStuff.streak === this.state.gameData.length && <h2 className='bonus-txt'>+500 points for a perfect game!</h2>}
+        {this.gameStuff.streak === this.state.gameData.length && <h2 className='hi-bonus-txt'>+500 points for a perfect game!</h2>}
       </div>
 
     );
@@ -136,7 +198,7 @@ class GamePage extends React.Component {
 
     }
 
-    this.gameStuff.currentTimers.push(setTimeout(this.nextQuestion, 350));
+    this.gameStuff.currentTimers.push(setTimeout(this.nextQuestion, 1000));
 
   }
 
@@ -201,10 +263,10 @@ class GamePage extends React.Component {
     }
 
     if (this.gameStuff.index !== this.state.gameData.length)
-      this.setState({successView: false, failView: false, timeLeft: 1.01}, () => this.gameStuff.currentTimers.push(this.timerFunc()))
+      this.setState({successView: false, failView: false, timeLeft: 3.01}, () => this.gameStuff.currentTimers.push(this.timerFunc()))
 
     else
-      this.setState({started: false, completed: true, timeLeft: 1.01});
+      this.setState({started: false, completed: true, timeLeft: 3.01});
 
   }
 
@@ -261,7 +323,7 @@ class GamePage extends React.Component {
     this.setState({
 
       started: false,
-      timeLeft: 1.01,
+      timeLeft: 3.01,
       gameView: true,
       successView: false,
       failView: false,
@@ -305,4 +367,16 @@ class GamePage extends React.Component {
 
 }
 
-export default GamePage;
+function stateToProps(state) {
+
+  return {
+
+    quizzes: state.quizzes,
+    fetching: state.fetching,
+    token: state.token
+
+  }
+
+}
+
+export default connect(stateToProps, { fetchQuizzes })(GamePage);

@@ -47,7 +47,9 @@ class Login extends React.Component {
           passwordTxt: '',
           username: '',
           password: '',
-          showSignupSuccess: true
+          showSignupSuccess: true,
+          showLoginFail: false,
+          showSignupFail: false
 
         });
 
@@ -57,7 +59,7 @@ class Login extends React.Component {
 
       if (this.props.signupStatus === 'FAILURE') {
 
-        this.setState({showSignupFail: true});
+        this.setState({showSignupFail: true, showLoginFail: false});
         this.props.acknowledge();
 
       }
@@ -68,7 +70,7 @@ class Login extends React.Component {
 
       if (this.props.loginStatus === 'FAILURE') {
 
-        this.setState({showLoginFail: true});
+        this.setState({showLoginFail: true, showSignupFail: false});
         this.props.acknowledge();
 
       }
@@ -152,6 +154,7 @@ class Login extends React.Component {
 
       <div id="loginForm" className="modal">
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
         <p>Dead or Alive</p>
 >>>>>>> doa_game_page
@@ -160,6 +163,14 @@ class Login extends React.Component {
             {this.state.showLoginFail && <p className='warning'>Username/Password not recognized. Please try again.</p>}
             {this.state.showSignupFail && <p className='warning'>Username already exists. <br></br>Pick new username.</p>}
             {this.state.showSignupSuccess && <p className='warning'>Registered!</p>}
+=======
+        <h1>Dead or Alive</h1>
+        <form onSubmit={this.handleSubmit} className="modal-content animate">
+          <div className="container">
+            {this.state.showLoginFail && <p className='warning-txt'>Username/Password not recognized. Please try again.</p>}
+            {this.state.showSignupFail && <p className='warning-txt'>Username already exists. Pick new username.</p>}
+            {this.state.showSignupSuccess && <p className='warning-txt'>Registered!</p>}
+>>>>>>> doa_game_page
             <label for="uname"><b>Username</b></label>
             {this.createFormInput('username')}
 
