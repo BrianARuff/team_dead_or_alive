@@ -736,7 +736,7 @@
   dependencies:
     regenerator-runtime "^0.12.0"
 
-"@babel/runtime@^7.2.0":
+"@babel/runtime@^7.0.0", "@babel/runtime@^7.2.0":
   version "7.2.0"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.2.0.tgz#b03e42eeddf5898e00646e4c840fa07ba8dcad7f"
   dependencies:
@@ -4069,6 +4069,13 @@ ignore@^4.0.6:
   version "4.0.6"
   resolved "https://registry.yarnpkg.com/ignore/-/ignore-4.0.6.tgz#750e3db5862087b4737ebac8207ffd1ef27b25fc"
 
+image-preloader@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/image-preloader/-/image-preloader-1.1.1.tgz#487a516dc165f87821d14326db8bb448b318f95f"
+  integrity sha1-SHpRbcFl+Hgh0UMm24u0SLMY+V8=
+  dependencies:
+    promise-ext-settled "^1.1.0"
+
 immer@1.7.2:
   version "1.7.2"
   resolved "https://registry.yarnpkg.com/immer/-/immer-1.7.2.tgz#a51e9723c50b27e132f6566facbec1c85fc69547"
@@ -6835,6 +6842,11 @@ progress@^2.0.0:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/progress/-/progress-2.0.3.tgz#7e8cf8d8f5b8f239c1bc68beb4eb78567d572ef8"
 
+promise-ext-settled@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/promise-ext-settled/-/promise-ext-settled-1.1.0.tgz#e258758abcb25b1456adfad82beed0dee2a9d857"
+  integrity sha1-4lh1iryyWxRWrfrYK+7Q3uKp2Fc=
+
 promise-inflight@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/promise-inflight/-/promise-inflight-1.0.1.tgz#98472870bf228132fcbdd868129bad12c3c029e3"
@@ -6852,7 +6864,7 @@ prompts@^0.1.9:
     kleur "^2.0.1"
     sisteransi "^0.1.1"
 
-prop-types@^15.6.1, prop-types@^15.6.2:
+prop-types@15.6.2, prop-types@^15.6.1, prop-types@^15.6.2:
   version "15.6.2"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.6.2.tgz#05d5ca77b4453e985d60fc7ff8c859094a497102"
   dependencies:
@@ -7044,9 +7056,22 @@ react-error-overlay@^5.1.0:
   version "5.1.0"
   resolved "https://registry.yarnpkg.com/react-error-overlay/-/react-error-overlay-5.1.0.tgz#c516995a5652e7bfbed8b497910d5280df74a7e8"
 
+react-image@^1.5.1:
+  version "1.5.1"
+  resolved "https://registry.yarnpkg.com/react-image/-/react-image-1.5.1.tgz#e900baa3f48b15ca94500542a2aff762c94431b8"
+  integrity sha512-UHVXGmv9NttI5nWlvXdqxqzbfRebZSmHTT4n5hsUb0uElYXwE71+Zla4/KZjjU96Z6eZPT66OFSVwd2wwBOKyg==
+  dependencies:
+    "@babel/runtime" "^7.0.0"
+    prop-types "15.6.2"
+
 react-is@^16.3.2, react-is@^16.6.3:
   version "16.6.3"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.6.3.tgz#d2d7462fcfcbe6ec0da56ad69047e47e56e7eac0"
+
+react-preload-image@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/react-preload-image/-/react-preload-image-1.0.4.tgz#7b7bfb9cf05670631b69cbb25cd75eb9f4a15d84"
+  integrity sha512-dRQg9a4mceY9+Sas82ztX66YcT0whTVrmS0KPwgzEi42otLIsGKml9Q2VgSX9fTUDvmcEkA0sbiRkkDAv8PYCA==
 
 react-redux@^6.0.0:
   version "6.0.0"

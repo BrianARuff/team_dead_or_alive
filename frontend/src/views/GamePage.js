@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import ImagePreloader from 'image-preloader';
 import { connect } from 'react-redux';
 
 import NavBar from '../components/NavBar';
@@ -11,6 +12,8 @@ import dead from '../img/dead.png';
 import alive from '../img/dead.png';
 
 import { fetchQuizzes } from '../redux/actions';
+
+let preloader = new ImagePreloader();
 
 class GamePage extends React.Component {
 
@@ -28,7 +31,8 @@ class GamePage extends React.Component {
       failView: false,
       completed: false,
       metaData: null,
-      username: null
+      username: null,
+      imagesLoaded: false
 
     }
 
@@ -48,8 +52,6 @@ class GamePage extends React.Component {
 
     if (!this.props.fetching && prevProps.fetching) {
 
-      console.log('getting quiz metadata...');
-
       axios.get(`${config.backendURL}:${config.backendPort}/api/quiz/${this.props.match.params.id}`)
         .then(res => this.setState({gameData: res.data}, this.getMetaData))
         .catch(err => console.log(err));
@@ -62,14 +64,12 @@ class GamePage extends React.Component {
 
     if (this.props.quizzes.length === 0) {
 
-      console.log('getting quizzes...');
       this.props.fetchQuizzes();
 
     }
 
     else {
 
-      console.log('have quizzes. Getting quiz metadata');
       axios.get(`${config.backendURL}:${config.backendPort}/api/quiz/${this.props.match.params.id}`)
         .then(res => this.setState({gameData: res.data}, this.getMetaData))
         .catch(err => console.log(err));
@@ -86,7 +86,7 @@ class GamePage extends React.Component {
         }
       }
 
-    console.log('got metadata');
+    this.loadImages();
 
     const data = this.props.quizzes.find(quiz => {
       return quiz.id == this.props.match.params.id
@@ -106,12 +106,24 @@ class GamePage extends React.Component {
 
   }
 
+  loadImages = () => {
+
+    let arr = [];
+
+    for (let i = 0; i < this.state.gameData.length; i++) {
+
+      arr.push(this.state.gameData[i].image_link);
+
+    }
+
+    preloader.preload(...arr).then(() => this.setState({imagesLoaded: true}));
+
+  }
+
   renderGamePreview = () => {
 
     if (!this.state.metaData || !this.state.username)
       return <h1>Getting quiz...</h1>
-
-    console.log(this.state.metaData);
 
     return (
 
@@ -122,7 +134,7 @@ class GamePage extends React.Component {
 
         <p>Number of questions: {this.state.gameData.length}</p>
 
-        <button onClick={this.startGame}>Start Game!</button>
+        {this.state.imagesLoaded ? <button onClick={this.startGame}>Start Game!</button> : <p>Loading game...</p>}
 
       </div>
 
@@ -160,8 +172,6 @@ class GamePage extends React.Component {
   check = val => {
 
     this.gameStuff.stopTime = this.state.timeLeft;
-
-    console.log(this.state.gameData[this.gameStuff.index].date_of_death);
 
     if (this.state.gameData[this.gameStuff.index].date_of_death) {
 
@@ -266,7 +276,7 @@ class GamePage extends React.Component {
 
   renderGame = () => {
 
-    const { timeLeft, gameData } = this.state;
+    const { timeLeft, gameData, gameImages } = this.state;
     const { index } = this.gameStuff;
 
     if (this.state.successView)
