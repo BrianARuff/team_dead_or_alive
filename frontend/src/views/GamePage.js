@@ -86,7 +86,7 @@ class GamePage extends React.Component {
         {this.gameStuff.streak === 5 && <h2 className='bonus-txt'>+75 points for 5 correct answers in a row!</h2>}
         {this.gameStuff.streak === 10 && <h2 className='bonus-txt'>+100 points for 10 correct answers in a row!</h2>}
         {this.gameStuff.streak === 15 && <h2 className='bonus-txt'>+200 points for 15 correct answers in a row!</h2>}
-        {this.gameStuff.streak === this.state.gameData.length && <h2 className='bonus-txt'>+500 points for a perfect game!</h2>}
+        {this.gameStuff.streak === this.state.gameData.length && <h2 className='hi-bonus-txt'>+500 points for a perfect game!</h2>}
       </div>
 
     );
@@ -107,7 +107,7 @@ class GamePage extends React.Component {
 
     console.log(this.state.gameData[this.gameStuff.index].date_of_death);
 
-    if (this.state.gameData[this.gameStuff.index].date_of_death) {
+    if (this.state.gameData[this.gameStuff.index] === 1) {
 
       if (!val) {
 
@@ -217,7 +217,6 @@ class GamePage extends React.Component {
       return this.renderFailView();
 
     document.querySelector('body').className = '';
-    console.log("IMGLINK",gameData[index].image_link);
 
     return (
 
