@@ -47,7 +47,9 @@ class Login extends React.Component {
           passwordTxt: '',
           username: '',
           password: '',
-          showSignupSuccess: true
+          showSignupSuccess: true,
+          showLoginFail: false,
+          showSignupFail: false
 
         });
 
@@ -57,7 +59,7 @@ class Login extends React.Component {
 
       if (this.props.signupStatus === 'FAILURE') {
 
-        this.setState({showSignupFail: true});
+        this.setState({showSignupFail: true, showLoginFail: false, showSignupFail: false});
         this.props.acknowledge();
 
       }
@@ -68,7 +70,8 @@ class Login extends React.Component {
 
       if (this.props.loginStatus === 'FAILURE') {
 
-        this.setState({showLoginFail: true});
+        this.setState({showLoginFail: true, showSignupFail: false,
+        showSignupSuccess: false});
         this.props.acknowledge();
 
       }
