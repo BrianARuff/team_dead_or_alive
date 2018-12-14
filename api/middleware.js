@@ -8,9 +8,9 @@ const jwtKey = process.env.JWT_KEY;
 const environment = process.env.NODE_ENV || "development";
 const db = knex(knexConfig[environment])
 
-console.log('KEY' + jwtKey);
 
 generateToken = (user) => {
+  console.log('KEY' + jwtKey);
   const payload = {
     subject: user.id,
     username: user.username
