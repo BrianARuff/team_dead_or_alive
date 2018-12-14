@@ -102,8 +102,10 @@ class CreatePage extends React.Component {
     e.preventDefault();
     e.stopPropagation();
 
-    if (!this.props.searchingCelebDB)
-      this.props.checkCeleb(this.state.celebName, this.props.token);
+    this.setState({celebName: this.state.celebName.split(' ').map(item => item.split('').map((char, index) => index === 0 ? char.toUpperCase() : char).join('')).join(' ')}, () => {
+      if (!this.props.searchingCelebDB)
+        this.props.checkCeleb(this.state.celebName, this.props.token);
+    });
 
   }
 
