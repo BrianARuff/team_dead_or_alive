@@ -1,7 +1,6 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 
-import NavBar from './NavBar';
 import MainPage from '../views/MainPage';
 import CreatePage from '../views/CreatePage';
 import GamePage from '../views/GamePage';

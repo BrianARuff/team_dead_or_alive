@@ -30,7 +30,6 @@ class UserPage extends React.Component {
 
     if (!this.props.fetching && prevProps.fetching) {
 
-      console.log(this.props.quizzes);
       this.setState({userQuizzes: this.props.quizzes.filter(data => data.user_id == this.props.match.params.id)})
 
     }
@@ -54,7 +53,6 @@ class UserPage extends React.Component {
     axios.get(`${config.backendURL}:${config.backendPort}/api/user/${this.props.match.params.id}`, options)
       .then(res => this.setState({userData: res.data['0']}, () => {
 
-        console.log('getting quizzes...');
         this.props.fetchQuizzes();
 
       }))
