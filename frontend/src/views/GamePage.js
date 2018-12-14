@@ -32,7 +32,8 @@ class GamePage extends React.Component {
       completed: false,
       metaData: null,
       username: null,
-      imagesLoaded: false
+      imagesLoaded: false,
+      keyDown: false
 
     }
 
@@ -60,7 +61,46 @@ class GamePage extends React.Component {
 
   }
 
+  checkKeys = event => {
+
+    const { started, gameView, successView, failView } = this.state;
+
+    if (this.state.started && !this.state.successView && !this.state.failView && !this.state.keyDown) {
+
+      switch (event.key) {
+
+        case 'a':
+        case 'ArrowRight':
+
+          this.check(true);
+
+          break;
+
+        case 'd':
+        case 'ArrowLeft':
+
+          this.check(false);
+
+          break;
+
+      }
+
+      this.setState({keyDown: true});
+
+    }
+
+  }
+
+  keyUp = () => {
+
+    this.setState({keyDown: false});
+
+  }
+
   componentDidMount() {
+
+    document.addEventListener('keydown', this.checkKeys);
+    document.addEventListener('keyup', this.keyUp);
 
     if (this.props.quizzes.length === 0) {
 
