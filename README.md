@@ -16,3 +16,35 @@ In order to start this app you will need to do `npm install` and then `npm start
     - `git checkout doa_dev_heroku`
     - `git pull`
     - `git merge your_new_branch`
+
+# Current used API's
+
+* API Name
+
+      GET `/api/user/:id`
+
+    * Requires Authentication
+
+* API Name
+
+        POST `/api/quiz`
+
+    * Requires Authentication
+
+* API Name
+
+
+      POST `/api/celebrity`
+
+    * Requires Authentication
+
+
+* API Name
+
+
+      POST `/api/quiz/:id`
+
+    * Requires Authentication
+    * Returns
+
+            {username: "username", id: "id", score: 999}
