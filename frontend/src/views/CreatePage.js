@@ -61,13 +61,14 @@ class CreatePage extends React.Component {
 
         this.setState({
           quizSuccess: true,
+          quizFailure: false
         });
 
       }
 
       else if (this.props.quizStatus === 'FAILURE') {
 
-        this.setState({quizFailure: true});
+        this.setState({quizFailure: true, quizSuccess: false});
 
       }
 
@@ -101,7 +102,8 @@ class CreatePage extends React.Component {
     e.preventDefault();
     e.stopPropagation();
 
-    this.props.checkCeleb(this.state.celebName, this.props.token);
+    if (!this.props.searchingCelebDB)
+      this.props.checkCeleb(this.state.celebName, this.props.token);
 
   }
 
