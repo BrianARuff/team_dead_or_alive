@@ -16,13 +16,16 @@ class QuizList extends React.Component {
 
   render() {
 
-    const { fetching, error, history} = this.props;
+    const { quizzes, fetching, error, history} = this.props;
 
     if (error)
       return <h1>Error! {error}</h1>;
 
     if (fetching)
       return <h1>Fetching quizzes...</h1>;
+
+    console.log(this.props.quizzes['0']);
+    console.log("ASDASDASD");
 
     return (
 

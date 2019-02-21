@@ -127,7 +127,7 @@ class Login extends React.Component {
         onChange={this.handleChange}
         placeholder={name}
         value={this.state[name]}
-        autoComplete='off'
+        autocomplete='off'
         required
       />);
 
@@ -160,10 +160,10 @@ class Login extends React.Component {
             {this.state.showLoginFail && <p className='warning'>Username/Password not recognized. Please try again.</p>}
             {this.state.showSignupFail && <p className='warning'>Username already exists. Pick new username.</p>}
             {this.state.showSignupSuccess && <p className='warning'>Registered!</p>}
-            <label htmlFor="uname"><b>Username</b></label>
+            <label for="uname"><b>Username</b></label>
             {this.createFormInput('username')}
 
-            <label htmlFor="psw"><b>Password</b></label>
+            <label for="psw"><b>Password</b></label>
             {this.createFormInput('password')}
 
             <button type="submit">Login</button>
@@ -173,8 +173,20 @@ class Login extends React.Component {
             </label>
           </div>
 
+          {/*<form
+            className='login-form'
+            onSubmit={this.handleSubmit}>
+            {this.state.showLoginFail && <p>Username/Password not recognized. Please try again.</p>}
+            {this.state.showSignupFail && <p>Username already exists. Pick new username.</p>}
+            {this.state.showSignupSuccess && <p>Registered!</p>}
+            {this.createFormInput('username')}
+            {this.createFormInput('password')}
+            <button>Log In</button>
+            <button onClick={this.signUp}>Sign Up</button>
+          </form>*/}
+
           <div className="container" style={{backgroundColor:' #f1f1f1'}}>
-            <span className="psw">Forgot <a href="/">password?</a></span>
+            <span className="psw">Forgot <a href="#">password?</a></span>
           </div>
         </form>
       </div>

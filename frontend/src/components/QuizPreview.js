@@ -42,6 +42,8 @@ class QuizPreview extends React.Component {
 
     const {quizData, history} = this.props;
 
+    console.log(quizData);
+
     if (!this.state.count || !this.state.username) {
 
       return (

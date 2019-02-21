@@ -63,9 +63,9 @@ class GamePage extends React.Component {
 
   checkKeys = event => {
 
-    const { started, keyDown, successView, failView } = this.state;
+    const { started, gameView, successView, failView } = this.state;
 
-    if (started && !successView && !failView && !keyDown) {
+    if (this.state.started && !this.state.successView && !this.state.failView && !this.state.keyDown) {
 
       switch (event.key) {
 
@@ -81,9 +81,6 @@ class GamePage extends React.Component {
 
           this.check(false);
 
-          break;
-
-        default:
           break;
 
       }
@@ -319,7 +316,7 @@ class GamePage extends React.Component {
 
   renderGame = () => {
 
-    const { timeLeft, gameData } = this.state;
+    const { timeLeft, gameData, gameImages } = this.state;
     const { index } = this.gameStuff;
 
     if (this.state.successView)
