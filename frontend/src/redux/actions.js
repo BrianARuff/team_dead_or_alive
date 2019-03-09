@@ -130,7 +130,8 @@ export const checkCeleb = (celebName, token) => dispatch => {
 
     }))
     .catch(err => dispatch({
-      type: NAME_FAILURE
+      type: NAME_FAILURE,
+      payload: err
     }))
 
 }

@@ -56,6 +56,7 @@ export default function reducer(state = initialState, action) {
       return {...state, nameStatus: 'SUCCESS', celebObj: action.payload, searchingCelebDB: false}
 
     case NAME_FAILURE:
+      console.log(action.payload.response.data.message);
       return {...state, nameStatus: 'FAILURE', searchingCelebDB: false}
 
     case SEARCHING_CELEB_DB:

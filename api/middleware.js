@@ -77,6 +77,7 @@ wikiWare = (req, res, next) => {
             res.status(500).json({message: "That name isn't working with the api", name: req.body.name})
         } else {
           req.body.name = data.name.value
+          console.log(data.birth_date);
           req.body.date_of_birth = data.birth_date.value
           req.body.image_link = "https://commons.wikimedia.org/wiki/File:" + data.image.value.split(' ').join('_')
           if('death_date' in data && data.death_date.value.length > 0) {
