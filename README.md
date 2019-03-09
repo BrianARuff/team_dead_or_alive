@@ -1,5 +1,8 @@
 # Dead or Alive
 
+Project on Heroku: https://doa-dev-marketing.herokuapp.com/
+    - note that if the site hasn't been used in a while it will take some time to load (esp the frontend react app and back end node app.)
+
 Credit: Package used for gitignore: https://www.gitignore.io/
 
 This is the development repo. We will be using a different repo for prouction and Heroku.
